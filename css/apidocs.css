@@ -13,6 +13,10 @@ header {
 }
 
 
+header .container .navbar-header {
+	margin-left: 15px;
+}
+
 .bs-docs-nav .navbar-brand {
 	text-indent: -999px;
 	background: url(https://ustvstaticcdn2-a.akamaihd.net/static/v6/images/logo.png);
@@ -65,7 +69,7 @@ header {
 	font-weight: 400;
 }
 
-bs-docs-container .nav > li > a:hover, .nav > li > a:focus {
+#content-body .nav > li > a:hover, #content-body .nav > li > a:focus {
 	background: none;
 	text-decoration: underline;
 }
@@ -106,4 +110,24 @@ h5 {
 
 ul.nav > li {
 	white-space: nowrap;
+}
+
+footer {
+	background: #202020;
+	overflow: hidden;
+	margin-top: 40px
+}
+
+.footer-tagline {
+	background: url(http://ustvstaticcdn2-a.akamaihd.net/static/v6/images/superfooter.png) no-repeat center top;
+	text-indent: -9999px;
+	margin-top: 40px;
+	height: 30px;
+}
+
+.footer-copy {
+	color: #707070;
+	text-align: center;
+	font-size: 12px;
+	margin-bottom: 40px;
 }
