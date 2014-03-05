@@ -1,0 +1,104 @@
+html, body {
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+header {
+	height: 60px;
+	background-color: #fff;
+	background-image:         linear-gradient(top, #fff 80%, #fafafa 100%);
+	background-image:        -webkit-gradient(linear, left top, left bottom, color-stop(80%, #fff), color-stop(100%, #fafafa));
+	background-image:     -ms-linear-gradient(top, #fff 80%, #fafafa 100%);
+	background-image:    -moz-linear-gradient(top, #fff 80%, #fafafa 100%);
+	background-image: -webkit-linear-gradient(top, #fff 80%, #fafafa 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa',GradientType=0 );
+}
+
+
+.bs-docs-nav .navbar-brand {
+	text-indent: -999px;
+	background: url(https://ustvstaticcdn2-a.akamaihd.net/static/v6/images/logo.png);
+	display: inline-block;
+	width: 124px;
+	height: 24px;
+	padding: 0;
+	margin-top: 18px;
+	margin-right: 10px;
+}
+
+.bs-docs-nav .navbar-brand + span {
+	line-height: 58px;
+	display: block;
+	height: 60px;
+	width: 520px;
+	/* margin-left: -40px; */
+	font-weight: 300;
+	font-size: 31px;
+	color: #3388ff;
+}
+
+.navbar-nav > li > a {
+	padding-top: 0;
+	padding-bottom: 0;
+	line-height: 60px;
+	height: 60px;
+	font-weight: 600;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+.bs-docs-nav .navbar-nav>li>a {
+	color: #303030;
+}
+
+.bs-docs-nav .navbar-nav>.active>a {
+	color: #3388ff;
+	border-bottom: 5px solid #3388ff;
+	background-color: transparent;
+}
+
+.bs-docs-nav .navbar-nav>li>a:hover,
+.bs-docs-nav .navbar-nav>li.active>a:hover {
+	color: #3388ff;
+	background-color: transparent;
+}
+
+.bs-docs-sidebar .nav>.active>a, .bs-docs-sidebar .nav>.active:hover>a, .bs-docs-sidebar .nav>.active:focus>a {
+	font-weight: 400;
+}
+
+.bs-docs-header {
+	background: url(http://static-cdn2.ustream.tv/static/v6/images/static/webinarlp-heading:13926332991.jpg);
+}
+
+.bs-docs-header h1 {
+	font-weight: 300;
+}
+
+h3 + table td:first-child,
+h4 + table td:first-child {
+	background: #f0f0f0;
+}
+
+th {
+	font-size: smaller;
+	text-transform: uppercase;
+}
+
+h3 + table {
+	border-bottom: 1px solid rgb(221,221,221);
+}
+
+h2, h3, h4, h5 {
+	margin-top: 2em;
+}
+
+pre, table.table {
+	margin-bottom: 2em;
+}
+
+h5 {
+	font-weight: 600;
+}
+
+ul.nav > li {
+	white-space: nowrap;
+}

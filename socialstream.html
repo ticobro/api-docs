@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+	<title>Channel API</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/bootstrap.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/bootstrap-theme.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/bootstrap-docs.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/apidocs.css" title="" type="text/css" media="screen">
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+          <a href="../" class="navbar-brand">Ustream</a><span>Enterprise Broadcasting API</span>
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="authentication.html">Authentication</a>
+        </li>
+        <li>
+          <a href="channel.html">Channel API</a>
+        </li>
+        <li class="active">
+          <a href="socialstream.html">Social Stream</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="bs-docs-header" id="content">
+      <div class="container">
+        <h1>Social Stream API</h1>
+      </div>
+    </div>
+<div class="container">
+<div class="row">
+<div class="col-md-9">
+<h3 id="reading">Reading the Social Stream</h3>
+
+	<p>The Social Stream messages can be fetched with simple HTTP GET requests.
+	They do not require OAuth2 authentication, so the "Authorization" header
+	should not be sent on these queries.</p>
+
+	<h4 id="first_request">The first social stream request</h4>
+
+	<p>The first social stream request should be the following HTTP GET
+	request:</p>
+
+				<pre>
+http://socialstream.ustream.tv/socialstream/get.json/CHANNEL_ID/default
+</pre>
+
+	<p>The CHANNEL_ID value is the same as the "id" field in the channel list
+	response.</p>
+
+	<p>The result will be a JSON string:</p>
+
+				<pre>
+{
+  "success":true,
+  "refreshInterval":10,
+  "range":[0,1302176480],
+  "payload":[
+	{
+	  "uid":1
+	  "type":"msg",
+	  "text":"MESSAGE_TEXT",
+	  "createdAt":"UTC_TIMESTAMP",
+	  "isOwner":0,
+	  "profilePictureUrl":"http://static.ustream.tv/na.jpg",
+	  "profileNetwork":"twitter",
+	  "profileUserName":"Gyula",
+	  "network":[
+		{
+		  "provider":"twitter",
+		  "displayName":"Gyula"
+		}
+	  ]
+	}
+  ]
+}
+</pre>
+
+	<p>The social stream messages are dictionaries under the "payload" array.
+	The message fields:</p>
+
+	<table class="table">
+		<tr>
+			<th>name</th>
+
+			<th>description</th>
+		</tr>
+
+		<tr>
+			<td>uid</td>
+
+			<td>unique identifier of the message</td>
+		</tr>
+
+		<tr>
+			<td>type</td>
+			<td>"msg" for social stream messages. See section 5.1.3.
+				for other types of messages</td>
+		</tr>
+
+		<tr>
+			<td>createdAt</td>
+
+			<td>UTC timestamp of the message</td>
+		</tr>
+
+		<tr>
+			<td>isOwner</td>
+
+			<td>1 if the message was sent by the owner of the channel. 0
+				otherwise.</td>
+		</tr>
+
+		<tr>
+			<td>profilePictureUrl</td>
+
+			<td>profile picture of the sender</td>
+		</tr>
+
+		<tr>
+			<td>profileNetwork</td>
+
+			<td>the social network that is shown for the message on the
+				website. Supported values: "twitter", "facebook",
+				"ustream".</td>
+		</tr>
+
+		<tr>
+			<td>profileUserName</td>
+
+			<td>sender username on the profileNetwork</td>
+		</tr>
+
+		<tr>
+			<td>network</td>
+
+			<td>array of social networks the user belongs to. Under network
+				"provider" contains the social network type (supported values:
+				"twitter", "facebook", "ustream"), "displayName" contains the
+				sender name on the social network.</td>
+		</tr>
+	</table>
+
+	<h3 id="querying">Querying new social stream messages</h3>
+
+	<p>The initial social stream request (see previous chapter) should be
+	called only at the beginning of the session. After the first request the
+	new social stream messages should be queried in timeslices:</p>
+
+				<pre>
+http://socialstream.ustream.tv/socialstream/get.json
+/CHANNEL_ID/timeslice/RANGE/REFRESH_INTERVAL
+</pre>
+
+	<p>The parameter "RANGE" refers to the second value of the "range" array in
+	the previous request. "REFRESH_INTERVAL" refers to the "refreshInterval"
+	value in the previous request.</p>
+
+	<p>The response of this query has the same format as described in Chapter
+	5.1.1. The client should take extra care of the following:</p>
+
+	<ul>
+		<li>Refresh interval can change during the session. Clients should
+		adjust timers to the intervals defined by the response.</li>
+
+		<li>In order to prevent time shift, clients should store the first
+		range value as the start timestamp, and adjust the time of the requests
+		properly.</li>
+
+		<li><strong>Example:</strong> if the first timestamp is 1000 (queried
+		at START_TS) and the client is currently requesting /timeslice/1100/10)
+		which contains a refreshInterval=5, it should query the next timeslice
+		(/timeslice/1110/5) at ts=START_TS+110</li>
+	</ul>
+
+	<h3 id="special_messages">Special social stream messages</h3>
+
+	<p>The "payload" section can contain the following extra messages:</p>
+
+	<p><strong>Changing the social stream host:</strong></p>
+
+	<p>When this message is received the next query should be done on the new
+	server with a /default request:</p>
+
+				<pre>
+{
+	"type": "host",
+	"host": "http://socialstream2.ustream.tv"
+}
+</pre>
+
+	<p><strong>Ignoring a message:</strong></p>
+
+	<p>When this message is received the client should remove the given message
+	from the chat window:</p>
+
+				<pre>
+{
+	"type": "ignMsg",
+	"uid": "123456"
+}
+</pre>
+
+	<p><strong>Ignoring a user:</strong></p>
+
+	<p>When this message is received the client should remove all messages from
+	the chat window for the given user, and ignore all the later messages as
+	well:</p>
+
+				<pre>
+{
+	"type": "ignUser",
+	"network": [{"provider":"twitter", "displayName":"Gyula"}]
+}
+</pre>
+
+	<p><strong>Unignoring a user:</strong></p>
+
+	<p>When this message is received the client should allow the further
+	messages of the given user to appear in the chat window:</p>
+
+				<pre>
+{
+	"type": "unIgnUser",
+	"network": [{"provider":"twitter", "displayName":"Gyula"}]
+}
+</pre>
+
+	<h3 id="writing">Writing to the Social Stream</h3>
+
+	<p>Sending messages to the Social Stream is currently not available for
+	third parties.</p>
+</div>
+<div class="col-md-3">
+	<div class="bs-docs-sidebar">
+		<ul class="nav bs-docs-sidenav" data-spy="affix" data-offset-top="280" style="top: 0">
+			<li>
+			  <a href="#reading">
+			  Reading the Social Stream
+			  </a>
+			  <ul class="nav">
+				  <li>
+				  	<a href="#first_request">The first social stream request</a>
+				  </li>
+			  </ul>
+			</li>
+			<li>
+			  <a href="#querying">
+			  Querying new social stream messages
+			  </a>
+			</li>
+			<li>
+			  <a href="#special_messages">
+			  Special social stream messages
+			  </a>
+			</li>
+			<li>
+			  <a href="#writing">
+			  Writing to the Social Stream
+			  </a>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>
+
+</div>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript">
+	</script>
+
+</body>
