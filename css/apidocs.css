@@ -2,7 +2,7 @@ html, body {
 	font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 header {
-	height: 60px;
+	min-height: 60px;
 	background-color: #fff;
 	background-image:         linear-gradient(top, #fff 80%, #fafafa 100%);
 	background-image:        -webkit-gradient(linear, left top, left bottom, color-stop(80%, #fff), color-stop(100%, #fafafa));
@@ -27,7 +27,7 @@ header {
 .bs-docs-nav .navbar-brand + span {
 	line-height: 58px;
 	display: block;
-	height: 60px;
+	heightheight: 60px;
 	width: 520px;
 	/* margin-left: -40px; */
 	font-weight: 300;
@@ -63,6 +63,11 @@ header {
 
 .bs-docs-sidebar .nav>.active>a, .bs-docs-sidebar .nav>.active:hover>a, .bs-docs-sidebar .nav>.active:focus>a {
 	font-weight: 400;
+}
+
+bs-docs-container .nav > li > a:hover, .nav > li > a:focus {
+	background: none;
+	text-decoration: underline;
 }
 
 .bs-docs-header {

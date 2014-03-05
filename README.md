@@ -1,4 +1,2 @@
-api-docs
-========
-
-Ustream API Documentation
+Ustream Enterprise Broadcasting API Documentation
+=======
