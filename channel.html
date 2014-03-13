@@ -2125,7 +2125,7 @@
         </tr>
     </table>
 
-    <h2>Channel creation</h2>
+    <h2 id="channel_creation">Channel creation</h2>
 
     <h3 id="prerequisites">Prerequisites</h3>
 
@@ -2152,7 +2152,8 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&
     <p>See more in detail:<br>
     <a>https://confluence.ustream-adm.in/display/api/Ustream+OAuth+2.0%2C+REST+API+functionality+v7#UstreamOAuth2.0%2CRESTAPIfunctionalityv7-2.3.Examples</a></p>
 
-    <h3 id="channel_operations">Channel operations</h3>The channel creation call
+    <h3 id="channel_operations">Channel operations</h3>
+    <h5>The channel creation call</h5>
 
     <p>To create a channel the client have to call the following API
     resource:</p>
@@ -2177,7 +2178,8 @@ Content-Type: application/x-www-form-urlencoded
 title=API+Testing+Channel
 </pre>
 
-    <p>The token in the above call is only an example.</p>Positive response
+    <p>The token in the above call is only an example.</p>
+    <h5>Positive response</h5>
 
     <p>If everything went well, the call above will create a new channel .</p>
 
@@ -2192,7 +2194,7 @@ title=API+Testing+Channel
             }
 }
 </pre>
-Possible negative responses
+<h5>Possible negative responses</h5>
 
     <ul>
         <li><strong>401 Unauthorized</strong>: The provided Access Token is
@@ -2207,7 +2209,8 @@ Possible negative responses
         error on the server which makes it impossible to serve the request</li>
     </ul>
 
-    <h3 id="test_api">Testing API from command line (with curl)</h3>Get an access_token
+    <h3 id="test_api">Testing API from command line (with curl)</h3>
+    <h5>Get an access token</h5>
 
                 <pre>
 https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=057ce944b015ec9fdf546dfbbe1b7af4b19e8158&amp;redirect_uri=https://www.ustream.tv/oauth2/redirect&amp;device_name=MyDevice&amp;display=touch&amp;state=XYZ
@@ -2216,7 +2219,8 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=057ce9
     <p>After logging in, the browser is redirected to a special URL (defined by
     the Client), passing the Access Token in the URL. As you can see in the
     examples below, you should use Authorization HTTP header with token in the
-    requests: "Authorization: Bearer "</p>Creating a channel (POST)
+    requests: "Authorization: Bearer "</p>
+    <h5>Creating a channel (POST)</h5>
 
                 <pre>
 $curl -i -H "Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950" -d "title=Whatever+Test+1234" https://api.ustream.tv/users/self/channels.json 
@@ -2238,7 +2242,7 @@ Age: 0
 Via: 1.1 varnish
 {"channel":{"id":"13091307","title":"Whatever Test 1234","url":"whatever-test-1234","tiny_url":"http://ustre.am/SVE7"}}
 </pre>
-Acquiring the streamkey for an external broadcasting application
+<h5>Acquiring the streamkey for an external broadcasting application</h5>
 
     <p>If you wish to use an non-Ustream provided broadcaster application or
     appliance (like Flash Live Media Encoder, Wirecast, Tricaster, etc., you
@@ -2265,7 +2269,7 @@ HTTP/1.1 200 OK
 Cache-Control: no-store
 {"streaming_key": "kqDlIyGb0H47g8SRSyKjyxAqPmiwTbw3"}
 </pre>
-Acquiring the streamkey for an external broadcasting application
+<h5>Acquiring the streamkey for an external broadcasting application</h5>
 
     <p>If you wish to use an non-Ustream provided broadcaster application or
     appliance (like Flash Live Media Encoder, Wirecast, Tricaster, etc., you
@@ -2277,10 +2281,9 @@ Acquiring the streamkey for an external broadcasting application
     the configuration of these devices) the following way. The endpoint
     requires you to provide the OAuth2 authorization key to complete. The
     endpoint is at
-    <a>https://api.ustream.tv/channels/CHANNEL_ID/authorizations/broadcasting/streaming_key.json</a></p>Example
-    call and response
+    <a>https://api.ustream.tv/channels/CHANNEL_ID/authorizations/broadcasting/streaming_key.json</a></p>
 
-    <p>Call</p>
+    <p>Example call</p>
 
                 <pre>
 GET /channels/123456/authorizations/broadcasting/streaming_key.json
@@ -2289,14 +2292,14 @@ Authorization: Bearer 3aef0ef0b120126789dc345abc45d6789abcdef1
 Content-Type: application/x-www-form-urlencoded
 </pre>
 
-    <p>Response</p>
+    <p>Example response</p>
 
                 <pre>
 HTTP/1.1 200 OK
 Cache-Control: no-store
 {"streaming_key": "kqDlIyGb0H47g8SRSyKjyxAqPmiwTbw3"}
 </pre>
-Acquiring the chnanelkey for an external broadcasting application
+Acquiring the channelkey for an external broadcasting application
 
     <p>If you wish to use Flash media live encoder , you will need the
     channelkey to authenticate with Ustream and proving that broadcasting to
@@ -2307,10 +2310,9 @@ Acquiring the chnanelkey for an external broadcasting application
     the configuration of these devices) the following way. The endpoint
     requires you to provide the OAuth2 authorization key to complete. The
     endpoint is at
-    <a>https://api.ustream.tv/channels/CHANNEL_ID/authorizations/broadcasting/channel_key.json</a></p>Example
-    call and response
+    <a>https://api.ustream.tv/channels/CHANNEL_ID/authorizations/broadcasting/channel_key.json</a></p>
 
-    <p>Call</p>
+    <p>Example call</p>
 
                 <pre>
 GET /channels/123456/authorizations/broadcasting/channel_key.json
@@ -2319,7 +2321,7 @@ Authorization: Bearer 3aef0ef0b120126789dc345abc45d6789abcdef1
 Content-Type: application/x-www-form-urlencoded
 </pre>
 
-    <p>Response</p>
+    <p>Example response</p>
 
                 <pre>
 HTTP/1.1 200 OK
@@ -2507,14 +2509,19 @@ Cache-Control: no-store
 			  </ul>
 			</li>
 			<li>
-			  <a href="#prerequisites">
-			    Prerequisites
-			  </a>
-			</li>
-			<li>
-			  <a href="#channel_operations">
-			    Channel operations
-			  </a>
+				<a href="#channel_creation">Channel creation</a>
+				<ul class="nav">
+					<li>
+					  <a href="#prerequisites">
+					    Prerequisites
+					  </a>
+					</li>
+					<li>
+					  <a href="#channel_operations">
+					    Channel operations
+					  </a>
+					</li>
+				</ul>
 			</li>
 			<li>
 			  <a href="#test_api">
