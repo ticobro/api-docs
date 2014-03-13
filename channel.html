@@ -2132,14 +2132,9 @@
     <p>The caller must have an access token capable initializing channel
     creation. To obtain a token , the client must request one from the
     authorization server.</p>
-
-    <table class="table">
-        <tr>
-            <td>Clients can acquire tokens without expiration by asking for
+	<p>Clients can acquire tokens without expiration by asking for
                 "offline" scope. By using this scope the token will never
-                expire.</td>
-        </tr>
-    </table>
+                expire.</p>
 
     <p>Example initialization of a web-server token-acquiring flow:</p>
                 <pre>
@@ -2149,24 +2144,51 @@ https://www.ustream.tv/oauth2/authorize?response_type=code&amp;client_id=A...Z&a
                 <pre>
 https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&amp;redirect_uri=http://site/callback
 </pre>
-    <p>See more in detail:<br>
-    <a>https://confluence.ustream-adm.in/display/api/Ustream+OAuth+2.0%2C+REST+API+functionality+v7#UstreamOAuth2.0%2CRESTAPIfunctionalityv7-2.3.Examples</a></p>
+    <p><a href="authentication.html#examples">See more examples</a></p>
 
     <h3 id="channel_operations">Channel operations</h3>
-    <h5>The channel creation call</h5>
+    <h4>Channel creation</h4>
+    <table class="table">
+	    <tr>
+		    <td>POST</td>
+		    <td><a href="https://api.ustream.tv/users/self/channels.json">https://api.ustream.tv/users/self/channels.json</a></td>
+	    </tr>
+    </table>
+	<h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
 
-    <p>To create a channel the client have to call the following API
-    resource:</p>
+            <th>type</th>
 
-                <pre>
-POST https://api.ustream.tv/users/self/channels.json
-</pre>
+            <th>importance</th>
 
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>title</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Create the channel with this title</td>
+        </tr>
+        <tr>
+            <td>description</td>
+
+            <td>string</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Create the channel with this description</td>
+        </tr>
+
+    </table>
     <p>The body of the call should contain the channel title optionally it can
     contain channel description and tags. The Content-Type of the request
-    should be <strong>application/x-www-form-urlencoded</strong> and the body
-    of the POST request should be like:
-    <strong>title=API+Testing+Channel</strong></p>
+    should be <strong>application/x-www-form-urlencoded</strong>.</p>
 
     <p>Example:</p>
 
@@ -2180,10 +2202,7 @@ title=API+Testing+Channel
 
     <p>The token in the above call is only an example.</p>
     <h5>Positive response</h5>
-
-    <p>If everything went well, the call above will create a new channel .</p>
-
-                <pre>
+    <pre>
 {
     "channel":
             {
@@ -2219,7 +2238,7 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=057ce9
     <p>After logging in, the browser is redirected to a special URL (defined by
     the Client), passing the Access Token in the URL. As you can see in the
     examples below, you should use Authorization HTTP header with token in the
-    requests: "Authorization: Bearer "</p>
+    requests: "Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950"</p>
     <h5>Creating a channel (POST)</h5>
 
                 <pre>
@@ -2260,7 +2279,7 @@ Via: 1.1 varnish
                 <pre>
 GET /channels/123456/authorizations/broadcasting.json
 Host: api.ustream.tv
-Authorization: Bearer 3aef0ef0b120126789dc345abc45d6789abcdef1
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 </pre>
 
@@ -2288,7 +2307,7 @@ Cache-Control: no-store
                 <pre>
 GET /channels/123456/authorizations/broadcasting/streaming_key.json
 Host: api.ustream.tv
-Authorization: Bearer 3aef0ef0b120126789dc345abc45d6789abcdef1
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 </pre>
 
@@ -2317,7 +2336,7 @@ Acquiring the channelkey for an external broadcasting application
                 <pre>
 GET /channels/123456/authorizations/broadcasting/channel_key.json
 Host: api.ustream.tv
-Authorization: Bearer 3aef0ef0b120126789dc345abc45d6789abcdef1
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 </pre>
 

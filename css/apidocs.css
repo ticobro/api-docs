@@ -83,7 +83,9 @@ header .container .navbar-header {
 }
 
 h3 + table td:first-child,
-h4 + table td:first-child {
+h3 + p + table td:first-child,
+h4 + table td:first-child,
+h4 + p + table td:first-child {
 	background: #f0f0f0;
 }
 
