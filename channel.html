@@ -185,6 +185,7 @@
     </table>
 
     <h3 id="password_protection">Getting / setting password protection for a channel</h3>
+    <p>When enabled, viewers must enter a password to view the show. This feature is currently disabled in both the iOS and Android apps.</p>
 
     <table class="table">
         <tr>
@@ -302,6 +303,7 @@
     </table>
 
     <h3 id="time_limit">Getting record time limit</h3>
+    <p>Gets the maximum allowed length of recorded videos for the channel.</p>
 
     <table class="table">
         <tr>
@@ -366,6 +368,7 @@
     (error_value is not in the response)</p>
 
     <h3 id="channel_branding">Managing channel branding</h3>
+    <p>With co-branding, you can display your brand prominently in the player. With full branding, you can even remove the default Ustream watermark.No-branding allows removing the Ustream watermark and go with no watermark at all.</p>
     <h4 id="branding_type">Set branding type</h4>
 
     <table class="table">
@@ -378,6 +381,7 @@
         </tr>
 
     </table>
+    
     <h5>Parameters</h5>
 
     <table class="table">
@@ -475,6 +479,7 @@
         </tr>
 
     </table>
+    <p>Reverts any custom settings.</p>
     <h5>Parameters</h5>
 
     <p>This request has no parameters.</p>
@@ -493,7 +498,7 @@
         </tr>
 
     </table>
-
+	<p>Set up your own watermark.</p>
     <p>NOTE: only 0 is supported as LOGO_ID currently.</p>
     <h5>Parameters</h5>
 
@@ -638,7 +643,6 @@
                 (format can be json or xml)</td>
         </tr>
     </table>
-
     <p>NOTE: only 0 is supported as LOGO_ID currently.</p>Request
 
     <p>The logo must be passed in the HTTP body.</p>
@@ -718,7 +722,6 @@
     </table>
 
     <h3 id="sharing_control">Sharing control</h3>
-
     <p>By turning this feature on the sharing feature will be removed from the
     viewer.</p>
 
@@ -786,6 +789,7 @@
     </table>
 
     <h3 id="hash_lock">Hash lock</h3>
+    <p>Hash lock is a mechanism to use third party authentication on viewing Ustream video content (live or recorded video). Technically it is a handshake mechanism between your service and the Ustream infrastructure.</p>
     <h4 id="basic_hash_lock">Basic hash lock</h4>
 
     <table class="table">
@@ -1000,6 +1004,7 @@
     <p>On success a response with HTTP status 200 OK is returned.</p>
 
     <h3 id="page_lock">Page lock</h3>
+    <p>Your channel and videos will not be found anywhere on ustream.tv. Viewers will only be able to watch embedded players on external websites. If you want the channel to appear only on your own website, make sure to restrict URL embeds to your site as well.</p>
     <h4 id="get_page_lock">Get page lock setting</h4>
 
     <table class="table">
@@ -1124,6 +1129,7 @@
     </table>
 
     <h3 id="embed_lock">Embed lock</h3>
+    <p>By default all ustream channels can be embedded anywhere across the internet. By restricting the embed URLs, you can control the viewing experience and limit distribution to your own preferred partners.</p>
     <h4 id="get_embed_lock">Get embed lock setting</h4>
 
     <table class="table">
@@ -1454,10 +1460,8 @@
     </table>
 
     <h3 id="multi_quality">Multi quality</h3>
-
-    <p>By turning this feature on your stream will be transcoded to more
-    quality</p>
-
+    <p>By turning this feature on your stream will be transcoded to several versions with different quality settings.</p>
+   
     <table class="table">
         <tr>
             <td>PUT</td>
@@ -1523,8 +1527,7 @@
     </table>
 
     <h3 id="hide_viewer_number">Hide viewer number</h3>
-
-    <p>By setting this feature the viewer number of a live channel will not be
+        <p>By setting this feature the viewer number of a live channel will not be
     visible in the viewer.</p>
 
     <table class="table">
@@ -1592,6 +1595,7 @@
     </table>
 
     <h3 id="channel_management">Channel management</h3>
+    <p>This feature enables a user (the master) to add managers to their channels with administrative rights. The activated managers receive benefits of managed channels, independently from their current plans. A managed channel can have at most 500 managers, but only 3 managers can be activated simultaneously by default.</p>
     <h4 id="get_managers">Getting channel managers</h4>
 
     <table class="table">
