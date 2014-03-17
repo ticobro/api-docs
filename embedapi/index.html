@@ -1,34 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-        <script src="../js/ustream-embedapi.min.js"></script>
-
-        <style type="text/css">
-            body {
-                padding: 20px;
-            }
-        </style>
-
-    </head>
+<head>
+	<title>Embed API - Ustream Enterprise Broadcasting API Documentation</title>
+	<link rel="shortcut icon" href="http://static-cdn1.ustream.tv/images/favicon.ico" />
+	<meta charset="utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../css/bootstrap.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="../css/bootstrap-theme.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="../css/bootstrap-docs.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="../css/apidocs.css" title="" type="text/css" media="screen">
+</head>
 <body>
 
-    <div class="page-header">
-        <h1>Ustream EmbedAPI <small>basic example</small></h1>
+<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="../" class="navbar-brand">Ustream</a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+       <li>
+        	<a href="index.html">Overview</a>
+        </li>
+        <li>
+          <a href="authentication.html">Authentication</a>
+        </li>
+        <li>
+          <a href="channel.html">Channel API</a>
+        </li>
+        <li>
+          <a href="socialstream.html">Social Stream</a>
+        </li>
+        <li class="dropdown active">
+        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Embed API<span class="caret"></span></a>
+        	<ul class="dropdown-menu" role="menu">
+	        	<li><a href="index.html">Basic example</a></li>
+				<li><a href="dynamic-frame-insert.html">Dynamic insertion</a></li>
+				<li><a href="multiple-instances.html">Multiple instances</a></li>
+        	</ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="bs-docs-header" id="content">
+      <div class="container">
+        <h1>Embed API – Basic example</h1>
+      </div>
+</div>
 
-
-    <div class="clearfix">
+<div class="container" id="content-body">
+<div class="row">
+<div class="col-md-12">
         <div style="padding: 0px 0 20px 0;">
             <span style="display: none;" class="st-live label label-danger">LIVE</span>
             <span style="display: none;" class="st-offline label label-default">OFFLINE</span>
@@ -45,7 +74,7 @@
 
             <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn control-content btn-info" type="button"><i class="icon-user"></i> Get Content</button>
+                        <button class="btn control-content btn-default" type="button"><i class="icon-user"></i> Get Content</button>
                     </span>
                 <input class="form-control span2" id="Content" readonly="readonly" type="text">
             </div>
@@ -59,7 +88,7 @@
                     <img class="media-object" src="http://static-cdn2.ustream.tv/i/channel/picture/4/3/0/7/4307895/4307895_4307895_creativelive-u_1322590439,66x66,r:1.jpg">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">creativeLIVE <span class="label label-info">channel</span></h4>
+                    <h4 class="media-heading">creativeLIVE <small>channel</small></h4>
                     creativeLIVE provides the best free, live creative education on the web. We offer high-quality workshops in photography, business, video, web and graphic design, and more.
                 </div>
             </div>
@@ -69,7 +98,7 @@
                     <img class="media-object" src="http://static-cdn1.ustream.tv/i/channel/picture/1/5/2/4/1524/1524_screenshot2013-01-03at6.4_1357331443,66x66,r:1.jpg">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">TWiT Live <span class="label label-info">channel</span></h4>
+                    <h4 class="media-heading">TWiT Live <small>channel</small></h4>
                     Live from the TWiT Brick House, non-stop technology news and conversation with Leo Laporte and friends.
                 </div>
             </div>
@@ -79,7 +108,7 @@
                     <img class="media-object" src="http://static-cdn1.ustream.tv/i/channel/picture/6/5/4/0/6540154/6540154_nasatv_public_hr_1330361732,66x66,r:1.jpg">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">NASA Public <span class="label label-info">channel</span></h4>
+                    <h4 class="media-heading">NASA Public <small>channel</small></h4>
                     NASA TV airs a variety of regularly scheduled, pre-recorded educational and public relations programming 24 hours a day on its various channels.
                 </div>
             </div>
@@ -89,7 +118,7 @@
                     <img class="media-object" src="http://static-cdn2.ustream.tv/i/channel/picture/4/9/8/6/498663/498663_msl_cam_100x75_1286920251,66x66,r:1.jpg">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">Curiosity's Seven Minutes of Terror <span class="label label-info">recorded</span></h4>
+                    <h4 class="media-heading">Curiosity's Seven Minutes of Terror <small>recorded</small></h4>
                     Video about the Mars Curiosity rover landing
                 </div>
             </div>
@@ -99,7 +128,7 @@
                     <img class="media-object" src="http://static-cdn1.ustream.tv/i/channel/picture/6/0/2/9/6029144/6029144_youtube_beatport_1312827936,66x66,r:1.jpg">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">Paul van Dyk Beatport Live <span class="label label-info">recorded</span></h4>
+                    <h4 class="media-heading">Paul van Dyk Beatport Live <small>recorded</small></h4>
                     Beatport is the world's leading music store and community for DJs. Join our crowd here on Ustream and be notified when we stream live every Friday from our offices in Berlin, Germany and Denver, Colorado USA.
                 </div>
             </div>
@@ -111,42 +140,42 @@
             <fieldset style="margin: 0 20px; float: left; width: 200px;">
 
 
-                <button class="btn btn-success control-play" type="button"><i class="icon-play"></i> Play</button>
-                <button class="btn control-pause btn-info" type="button"><i class="icon-pause"></i> Pause</button>
+                <button class="btn btn-default control-play" type="button"><i class="icon-play"></i> Play</button>
+                <button class="btn control-pause btn-default" type="button"><i class="icon-pause"></i> Pause</button>
 
 
                 <hr />
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn control-seek btn-info" type="button"><i class="icon-forward"></i> Seek to</button>
+                        <button class="btn control-seek btn-default" type="button"><i class="icon-forward"></i> Seek to</button>
                     </span>
                     <input class="form-control span2" id="SeekTo" type="text">
                 </div>
                 <hr />
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn control-volume btn-info" type="button"><i class="icon-volume-up"></i> Set volume</button>
+                        <button class="btn control-volume btn-default" type="button"><i class="icon-volume-up"></i> Set volume</button>
                     </span>
                     <input class="form-control span2" value="100" id="SetVolume" type="number">
                 </div>
                 <hr />
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn control-duration btn-info" type="button"><i class="icon-time"></i> Get Duration</button>
+                        <button class="btn control-duration btn-default" type="button"><i class="icon-time"></i> Get Duration</button>
                     </span>
                     <input class="form-control span2" id="Duration" readonly="readonly"  type="text">
                 </div>
                 <hr />
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn control-progress btn-info" type="button"><i class="icon-map-marker"></i> Get Progress</button>
+                        <button class="btn control-progress btn-default" type="button"><i class="icon-map-marker"></i> Get Progress</button>
                     </span>
                     <input class="form-control span2" id="Progress" readonly="readonly"  type="text">
                 </div>
                 <hr />
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn control-viewers btn-info" type="button"><i class="icon-user"></i> Get Viewers</button>
+                        <button class="btn control-viewers btn-default" type="button"><i class="icon-user"></i> Get Viewers</button>
                     </span>
                     <input class="form-control span2" id="Viewers" readonly="readonly" type="text">
                 </div>
@@ -155,7 +184,7 @@
                     <input class="span2 form-control"  type="number" placeholder="content id" id="LoadContent">
                     <div class="input-group-btn">
 
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Load <span class="caret"></span></button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Load <span class="caret"></span></button>
 
 
                         <ul class="dropdown-menu">
@@ -168,8 +197,8 @@
                 <hr />
 
 
-                <div class="btn-group">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
                         Quality
                         <span class="caret"></span>
                     </button>
@@ -184,7 +213,12 @@
             </fieldset>
         </form>
     </div>
+</div>
+</div>
 
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.js"></script>
+		<script src="../js/ustream-embedapi.min.js"></script>
 
     <script type="text/javascript">
 

@@ -17,6 +17,10 @@ header .container .navbar-header {
 	margin-left: 15px;
 }
 
+.bs-docs-header h1, .bs-docs-header p {
+	margin-right: 0;
+}
+
 .bs-docs-nav .navbar-brand {
 	text-indent: -999px;
 	background: url(https://ustvstaticcdn2-a.akamaihd.net/static/v6/images/logo.png);
