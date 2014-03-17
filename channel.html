@@ -58,7 +58,158 @@
 <div class="container" id="content-body">
 <div class="row">
 <div class="col-md-9">
-    <h3 id="listing_channels">Listing User's channels</h3>
+	<h2 id="basic_actions">Basic actions</h2>
+
+<h3>Create a channel</h3>
+        <h4 id="prerequisites">Prerequisites</h4>
+
+    <p>The caller must have an access token capable initializing channel
+    creation. To obtain a token , the client must request one from the
+    authorization server.</p>
+	<p>Clients can acquire tokens without expiration by asking for
+                "offline" scope. By using this scope the token will never
+                expire.</p>
+
+    <p>Example initialization of a web-server token-acquiring flow:</p>
+                <pre>
+https://www.ustream.tv/oauth2/authorize?response_type=code&amp;client_id=A...Z&amp;redirect_uri=http://site/callback
+</pre>
+    <p>Example initialization of an implicit token-acquiring flow:</p>
+                <pre>
+https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&amp;redirect_uri=http://site/callback
+</pre>
+    <p><a href="authentication.html#examples">See more examples</a></p>
+
+    <h4 id="channel_operations">Channel creation</h4>    
+    <table class="table">
+	    <tr>
+		    <td>POST</td>
+		    <td><a href="https://api.ustream.tv/users/self/channels.json">https://api.ustream.tv/users/self/channels.json</a></td>
+	    </tr>
+    </table>
+	<h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>title</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Create the channel with this title</td>
+        </tr>
+        <tr>
+            <td>description</td>
+
+            <td>string</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Create the channel with this description</td>
+        </tr>
+
+    </table>
+    <p>The body of the call should contain the channel title optionally it can
+    contain channel description and tags. The Content-Type of the request
+    should be <strong>application/x-www-form-urlencoded</strong>.</p>
+
+    <p>Example:</p>
+
+                <pre>
+POST users/self/channels.json HTTP/1.1
+Host: api.ustream.tv
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+title=API+Testing+Channel
+</pre>
+
+    <p>The token in the above call is only an example.</p>
+    <h5>Positive response</h5>
+    <pre>
+{
+    "channel":
+            {
+            "id":"13091307",
+            "title":"Whatever Test 1234",
+            "url":"whatever-test-1234",
+            "tiny_url":"http://ustre.am/SVE7"
+            }
+}
+</pre>
+<h5>Possible negative responses</h5>
+
+    <ul>
+        <li><strong>401 Unauthorized</strong>: The provided Access Token is
+        missing, revoked, expired or malformed</li>
+
+        <li><strong>409 Conflict</strong>: The channel title or the channel url
+        is already in use</li>
+
+        <li><strong>400 Bad Request</strong>: The channel title is invalid</li>
+
+        <li><strong>503 Service Unavailable</strong>: There is a temporary
+        error on the server which makes it impossible to serve the request</li>
+    </ul>
+
+
+    <h3 id="delete_channel">Delete a channel</h3>
+
+    <table class="table">
+        <tr>
+            <td>DELETE</td>
+
+            <td><a>https://api.ustream.tv/channels/CHANNEL_ID.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given channel does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given channel does not exist.</td>
+        </tr>
+    </table>
+
+
+
+    <h3 id="listing_channels">Listing your channels</h3>
 
     <table class="table">
         <tr>
@@ -192,8 +343,11 @@
             <td>Listed when the channel is online.</td>
         </tr>
     </table>
+    
+    
+    <h2 id="security">Security</h2>
 
-    <h3 id="password_protection">Getting / setting password protection for a channel</h3>
+    <h3 id="password_protection">Password protection</h3>
     <p>When enabled, viewers must enter a password to view the show. This feature is currently disabled in both the iOS and Android apps.</p>
 
     <table class="table">
@@ -311,15 +465,212 @@
         </tr>
     </table>
 
-    <h3 id="time_limit">Getting record time limit</h3>
-    <p>Gets the maximum allowed length of recorded videos for the channel.</p>
+
+	<h3 id="hash_lock">3rd party viewer authentication</h3>
+    <p>Use third party authentication on viewing Ustream video content (live or recorded video). Technically it is a handshake mechanism between your service and the Ustream infrastructure.</p>
+    <h4 id="basic_hash_lock">Basic authentcation</h4>
 
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td>PUT</td>
 
             <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/limits/recording.FORMAT</a>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash/basic.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>url</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Third party url</td>
+        </tr>
+
+        <tr>
+            <td><strong>secret</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Secret key</td>
+        </tr>
+    </table>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 201 Created is returned when new
+    hash lock was inserted for the channel.<br>
+    On success a response with HTTP status 204 No Content is returned when an
+    old hash lock was updated for the channel.</p>Specific error codes
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_request</td>
+
+            <td>400 Bad Request</td>
+
+            <td>When one or more required parameters are missing or the user
+                has no access to hash lock</td>
+        </tr>
+
+        <tr>
+            <td>invalid_type</td>
+
+            <td>400 Bad Request</td>
+
+            <td>The specified type is invalid or unsupported</td>
+        </tr>
+    </table>
+    <h4 id="advanced_hash_lock">Advanced authentication</h4>
+
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash/advanced.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+    <h5>Parameters</h5>
+
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>url</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Third party url</td>
+        </tr>
+
+        <tr>
+            <td><strong>secret</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Secret key</td>
+        </tr>
+
+        <tr>
+            <td><strong>message</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Displayed message</td>
+        </tr>
+
+        <tr>
+            <td><strong>button_caption</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Button caption</td>
+        </tr>
+
+        <tr>
+            <td><strong>popup_width</strong></td>
+
+            <td>int</td>
+
+            <td>REQUIRED</td>
+
+            <td>Popup width</td>
+        </tr>
+
+        <tr>
+            <td><strong>popup_height</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Popup height</td>
+        </tr>
+    </table>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 201 Created is returned when new
+    hash lock was inserted for the channel.<br>
+    On success a response with HTTP status 204 No Content is returned when an
+    old hash lock was updated for the channel.</p>Specific error codes
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_request</td>
+
+            <td>400 Bad Request</td>
+
+            <td>When one or more required parameters are missing or the user
+                has no access to hash lock</td>
+        </tr>
+
+        <tr>
+            <td>invalid_type</td>
+
+            <td>400 Bad Request</td>
+
+            <td>The specified type is invalid or unsupported</td>
+        </tr>
+    </table>
+    <h4 id="delete_hash_lock">Remove authentication</h4>
+
+    <table class="table">
+        <tr>
+            <td>DELETE</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
     </table>
@@ -327,6 +678,33 @@
 
     <p>This request has no parameters.</p>
     <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+
+
+
+
+
+    <h3 id="embed_lock">Embed restriction</h3>
+    <p>By default all Ustream channels can be embedded anywhere across the internet. By restricting the embed URLs, you can control the viewing experience and limit distribution to your own preferred partners.</p>
+    <h4 id="get_embed_lock">Get embed lock status</h4>
+
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200</p>
 
     <table class="table">
         <tr>
@@ -338,11 +716,12 @@
         </tr>
 
         <tr>
-            <td>time</td>
+            <td>locked</td>
 
-            <td>integer</td>
+            <td>string</td>
 
-            <th>record time limit in seconds</th>
+            <th>Returns TRUE if the embed lock is set to the channel, FALSE
+                otherwise</th>
         </tr>
     </table>
     <h5>Error codes</h5>
@@ -357,26 +736,322 @@
         </tr>
 
         <tr>
-            <td>lack_of_ownership</td>
+            <td>invalid_request</td>
 
-            <td>403 Forbidden</td>
+            <td>402 Payment Required</td>
 
-            <td>The given channel does not belong to the user.</td>
+            <td>If the user does not have the embed_restriction benefit</td>
+        </tr>
+    </table>
+    <h4 id="edit_embed_lock">Edit embed lock</h4>
+
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+    <h5>Parameters</h5>
+
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
         </tr>
 
         <tr>
-            <td>not_found</td>
+            <td><strong>locked</strong></td>
 
-            <td>404 Not Found</td>
+            <td>string</td>
 
-            <td>The given channel does not exist.</td>
+            <td>REQUIRED</td>
+
+            <td>Set embed lock on channel when parameter locked==TRUE,
+                remove embed lock when locked==FALSE</td>
+        </tr>
+    </table>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 204 No Content is
+    returned.</p>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_request</td>
+
+            <td>402 Payment Required</td>
+
+            <td>If the user does not have the embed_restriction benefit</td>
+        </tr>
+
+        <tr>
+            <td>invalid_request</td>
+
+            <td>400 Bad Request</td>
+
+            <td>If the request parameter is missing or invalid</td>
+        </tr>
+    </table>
+    <h4 id="get_whitelist">Get embed lock url whitelist</h4>
+
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200</p>
+
+    <table class="table">
+        <tr>
+            <th>key</th>
+
+            <th>type</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>allowed_urls</td>
+
+            <td>array</td>
+
+            <th>Return the url list from the allowed urls embed lock list no
+                matter where it was set. Return empty array if the lock is
+                FALSE.</th>
+        </tr>
+    </table>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_request</td>
+
+            <td>402 Payment Required</td>
+
+            <td>If the user does not have the embed_restriction benefit</td>
+        </tr>
+    </table>
+    <h4 id="add_whitelist">Add url to embed lock url whitelist</h4>
+
+    <table class="table">
+        <tr>
+            <td>POST</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>url</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Add the url to the url whitelist</td>
         </tr>
     </table>
 
-    <p><strong>TODO:</strong> currently only HTTP response code is returned
-    (error_value is not in the response)</p>
+    <p>You can only add one URL per API call.</p>
+    <h5>Response</h5>
 
-    <h3 id="channel_branding">Managing channel branding</h3>
+    <p>On success a response with HTTP status 201 Created is
+    returned.</p>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_request</td>
+
+            <td>402 Payment Required</td>
+
+            <td>If the user does not have the embed_restriction benefit</td>
+        </tr>
+
+        <tr>
+            <td>invalid_request</td>
+
+            <td>400 Bad Request</td>
+
+            <td>If the request parameter is missing or invalid</td>
+        </tr>
+    </table>
+    <h4 id="empty_whitelist">Empty the embed lock url whitelist</h4>
+
+    <table class="table">
+        <tr>
+            <td>DELETE</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_request</td>
+
+            <td>402 Payment Required</td>
+
+            <td>If the user does not have the embed_restriction benefit</td>
+        </tr>
+    </table>
+
+
+
+
+
+    <h3 id="sharing_control">Sharing control</h3>
+    <p>By turning this feature on the sharing feature will be removed from the
+    viewer.</p>
+
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/viewer.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>sharing</strong></td>
+
+            <td>boolean</td>
+
+            <td>REQUIRED</td>
+
+            <td>Enable or disable sharing</td>
+        </tr>
+    </table>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200 OK is returned.</p><h5>Error Codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_sharing</td>
+
+            <td>400 Bad Request</td>
+
+            <td>The specified sharing is invalid or unsupported.</td>
+        </tr>
+
+        <tr>
+            <td>payment_required</td>
+
+            <td>402 Payment Required</td>
+
+            <td>The user does not have access to control sharing</td>
+        </tr>
+    </table>
+
+
+
+
+
+<h2 id="whitelabel">Whitelabel Broadcasting</h2>
+
+
+
+
+    <h3 id="channel_branding">Branding control</h3>
     <p>With co-branding, you can display your brand prominently in the player. With full branding, you can even remove the default Ustream watermark.No-branding allows removing the Ustream watermark and go with no watermark at all.</p>
     <h4 id="branding_type">Set branding type</h4>
 
@@ -730,289 +1405,10 @@
         </tr>
     </table>
 
-    <h3 id="sharing_control">Sharing control</h3>
-    <p>By turning this feature on the sharing feature will be removed from the
-    viewer.</p>
 
-    <table class="table">
-        <tr>
-            <td>PUT</td>
 
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/viewer.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
 
-    </table>
-    <h5>Parameters</h5>
-
-    <table class="table">
-        <tr>
-            <th>parameter</th>
-
-            <th>type</th>
-
-            <th>importance</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td><strong>sharing</strong></td>
-
-            <td>boolean</td>
-
-            <td>REQUIRED</td>
-
-            <td>Enable or disable sharing</td>
-        </tr>
-    </table>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 200 OK is returned.</p><h5>Error Codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_sharing</td>
-
-            <td>400 Bad Request</td>
-
-            <td>The specified sharing is invalid or unsupported.</td>
-        </tr>
-
-        <tr>
-            <td>payment_required</td>
-
-            <td>402 Payment Required</td>
-
-            <td>The user does not have access to control sharing</td>
-        </tr>
-    </table>
-
-    <h3 id="hash_lock">Hash lock</h3>
-    <p>Hash lock is a mechanism to use third party authentication on viewing Ustream video content (live or recorded video). Technically it is a handshake mechanism between your service and the Ustream infrastructure.</p>
-    <h4 id="basic_hash_lock">Basic hash lock</h4>
-
-    <table class="table">
-        <tr>
-            <td>PUT</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash/basic.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-
-    </table>
-    <h5>Parameters</h5>
-
-    <table class="table">
-        <tr>
-            <th>parameter</th>
-
-            <th>type</th>
-
-            <th>importance</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td><strong>url</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Third party url</td>
-        </tr>
-
-        <tr>
-            <td><strong>secret</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Secret key</td>
-        </tr>
-    </table>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 201 Created is returned when new
-    hash lock was inserted for the channel.<br>
-    On success a response with HTTP status 204 No Content is returned when an
-    old hash lock was updated for the channel.</p>Specific error codes
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>400 Bad Request</td>
-
-            <td>When one or more required parameters are missing or the user
-                has no access to hash lock</td>
-        </tr>
-
-        <tr>
-            <td>invalid_type</td>
-
-            <td>400 Bad Request</td>
-
-            <td>The specified type is invalid or unsupported</td>
-        </tr>
-    </table>
-    <h4 id="advanced_hash_lock">Advanced hash lock</h4>
-
-    <table class="table">
-        <tr>
-            <td>PUT</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash/advanced.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-    </table>
-    <h5>Parameters</h5>
-
-    <table class="table">
-        <tr>
-            <th>parameter</th>
-
-            <th>type</th>
-
-            <th>importance</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td><strong>url</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Third party url</td>
-        </tr>
-
-        <tr>
-            <td><strong>secret</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Secret key</td>
-        </tr>
-
-        <tr>
-            <td><strong>message</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Displayed message</td>
-        </tr>
-
-        <tr>
-            <td><strong>button_caption</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Button caption</td>
-        </tr>
-
-        <tr>
-            <td><strong>popup_width</strong></td>
-
-            <td>int</td>
-
-            <td>REQUIRED</td>
-
-            <td>Popup width</td>
-        </tr>
-
-        <tr>
-            <td><strong>popup_height</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Popup height</td>
-        </tr>
-    </table>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 201 Created is returned when new
-    hash lock was inserted for the channel.<br>
-    On success a response with HTTP status 204 No Content is returned when an
-    old hash lock was updated for the channel.</p>Specific error codes
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>400 Bad Request</td>
-
-            <td>When one or more required parameters are missing or the user
-                has no access to hash lock</td>
-        </tr>
-
-        <tr>
-            <td>invalid_type</td>
-
-            <td>400 Bad Request</td>
-
-            <td>The specified type is invalid or unsupported</td>
-        </tr>
-    </table>
-    <h4 id="delete_hash_lock">Delete a hash lock</h4>
-
-    <table class="table">
-        <tr>
-            <td>DELETE</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-    </table>
-    <h5>Parameters</h5>
-
-    <p>This request has no parameters.</p>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 200 OK is returned.</p>
-
-    <h3 id="page_lock">Page lock</h3>
+        <h3 id="page_lock">Channel page control</h3>
     <p>Your channel and videos will not be found anywhere on ustream.tv. Viewers will only be able to watch embedded players on external websites. If you want the channel to appear only on your own website, make sure to restrict URL embeds to your site as well.</p>
     <h4 id="get_page_lock">Get page lock setting</h4>
 
@@ -1137,405 +1533,10 @@
         </tr>
     </table>
 
-    <h3 id="embed_lock">Embed lock</h3>
-    <p>By default all ustream channels can be embedded anywhere across the internet. By restricting the embed URLs, you can control the viewing experience and limit distribution to your own preferred partners.</p>
-    <h4 id="get_embed_lock">Get embed lock setting</h4>
 
-    <table class="table">
-        <tr>
-            <td>GET</td>
 
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
 
-    </table>
-    <h5>Parameters</h5>
-
-    <p>This request has no parameters.</p>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 200</p>
-
-    <table class="table">
-        <tr>
-            <th>key</th>
-
-            <th>type</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td>locked</td>
-
-            <td>string</td>
-
-            <th>Returns TRUE if the embed lock is set to the channel, FALSE
-                otherwise</th>
-        </tr>
-    </table>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>402 Payment Required</td>
-
-            <td>If the user does not have the embed_restriction benefit</td>
-        </tr>
-    </table>
-    <h4 id="edit_embed_lock">Edit embed lock</h4>
-
-    <table class="table">
-        <tr>
-            <td>PUT</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-    </table>
-    <h5>Parameters</h5>
-
-    <table class="table">
-        <tr>
-            <th>parameter</th>
-
-            <th>type</th>
-
-            <th>importance</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td><strong>locked</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Set embed lock on channel when parameter locked==TRUE,
-                remove embed lock when locked==FALSE</td>
-        </tr>
-    </table>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 204 No Content is
-    returned.</p>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>402 Payment Required</td>
-
-            <td>If the user does not have the embed_restriction benefit</td>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>400 Bad Request</td>
-
-            <td>If the request parameter is missing or invalid</td>
-        </tr>
-    </table>
-    <h4 id="get_whitelist">Get embed lock url whitelist</h4>
-
-    <table class="table">
-        <tr>
-            <td>GET</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-    </table>
-    <h5>Parameters</h5>
-
-    <p>This request has no parameters.</p>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 200</p>
-
-    <table class="table">
-        <tr>
-            <th>key</th>
-
-            <th>type</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td>allowed_urls</td>
-
-            <td>array</td>
-
-            <th>Return the url list from the allowed urls embed lock list no
-                matter where it was set. Return empty array if the lock is
-                FALSE.</th>
-        </tr>
-    </table>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>402 Payment Required</td>
-
-            <td>If the user does not have the embed_restriction benefit</td>
-        </tr>
-    </table>
-    <h4 id="add_whitelist">Add url to embed lock url whitelist</h4>
-
-    <table class="table">
-        <tr>
-            <td>POST</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-
-    </table>
-    <h5>Parameters</h5>
-
-    <table class="table">
-        <tr>
-            <th>parameter</th>
-
-            <th>type</th>
-
-            <th>importance</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td><strong>url</strong></td>
-
-            <td>string</td>
-
-            <td>REQUIRED</td>
-
-            <td>Add the url to the url whitelist</td>
-        </tr>
-    </table>
-
-    <p>You can only add one URL per API call.</p>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 201 Created is
-    returned.</p>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>402 Payment Required</td>
-
-            <td>If the user does not have the embed_restriction benefit</td>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>400 Bad Request</td>
-
-            <td>If the request parameter is missing or invalid</td>
-        </tr>
-    </table>
-    <h4 id="empty_whitelist">Empty the embed lock url whitelist</h4>
-
-    <table class="table">
-        <tr>
-            <td>DELETE</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-
-    </table>
-    <h5>Parameters</h5>
-
-    <p>This request has no parameters.</p>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 200 OK is returned.</p>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_request</td>
-
-            <td>402 Payment Required</td>
-
-            <td>If the user does not have the embed_restriction benefit</td>
-        </tr>
-    </table>
-
-    <h3 id="delete_channel">Delete a channel</h3>
-
-    <table class="table">
-        <tr>
-            <td>DELETE</td>
-
-            <td><a>https://api.ustream.tv/channels/CHANNEL_ID.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-
-    </table>
-    <h5>Parameters</h5>
-
-    <p>This request has no parameters.</p>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 200 OK is returned.</p>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>lack_of_ownership</td>
-
-            <td>403 Forbidden</td>
-
-            <td>The given channel does not belong to the user.</td>
-        </tr>
-
-        <tr>
-            <td>not_found</td>
-
-            <td>404 Not Found</td>
-
-            <td>The given channel does not exist.</td>
-        </tr>
-    </table>
-
-    <h3 id="multi_quality">Multi quality</h3>
-    <p>By turning this feature on your stream will be transcoded to several versions with different quality settings.</p>
-   
-    <table class="table">
-        <tr>
-            <td>PUT</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/multi-quality.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-
-    </table>
-    <h5>Parameters</h5>
-
-    <table class="table">
-        <tr>
-            <th>parameter</th>
-
-            <th>type</th>
-
-            <th>importance</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td><strong>value</strong></td>
-
-            <td>boolean</td>
-
-            <td>REQUIRED</td>
-
-            <td>Enable or disable multi quality in viewer</td>
-        </tr>
-    </table>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 200 OK is returned.</p>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_value</td>
-
-            <td>400 Bad Request</td>
-
-            <td>The specified value is invalid or unsupported.</td>
-        </tr>
-
-        <tr>
-            <td>payment_required</td>
-
-            <td>402 Payment Required</td>
-
-            <td>The user does not have access to control multi quality</td>
-        </tr>
-    </table>
-
-    <h3 id="hide_viewer_number">Hide viewer number</h3>
+    <h3 id="hide_viewer_number">Hide viewer numbers</h3>
         <p>By setting this feature the viewer number of a live channel will not be
     visible in the viewer.</p>
 
@@ -1603,7 +1604,10 @@
         </tr>
     </table>
 
-    <h3 id="channel_management">Channel management</h3>
+
+
+
+<h2 id="channel_managers">Channel managers</h2>
     <p>This feature enables a user (the master) to add managers to their channels with administrative rights. The activated managers receive benefits of managed channels, independently from their current plans. A managed channel can have at most 500 managers, but only 3 managers can be activated simultaneously by default.</p>
     <h4 id="get_managers">Getting channel managers</h4>
 
@@ -2138,36 +2142,92 @@
         </tr>
     </table>
 
-    <h2 id="channel_creation">Channel creation</h2>
 
-    <h3 id="prerequisites">Prerequisites</h3>
 
-    <p>The caller must have an access token capable initializing channel
-    creation. To obtain a token , the client must request one from the
-    authorization server.</p>
-	<p>Clients can acquire tokens without expiration by asking for
-                "offline" scope. By using this scope the token will never
-                expire.</p>
+<h2 id="video_settings">Video & stream settings</h2>
 
-    <p>Example initialization of a web-server token-acquiring flow:</p>
-                <pre>
-https://www.ustream.tv/oauth2/authorize?response_type=code&amp;client_id=A...Z&amp;redirect_uri=http://site/callback
-</pre>
-    <p>Example initialization of an implicit token-acquiring flow:</p>
-                <pre>
-https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&amp;redirect_uri=http://site/callback
-</pre>
-    <p><a href="authentication.html#examples">See more examples</a></p>
+    <h3 id="time_limit">Getting record time limit</h3>
+    <p>Gets the maximum allowed length of recorded videos for the channel.</p>
 
-    <h3 id="channel_operations">Channel operations</h3>
-    <h4>Channel creation</h4>
     <table class="table">
-	    <tr>
-		    <td>POST</td>
-		    <td><a href="https://api.ustream.tv/users/self/channels.json">https://api.ustream.tv/users/self/channels.json</a></td>
-	    </tr>
+        <tr>
+            <td>GET</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/limits/recording.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
     </table>
-	<h5>Parameters</h5>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <table class="table">
+        <tr>
+            <th>key</th>
+
+            <th>type</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>time</td>
+
+            <td>integer</td>
+
+            <th>record time limit in seconds</th>
+        </tr>
+    </table>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given channel does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given channel does not exist.</td>
+        </tr>
+    </table>
+
+    <p><strong>TODO:</strong> currently only HTTP response code is returned
+    (error_value is not in the response)</p>
+
+
+
+    <h3 id="multi_quality">Multi quality streaming</h3>
+    <p>By turning this feature on your stream will be transcoded to several versions with different quality settings.</p>
+   
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/multi-quality.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
     <table class="table">
         <tr>
             <th>parameter</th>
@@ -2180,66 +2240,46 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&
         </tr>
 
         <tr>
-            <td><strong>title</strong></td>
+            <td><strong>value</strong></td>
 
-            <td>string</td>
+            <td>boolean</td>
 
             <td>REQUIRED</td>
 
-            <td>Create the channel with this title</td>
+            <td>Enable or disable multi quality in viewer</td>
         </tr>
-        <tr>
-            <td>description</td>
-
-            <td>string</td>
-
-            <td>OPTIONAL</td>
-
-            <td>Create the channel with this description</td>
-        </tr>
-
     </table>
-    <p>The body of the call should contain the channel title optionally it can
-    contain channel description and tags. The Content-Type of the request
-    should be <strong>application/x-www-form-urlencoded</strong>.</p>
+    <h5>Response</h5>
 
-    <p>Example:</p>
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+    <h5>Error codes</h5>
 
-                <pre>
-POST users/self/channels.json HTTP/1.1
-Host: api.ustream.tv
-Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
-Content-Type: application/x-www-form-urlencoded
-title=API+Testing+Channel
-</pre>
+    <table class="table">
+        <tr>
+            <th>error value</th>
 
-    <p>The token in the above call is only an example.</p>
-    <h5>Positive response</h5>
-    <pre>
-{
-    "channel":
-            {
-            "id":"13091307",
-            "title":"Whatever Test 1234",
-            "url":"whatever-test-1234",
-            "tiny_url":"http://ustre.am/SVE7"
-            }
-}
-</pre>
-<h5>Possible negative responses</h5>
+            <th>HTTP response code</th>
 
-    <ul>
-        <li><strong>401 Unauthorized</strong>: The provided Access Token is
-        missing, revoked, expired or malformed</li>
+            <th>Error conditions</th>
+        </tr>
 
-        <li><strong>409 Conflict</strong>: The channel title or the channel url
-        is already in use</li>
+        <tr>
+            <td>invalid_value</td>
 
-        <li><strong>400 Bad Request</strong>: The channel title is invalid</li>
+            <td>400 Bad Request</td>
 
-        <li><strong>503 Service Unavailable</strong>: There is a temporary
-        error on the server which makes it impossible to serve the request</li>
-    </ul>
+            <td>The specified value is invalid or unsupported.</td>
+        </tr>
+
+        <tr>
+            <td>payment_required</td>
+
+            <td>402 Payment Required</td>
+
+            <td>The user does not have access to control multi quality</td>
+        </tr>
+    </table>
+    
 
     <h3 id="test_api">Testing API from command line (with curl)</h3>
     <h5>Get an access token</h5>
@@ -2365,200 +2405,91 @@ Cache-Control: no-store
 	<div class="bs-docs-sidebar">
 		<ul class="nav bs-docs-sidenav" data-spy="affix" data-offset-top="280" style="top: 0">
 			<li>
-			  <a href="#listing_channels">
-			    Listing User's channels
-			  </a>
-			</li>
-			<li>
-			  <a href="#password_protection">
-			    Getting / setting password protection
-			  </a>
-			</li>
-			<li>
-			  <a href="#time_limit">
-			    Getting record time limit
-			  </a>
-			</li>
-			<li>
-			  <a href="#channel_branding">
-			    Managing channel branding
-			  </a>
-			  <ul class="nav">
-				<li>
-				  <a href="#branding_type">
-				    Set branding type
-				  </a>
-				</li>
-				<li>
-				  <a href="#disable_branding">
-				    Disable branding
-				  </a>
-				</li>
-				<li>
-				  <a href="#logo_settings">
-				    Update logo settings
-				  </a>
-				</li>
-				<li>
-				  <a href="#upload_logo">
-				    Uploading logo
-				  </a>
-				</li>
-			  </ul>
-			</li>
-			<li>
-			  <a href="#sharing_control">
-			    Sharing control
-			  </a>
-			</li>
-			<li>
-			  <a href="#hash_lock">
-			    Hash lock
-			  </a>
-			  <ul class="nav">
-				<li>
-				  <a href="#basic_hash_lock">
-				    Basic hash lock
-				  </a>
-				</li>
-				<li>
-				  <a href="#advanced_hash_lock">
-				    Advanced hash lock
-				  </a>
-				</li>
-				<li>
-				  <a href="#delete_hash_lock">
-				    Delete a hash lock
-				  </a>
-				</li>
-			  </ul>
-			</li>
-			<li>
-			  <a href="#page_lock">
-			    Page lock
-			  </a>
-			  <ul class="nav">
-				<li>
-				  <a href="#get_page_lock">
-				    Get page lock setting
-				  </a>
-				</li>
-				<li>
-				  <a href="#edit_page_lock">
-				    Edit page lock
-				  </a>
-				</li>
-			  </ul>
-			</li>
-			<li>
-			  <a href="#embed_lock">
-			    Embed lock
-			  </a>
-			  <ul class="nav">
-				<li>
-				  <a href="#get_embed_lock">
-				    Get embed lock setting
-				  </a>
-				</li>
-				<li>
-				  <a href="#edit_embed_lock">
-				    Edit embed lock
-				  </a>
-				</li>
-				<li>
-				  <a href="#get_whitelist">
-				    Get embed lock url whitelist
-				  </a>
-				</li>
-				<li>
-				  <a href="#add_whitelist">
-				    Add url to embed lock url whitelist
-				  </a>
-				</li>
-				<li>
-				  <a href="#empty_whitelist">
-				    Empty the embed lock url whitelist
-				  </a>
-				</li>
-			  </ul>
-			</li>
-			<li>
-			  <a href="#delete_channel">
-			    Delete a channel
-			  </a>
-			</li>
-			<li>
-			  <a href="#multi_quality">
-			    Multi quality
-			  </a>
-			</li>
-			<li>
-			  <a href="#hide_viewer_number">
-			    Hide viewer number
-			  </a>
-			</li>
-			<li>
-			  <a href="#channel_management">
-			    Channel management
-			  </a>
-			  <ul class="nav">
-	  			<li>
-				  <a href="#get_managers">
-				    Getting channel managers
-				  </a>
-				</li>
-				<li>
-				  <a href="#add_manager">
-				    Adding a new channel manager
-				  </a>
-				</li>
-				<li>
-				  <a href="#modify_manager">
-				    Modifying a new channel manager
-				  </a>
-				</li>
-				<li>
-				  <a href="#get_manager">
-				    Getting channel manager
-				  </a>
-				</li>
-				<li>
-				  <a href="#delete_manager">
-				    Deleting a new channel manager
-				  </a>
-				</li>
-				<li>
-				  <a href="#grant_access">
-				    Grant access to a user for a channel
-				  </a>
-				</li>
-				<li>
-				  <a href="#revoke_access">
-				    Revoke access from a user on a channel
-				  </a>
-				</li>
-
-			  </ul>
-			</li>
-			<li>
-				<a href="#channel_creation">Channel creation</a>
+				<a href="#basic_actions">
+					Basic actions
+				</a>
 				<ul class="nav">
 					<li>
-					  <a href="#prerequisites">
-					    Prerequisites
-					  </a>
+					  <a href="#listing_channels">Listing User's channels</a>
 					</li>
 					<li>
-					  <a href="#channel_operations">
-					    Channel operations
-					  </a>
+						<a href="#channel_creation">Channel creation</a>
+					</li>
+					<li>
+						<a href="#delete_channel">Delete a channel</a>
 					</li>
 				</ul>
 			</li>
 			<li>
-			  <a href="#test_api">
-			    Testing API from command line (with curl)
-			  </a>
+				<a href="#security">Security</a>
+				<ul class="nav">
+					<li>
+						<a href="#password_protection">Password protection</a>
+					</li>
+					<li>
+						<a href="#hash_lock">3rd party authentication</a>
+					</li>
+					<li>
+						<a href="#embed_lock">Embed restriction</a>
+					</li>
+					<li>
+						<a href="#sharing_control">Sharing control</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#whitelabel">Whitelabel broadcasting</a>
+				<ul class="nav">
+					<li>
+						<a href="#channel_branding">Branding control</a>
+					</li>
+					<li>
+						<a href="#page_lock">Page lock</a>
+					</li>
+					<li>
+						<a href="#hide_viewer_number">Hide viewer number</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#channel_managers">Channel managers</a>
+				<ul class="nav">
+	  				<li>
+		  				<a href="#get_managers">Getting channel managers</a>
+		  			</li>
+		  			<li>
+			  			<a href="#add_manager">Adding a new channel manager</a>
+			  		</li>
+			  		<li>
+			  			<a href="#modify_manager">Modifying a new channel manager</a>
+			  		</li>
+			  		<li>
+				  		<a href="#get_manager">Getting channel manager</a>
+					</li>
+					<li>
+						<a href="#delete_manager">Deleting a new channel manager</a>
+					</li>
+					<li>
+						<a href="#grant_access">Grant access to a user for a channel</a>
+					</li>
+					<li>
+						<a href="#revoke_access">Revoke access from a user on a channel</a>
+					</li>
+			  </ul>
+			</li>
+			<li>
+				<a href="video_settings">Video &amp; stream settings</a>
+				<ul class="nav">
+					<li>
+						<a href="#time_limit">Getting record time limit</a>
+					</li>
+					<li>
+						<a href="#multi_quality">Multi quality streaming</a>
+					</li>
+					<li>
+						<a href="#test_api">Testing API from command line (with curl)</a>
+					</li>
+				</ul>
 			</li>
 		</ul>
 	</div>
