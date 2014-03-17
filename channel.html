@@ -2279,127 +2279,6 @@ title=API+Testing+Channel
             <td>The user does not have access to control multi quality</td>
         </tr>
     </table>
-    
-
-    <h3 id="test_api">Testing API from command line (with curl)</h3>
-    <h5>Get an access token</h5>
-
-                <pre>
-https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=057ce944b015ec9fdf546dfbbe1b7af4b19e8158&amp;redirect_uri=https://www.ustream.tv/oauth2/redirect&amp;device_name=MyDevice&amp;display=touch&amp;state=XYZ
-</pre>
-
-    <p>After logging in, the browser is redirected to a special URL (defined by
-    the Client), passing the Access Token in the URL. As you can see in the
-    examples below, you should use Authorization HTTP header with token in the
-    requests: "Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950"</p>
-    <h5>Creating a channel (POST)</h5>
-
-                <pre>
-$curl -i -H "Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950" -d "title=Whatever+Test+1234" https://api.ustream.tv/users/self/channels.json 
-</pre>
-
-                <pre>
-HTTP/1.1 201 CREATED
-Server: nginx/1.2.6
-Date: Tue, 15 Jan 2013 13:08:06 GMT
-Content-Type: application/json; charset=UTF-8
-Content-Length: 123
-Connection: keep-alive
-Vary: Host
-X-Powered-By: PHP/5.3.20-1~dotdeb.0
-Cache-Control: no-store
-Accept-Ranges: bytes
-X-Varnish: 703443498
-Age: 0
-Via: 1.1 varnish
-{"channel":{"id":"13091307","title":"Whatever Test 1234","url":"whatever-test-1234","tiny_url":"http://ustre.am/SVE7"}}
-</pre>
-<h5>Acquiring the streamkey for an external broadcasting application</h5>
-
-    <p>If you wish to use an non-Ustream provided broadcaster application or
-    appliance (like Flash Live Media Encoder, Wirecast, Tricaster, etc., you
-    will need a streamkey to authenticate with Ustream and proving that
-    broadcasting to that particular channel is allowed. Also you should get the
-    ingest point where your device or application should connect.</p>
-
-    <p>You can access the streamkey (it is usually the parameter "stream" in
-    the configuration of these devices) the following way. The endpoint
-    requires you to provide the OAuth2 authorization key to complete. The
-    endpoint is at
-    <a>https://api.ustream.tv/channels/CHANNEL_ID/authorizations/broadcasting.json</a></p>Example
-    call
-
-                <pre>
-GET /channels/123456/authorizations/broadcasting.json
-Host: api.ustream.tv
-Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
-Content-Type: application/x-www-form-urlencoded
-</pre>
-
-                <pre>
-HTTP/1.1 200 OK
-Cache-Control: no-store
-{"streaming_key": "kqDlIyGb0H47g8SRSyKjyxAqPmiwTbw3"}
-</pre>
-<h5>Acquiring the streamkey for an external broadcasting application</h5>
-
-    <p>If you wish to use an non-Ustream provided broadcaster application or
-    appliance (like Flash Live Media Encoder, Wirecast, Tricaster, etc., you
-    will need a streamkey to authenticate with Ustream and proving that
-    broadcasting to that particular channel is allowed. Also you should get the
-    ingest point where your device or application should connect.</p>
-
-    <p>You can access the streamkey (it is usually the parameter "stream" in
-    the configuration of these devices) the following way. The endpoint
-    requires you to provide the OAuth2 authorization key to complete. The
-    endpoint is at
-    <a>https://api.ustream.tv/channels/CHANNEL_ID/authorizations/broadcasting/streaming_key.json</a></p>
-
-    <p>Example call</p>
-
-                <pre>
-GET /channels/123456/authorizations/broadcasting/streaming_key.json
-Host: api.ustream.tv
-Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
-Content-Type: application/x-www-form-urlencoded
-</pre>
-
-    <p>Example response</p>
-
-                <pre>
-HTTP/1.1 200 OK
-Cache-Control: no-store
-{"streaming_key": "kqDlIyGb0H47g8SRSyKjyxAqPmiwTbw3"}
-</pre>
-Acquiring the channelkey for an external broadcasting application
-
-    <p>If you wish to use Flash media live encoder , you will need the
-    channelkey to authenticate with Ustream and proving that broadcasting to
-    that particular channel is allowed. Also you should get the ingest point
-    where your device or application should connect.</p>
-
-    <p>You can access the channelkey (it is usually the parameter "stream" in
-    the configuration of these devices) the following way. The endpoint
-    requires you to provide the OAuth2 authorization key to complete. The
-    endpoint is at
-    <a>https://api.ustream.tv/channels/CHANNEL_ID/authorizations/broadcasting/channel_key.json</a></p>
-
-    <p>Example call</p>
-
-                <pre>
-GET /channels/123456/authorizations/broadcasting/channel_key.json
-Host: api.ustream.tv
-Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
-Content-Type: application/x-www-form-urlencoded
-</pre>
-
-    <p>Example response</p>
-
-                <pre>
-HTTP/1.1 200 OK
-Cache-Control: no-store
-{"channel_key": "kqDlIyGb0H47g8SRSyKjyxAqPmiwTbw3"}
-</pre>
 </div>
 <div class="col-md-3">
 	<div class="bs-docs-sidebar">
@@ -2485,9 +2364,6 @@ Cache-Control: no-store
 					</li>
 					<li>
 						<a href="#multi_quality">Multi quality streaming</a>
-					</li>
-					<li>
-						<a href="#test_api">Testing API from command line (with curl)</a>
 					</li>
 				</ul>
 			</li>
