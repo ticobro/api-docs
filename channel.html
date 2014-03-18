@@ -60,7 +60,8 @@
 <div class="col-md-9">
 	<h2 id="basic_actions">Basic actions</h2>
 
-<h3>Create a channel</h3>
+<h3 id="create_channel">Create a channel</h3>
+<p>Create a new channel for the current account.</p>
         <h4 id="prerequisites">Prerequisites</h4>
 
     <p>The caller must have an access token capable initializing channel
@@ -163,7 +164,7 @@ title=API+Testing+Channel
 
 
     <h3 id="delete_channel">Delete a channel</h3>
-
+	<p>Permanently delete a channel from the current account.</p>
     <table class="table">
         <tr>
             <td>DELETE</td>
@@ -209,8 +210,8 @@ title=API+Testing+Channel
 
 
 
-    <h3 id="listing_channels">Listing your channels</h3>
-
+    <h3 id="listing_channels">Listing the user's channels</h3>
+	<p>Get a detailed list of the user's channels, including live status, thumbnail, and mobile and broadcast urls</p>
     <table class="table">
         <tr>
             <td>GET</td>
@@ -1163,7 +1164,6 @@ title=API+Testing+Channel
         </tr>
 
     </table>
-    <p>Reverts any custom settings.</p>
     <h5>Parameters</h5>
 
     <p>This request has no parameters.</p>
@@ -1182,7 +1182,6 @@ title=API+Testing+Channel
         </tr>
 
     </table>
-	<p>Set up your own watermark.</p>
     <p>NOTE: only 0 is supported as LOGO_ID currently.</p>
     <h5>Parameters</h5>
 
@@ -2289,13 +2288,13 @@ title=API+Testing+Channel
 				</a>
 				<ul class="nav">
 					<li>
-					  <a href="#listing_channels">Listing User's channels</a>
-					</li>
-					<li>
-						<a href="#channel_creation">Channel creation</a>
+						<a href="#create_channel">Create a channel</a>
 					</li>
 					<li>
 						<a href="#delete_channel">Delete a channel</a>
+					</li>
+					<li>
+					  <a href="#listing_channels">Listing the user's channels</a>
 					</li>
 				</ul>
 			</li>
@@ -2323,16 +2322,16 @@ title=API+Testing+Channel
 						<a href="#channel_branding">Branding control</a>
 					</li>
 					<li>
-						<a href="#page_lock">Page lock</a>
+						<a href="#page_lock">Channel page control</a>
 					</li>
 					<li>
-						<a href="#hide_viewer_number">Hide viewer number</a>
+						<a href="#hide_viewer_number">Hide viewer numbers</a>
 					</li>
 				</ul>
 			</li>
 			<li>
 				<a href="#channel_managers">Channel managers</a>
-				<ul class="nav">
+				<!--<ul class="nav">
 	  				<li>
 		  				<a href="#get_managers">Getting channel managers</a>
 		  			</li>
@@ -2354,7 +2353,7 @@ title=API+Testing+Channel
 					<li>
 						<a href="#revoke_access">Revoke access from a user on a channel</a>
 					</li>
-			  </ul>
+			  </ul>-->
 			</li>
 			<li>
 				<a href="#video_settings">Video &amp; stream settings</a>
