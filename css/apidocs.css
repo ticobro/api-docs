@@ -110,6 +110,10 @@ pre, table.table {
 	margin-bottom: 2em;
 }
 
+td > table.table {
+	margin-bottom: 0;
+}
+
 h5 {
 	font-weight: 600;
 }
