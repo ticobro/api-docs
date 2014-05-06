@@ -2646,6 +2646,33 @@ title=API+Testing+Channel
         </tr>
     </table>
 
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given channel does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given channel does not exist.</td>
+        </tr>
+    </table>
+
     <h3 id="time_limit">Getting record time limit</h3>
     <p>Gets the maximum allowed length of recorded videos for the channel.</p>
 
