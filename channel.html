@@ -2166,6 +2166,297 @@ title=API+Testing+Channel
 
 
 <h2 id="video_settings">Video & stream settings</h2>
+    <h3 id="channel_videos">Listing the videos of channel</h3>
+    <p>Get a detailed list of the videos of channel</p>
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td>
+                <a>https://api.ustream.tv/channel/CHANNEL_ID/videos.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+
+    <h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>page</td>
+
+            <td>integer</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Requested page number (1 by default)</td>
+        </tr>
+        <tr>
+            <td>pagesize</td>
+
+            <td>integer</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Requested page size (50 by default, max 50)</td>
+        </tr>
+        <tr>
+            <td>filter</td>
+
+            <td>set</td>
+
+            <td>OPTIONAL</td>
+
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>parameter</th>
+
+                        <th>type</th>
+
+                        <th>importance</th>
+
+                        <th>description</th>
+                    </tr>
+                    <tr>
+                        <td>protect</td>
+
+                        <td>string</td>
+
+                        <td>OPTIONAL</td>
+
+                        <td>Filter videos by protection levels. Levels: public, friends, private (default: empty)</td>
+                    </tr>
+                    <tr>
+                        <td>vod</td>
+
+                        <td>boolean</td>
+
+                        <td>OPTIONAL</td>
+
+                        <td>Filter PPV VODs from result when true (default: false)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <h5>Response</h5>
+    <p>A set of a key-value structures under a "videos" element. All of these
+        elements are containing these informations:</p>
+    <table class="table">
+        <tr>
+            <th>key</th>
+
+            <th>type</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>id</td>
+
+            <td>string</td>
+
+            <td>Identifier of the video</td>
+        </tr>
+
+        <tr>
+            <td>title</td>
+
+            <td>string</td>
+
+            <td>Title of the video</td>
+        </tr>
+
+        <tr>
+            <td>description</td>
+
+            <td>string</td>
+
+            <td>Description of the video</td>
+        </tr>
+
+        <tr>
+            <td>url</td>
+
+            <td>string</td>
+
+            <td>Long web URL of the video
+                ({{<a>http://www.ustream.tv/recorded/</a>
+
+                ...}})</td>
+        </tr>
+
+        <tr>
+            <td>length</td>
+
+            <td>float</td>
+
+            <td>Video length in second</td>
+        </tr>
+
+        <tr>
+            <td>created_at</td>
+
+            <td>int</td>
+
+            <td>Video create date in UNIX timestamp</td>
+        </tr>
+
+        <tr>
+            <td>file_size</td>
+
+            <td>int</td>
+
+            <td>Video file size in byte</td>
+        </tr>
+
+        <tr>
+            <td>views</td>
+
+            <td>int</td>
+
+            <td>Vidoe view count</td>
+        </tr>
+
+        <tr>
+            <td>thumbnail</td>
+
+            <td>set</td>
+
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>key</th>
+
+                        <th>type</th>
+
+                        <th>description</th>
+                    </tr>
+                    <tr>
+                        <td>default</td>
+
+                        <td>string</td>
+
+                        <td>Dafault video thumbnail URL</td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td>media_urls</td>
+
+            <td>set</td>
+
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>key</th>
+
+                        <th>type</th>
+
+                        <th>description</th>
+                    </tr>
+                    <tr>
+                        <td>flv</td>
+
+                        <td>string</td>
+
+                        <td>FLV format video URL</td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td>links</td>
+
+            <td>set</td>
+
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>key</th>
+
+                        <th>type</th>
+
+                        <th>description</th>
+                    </tr>
+                    <tr>
+                        <td>channel</td>
+
+                        <td>set</td>
+
+                        <td>
+                            <table class="table">
+                                <tr>
+                                    <th>key</th>
+
+                                    <th>type</th>
+
+                                    <th>description</th>
+                                </tr>
+                                <tr>
+                                    <td>href</td>
+
+                                    <td>string</td>
+
+                                    <td>Channel resource link</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+    <p>The paging information can be found under the "paging" element. Example:</p>
+
+    <pre>
+"paging": {
+        "previous": "https://api.ustream.tv/channels/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE"
+        "next": "https://api.ustream.tv/channels/17728050/videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
+    }</pre>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given channel does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given channel does not exist.</td>
+        </tr>
+    </table>
+
 
     <h3 id="time_limit">Getting record time limit</h3>
     <p>Gets the maximum allowed length of recorded videos for the channel.</p>
@@ -2616,6 +2907,9 @@ title=API+Testing+Channel
 			<li>
 				<a href="#video_settings">Video &amp; stream settings</a>
 				<ul class="nav">
+					<li>
+						<a href="#channel_videos">Listing the videos of channel</a>
+					</li>
 					<li>
 						<a href="#time_limit">Getting record time limit</a>
 					</li>
