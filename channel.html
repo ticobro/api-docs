@@ -2762,6 +2762,51 @@ title=API+Testing+Channel
         </tr>
     </table>
 
+    <h4 id="video_delete">Deleting a video</h4>
+    <p>Permanently delete a video from the current account.</p>
+    <table class="table">
+        <tr>
+            <td>DELETE</td>
+
+            <td><a>https://api.ustream.tv/videos/VIDOE_ID.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given vidoe does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given video does not exist.</td>
+        </tr>
+    </table>
+
     <h3 id="time_limit">Getting record time limit</h3>
     <p>Gets the maximum allowed length of recorded videos for the channel.</p>
 
