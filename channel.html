@@ -81,7 +81,7 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&
 </pre>
     <p><a href="authentication.html#examples">See more examples</a></p>
 
-    <h4 id="channel_operations">Channel creation</h4>    
+    <h4 id="channel_operations">Channel creation</h4>
     <table class="table">
 	    <tr>
 		    <td>POST</td>
@@ -1088,7 +1088,7 @@ title=API+Testing+Channel
         </tr>
 
     </table>
-    
+
     <h5>Parameters</h5>
 
     <table class="table">
@@ -2250,8 +2250,35 @@ title=API+Testing+Channel
     </table>
 
     <h5>Response</h5>
-    <p>A set of a key-value structures under a "videos" element. All of these
-        elements are containing these informations:</p>
+    <p>A set of a key-value structures under a "videos" element. Example:</p>
+
+    <pre>
+"videos": [
+    {
+        "id": "111",
+        "title": "Title of video",
+        "description": "Description of video",
+        "url": "http://www.ustream.tv/recorded/111",
+        "length": "12345.123456",
+        "created_at": 1399388736,
+        "file_size": "120000",
+        "views": 0,
+        "thumbnail": {
+            "default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+        },
+        "media_urls": {
+            "flv": "http://tcdn.ustream.tv/video/111"
+        },
+        "links": {
+            "channel": {
+                "href": "https://api.ustream.tv/channels/1.json"
+            }
+        }
+    },
+    ...
+]
+</pre>
+    <p>Explanation of some values:</p>
     <table class="table">
         <tr>
             <th>key</th>
@@ -2260,42 +2287,6 @@ title=API+Testing+Channel
 
             <th>description</th>
         </tr>
-
-        <tr>
-            <td>id</td>
-
-            <td>string</td>
-
-            <td>Identifier of the video</td>
-        </tr>
-
-        <tr>
-            <td>title</td>
-
-            <td>string</td>
-
-            <td>Title of the video</td>
-        </tr>
-
-        <tr>
-            <td>description</td>
-
-            <td>string</td>
-
-            <td>Description of the video</td>
-        </tr>
-
-        <tr>
-            <td>url</td>
-
-            <td>string</td>
-
-            <td>Long web URL of the video
-                (<a>http://www.ustream.tv/recorded/</a>
-
-                ...)</td>
-        </tr>
-
         <tr>
             <td>length</td>
 
@@ -2304,7 +2295,7 @@ title=API+Testing+Channel
             <td>Video length in second</td>
         </tr>
 
-        <tr>
+            <tr>
             <td>created_at</td>
 
             <td>int</td>
@@ -2318,107 +2309,6 @@ title=API+Testing+Channel
             <td>int</td>
 
             <td>Video file size in byte</td>
-        </tr>
-
-        <tr>
-            <td>views</td>
-
-            <td>int</td>
-
-            <td>Video view count</td>
-        </tr>
-
-        <tr>
-            <td>thumbnail</td>
-
-            <td>set</td>
-
-            <td>
-                <table class="table">
-                    <tr>
-                        <th>key</th>
-
-                        <th>type</th>
-
-                        <th>description</th>
-                    </tr>
-                    <tr>
-                        <td>default</td>
-
-                        <td>string</td>
-
-                        <td>Default video thumbnail URL</td>
-                    </tr>
-                </table>
-
-            </td>
-        </tr>
-        <tr>
-            <td>media_urls</td>
-
-            <td>set</td>
-
-            <td>
-                <table class="table">
-                    <tr>
-                        <th>key</th>
-
-                        <th>type</th>
-
-                        <th>description</th>
-                    </tr>
-                    <tr>
-                        <td>flv</td>
-
-                        <td>string</td>
-
-                        <td>FLV format video URL</td>
-                    </tr>
-                </table>
-
-            </td>
-        </tr>
-        <tr>
-            <td>links</td>
-
-            <td>set</td>
-
-            <td>
-                <table class="table">
-                    <tr>
-                        <th>key</th>
-
-                        <th>type</th>
-
-                        <th>description</th>
-                    </tr>
-                    <tr>
-                        <td>channel</td>
-
-                        <td>set</td>
-
-                        <td>
-                            <table class="table">
-                                <tr>
-                                    <th>key</th>
-
-                                    <th>type</th>
-
-                                    <th>description</th>
-                                </tr>
-                                <tr>
-                                    <td>href</td>
-
-                                    <td>string</td>
-
-                                    <td>Channel resource link</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-
-            </td>
         </tr>
     </table>
 
@@ -2474,7 +2364,32 @@ title=API+Testing+Channel
     <p>This request has no parameters.</p>
 
     <h5>Response</h5>
-    <p>A key-value structures under a "video" element.</p>
+    <p>A key-value structures under a "video" element. Example:</p>
+
+    <pre>
+"video": {
+    "id": "111",
+    "title": "Title of video",
+    "description": "Description of video",
+    "url": "http://www.ustream.tv/recorded/111",
+    "length": "12345.123456",
+    "created_at": 1399388736,
+    "file_size": "120000",
+    "views": 0,
+    "thumbnail": {
+        "default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+    },
+    "media_urls": {
+        "flv": "http://tcdn.ustream.tv/video/111"
+    },
+    "links": {
+        "channel": {
+            "href": "https://api.ustream.tv/channels/1.json"
+        }
+    }
+}
+</pre>
+    <p>Explanation of some values:</p>
     <table class="table">
         <tr>
             <th>key</th>
@@ -2483,42 +2398,6 @@ title=API+Testing+Channel
 
             <th>description</th>
         </tr>
-
-        <tr>
-            <td>id</td>
-
-            <td>string</td>
-
-            <td>Identifier of the video</td>
-        </tr>
-
-        <tr>
-            <td>title</td>
-
-            <td>string</td>
-
-            <td>Title of the video</td>
-        </tr>
-
-        <tr>
-            <td>description</td>
-
-            <td>string</td>
-
-            <td>Description of the video</td>
-        </tr>
-
-        <tr>
-            <td>url</td>
-
-            <td>string</td>
-
-            <td>Long web URL of the video
-                (<a>http://www.ustream.tv/recorded/</a>
-
-                ...)</td>
-        </tr>
-
         <tr>
             <td>length</td>
 
@@ -2541,107 +2420,6 @@ title=API+Testing+Channel
             <td>int</td>
 
             <td>Video file size in byte</td>
-        </tr>
-
-        <tr>
-            <td>views</td>
-
-            <td>int</td>
-
-            <td>Video view count</td>
-        </tr>
-
-        <tr>
-            <td>thumbnail</td>
-
-            <td>set</td>
-
-            <td>
-                <table class="table">
-                    <tr>
-                        <th>key</th>
-
-                        <th>type</th>
-
-                        <th>description</th>
-                    </tr>
-                    <tr>
-                        <td>default</td>
-
-                        <td>string</td>
-
-                        <td>Default video thumbnail URL</td>
-                    </tr>
-                </table>
-
-            </td>
-        </tr>
-        <tr>
-            <td>media_urls</td>
-
-            <td>set</td>
-
-            <td>
-                <table class="table">
-                    <tr>
-                        <th>key</th>
-
-                        <th>type</th>
-
-                        <th>description</th>
-                    </tr>
-                    <tr>
-                        <td>flv</td>
-
-                        <td>string</td>
-
-                        <td>FLV format video URL</td>
-                    </tr>
-                </table>
-
-            </td>
-        </tr>
-        <tr>
-            <td>links</td>
-
-            <td>set</td>
-
-            <td>
-                <table class="table">
-                    <tr>
-                        <th>key</th>
-
-                        <th>type</th>
-
-                        <th>description</th>
-                    </tr>
-                    <tr>
-                        <td>channel</td>
-
-                        <td>set</td>
-
-                        <td>
-                            <table class="table">
-                                <tr>
-                                    <th>key</th>
-
-                                    <th>type</th>
-
-                                    <th>description</th>
-                                </tr>
-                                <tr>
-                                    <td>href</td>
-
-                                    <td>string</td>
-
-                                    <td>Channel resource link</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-
-            </td>
         </tr>
     </table>
 
@@ -2868,7 +2646,7 @@ title=API+Testing+Channel
 
     <h3 id="multi_quality">Multi quality streaming</h3>
     <p>By turning this feature on your stream will be transcoded to several versions with different quality settings.</p>
-   
+
     <table class="table">
         <tr>
             <td>PUT</td>
