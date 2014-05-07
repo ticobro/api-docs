@@ -2164,8 +2164,218 @@ title=API+Testing+Channel
     </table>
 
 
+<h2 id="stream_settings">Stream settings</h2>
 
-<h2 id="video_settings">Video & stream settings</h2>
+    <h3 id="time_limit">Getting record time limit</h3>
+    <p>Gets the maximum allowed length of recorded videos for the channel.</p>
+
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/limits/recording.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <table class="table">
+        <tr>
+            <th>key</th>
+
+            <th>type</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>time</td>
+
+            <td>integer</td>
+
+            <td>record time limit in seconds</td>
+        </tr>
+    </table>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given channel does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given channel does not exist.</td>
+        </tr>
+    </table>
+
+    <p><strong>TODO:</strong> currently only HTTP response code is returned
+        (error_value is not in the response)</p>
+
+
+
+    <h3 id="multi_quality">Multi quality streaming</h3>
+    <p>By turning this feature on your stream will be transcoded to several versions with different quality settings.</p>
+
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/multi-quality.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>value</strong></td>
+
+            <td>boolean</td>
+
+            <td>REQUIRED</td>
+
+            <td>Enable or disable multi quality in viewer</td>
+        </tr>
+    </table>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_value</td>
+
+            <td>400 Bad Request</td>
+
+            <td>The specified value is invalid or unsupported.</td>
+        </tr>
+
+        <tr>
+            <td>payment_required</td>
+
+            <td>402 Payment Required</td>
+
+            <td>The user does not have access to control multi quality</td>
+        </tr>
+    </table>
+
+
+
+    <h3 id="autorecord">Autorecord</h3>
+    <p>Videos can be automatically created when broadcasting. The behaviour can be controlled by this resource.</p>
+
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/autorecord.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>value</td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Possible values: disabled, private, public. If the value is disabled,
+                no auto-recorded video gets created for the channel when broadcasting.
+                If the value is private, then the new auto-record will be
+                private by default. In case of public the created auto-records will be
+                public by default.
+            </td>
+        </tr>
+    </table>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_value</td>
+
+            <td>400 Bad Request</td>
+
+            <td>The specified value is invalid or unsupported.</td>
+        </tr>
+
+        <tr>
+            <td>payment_required</td>
+
+            <td>402 Payment Required</td>
+
+            <td>The user does not have access to control autorecord settings</td>
+        </tr>
+    </table>
+
+
+    <h2 id="video_settings">Video settings</h2>
     <h3 id="channel_videos">Listing the videos of channel</h3>
     <p>Get a detailed list of the videos of channel</p>
     <table class="table">
@@ -2577,216 +2787,6 @@ title=API+Testing+Channel
         </tr>
     </table>
 
-    <h3 id="time_limit">Getting record time limit</h3>
-    <p>Gets the maximum allowed length of recorded videos for the channel.</p>
-
-    <table class="table">
-        <tr>
-            <td>GET</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/limits/recording.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-    </table>
-    <h5>Parameters</h5>
-
-    <p>This request has no parameters.</p>
-    <h5>Response</h5>
-
-    <table class="table">
-        <tr>
-            <th>key</th>
-
-            <th>type</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td>time</td>
-
-            <td>integer</td>
-
-            <td>record time limit in seconds</td>
-        </tr>
-    </table>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>lack_of_ownership</td>
-
-            <td>403 Forbidden</td>
-
-            <td>The given channel does not belong to the user.</td>
-        </tr>
-
-        <tr>
-            <td>not_found</td>
-
-            <td>404 Not Found</td>
-
-            <td>The given channel does not exist.</td>
-        </tr>
-    </table>
-
-    <p><strong>TODO:</strong> currently only HTTP response code is returned
-    (error_value is not in the response)</p>
-
-
-
-    <h3 id="multi_quality">Multi quality streaming</h3>
-    <p>By turning this feature on your stream will be transcoded to several versions with different quality settings.</p>
-
-    <table class="table">
-        <tr>
-            <td>PUT</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/multi-quality.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-
-    </table>
-    <h5>Parameters</h5>
-
-    <table class="table">
-        <tr>
-            <th>parameter</th>
-
-            <th>type</th>
-
-            <th>importance</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td><strong>value</strong></td>
-
-            <td>boolean</td>
-
-            <td>REQUIRED</td>
-
-            <td>Enable or disable multi quality in viewer</td>
-        </tr>
-    </table>
-    <h5>Response</h5>
-
-    <p>On success a response with HTTP status 200 OK is returned.</p>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>invalid_value</td>
-
-            <td>400 Bad Request</td>
-
-            <td>The specified value is invalid or unsupported.</td>
-        </tr>
-
-        <tr>
-            <td>payment_required</td>
-
-            <td>402 Payment Required</td>
-
-            <td>The user does not have access to control multi quality</td>
-        </tr>
-    </table>
-
-
-
-	<h3 id="autorecord">Autorecord</h3>
-	<p>Videos can be automatically created when broadcasting. The behaviour can be controlled by this resource.</p>
-
-	<table class="table">
-		<tr>
-			<td>PUT</td>
-
-			<td>
-				<a>https://api.ustream.tv/channels/CHANNEL_ID/settings/autorecord.FORMAT</a>
-				(format can be json or xml)</td>
-		</tr>
-
-	</table>
-	<h5>Parameters</h5>
-
-	<table class="table">
-		<tr>
-			<th>parameter</th>
-
-			<th>type</th>
-
-			<th>importance</th>
-
-			<th>description</th>
-		</tr>
-
-		<tr>
-			<td>value</td>
-
-			<td>string</td>
-
-			<td>REQUIRED</td>
-
-			<td>Possible values: disabled, private, public. If the value is disabled,
-				no auto-recorded video gets created for the channel when broadcasting.
-				If the value is private, then the new auto-record will be
-				private by default. In case of public the created auto-records will be
-				public by default.
-			</td>
-		</tr>
-	</table>
-	<h5>Response</h5>
-
-	<p>On success a response with HTTP status 200 OK is returned.</p>
-	<h5>Error codes</h5>
-
-	<table class="table">
-		<tr>
-			<th>error value</th>
-
-			<th>HTTP response code</th>
-
-			<th>Error conditions</th>
-		</tr>
-
-		<tr>
-			<td>invalid_value</td>
-
-			<td>400 Bad Request</td>
-
-			<td>The specified value is invalid or unsupported.</td>
-		</tr>
-
-		<tr>
-			<td>payment_required</td>
-
-			<td>402 Payment Required</td>
-
-			<td>The user does not have access to control autorecord settings</td>
-		</tr>
-	</table>
-
-
-
 	<h3 id="video_expiration">Video expiration</h3>
 	<p>A video gets deleted when expires. These videos can be saved by setting the time of the expiration.</p>
 
@@ -3023,23 +3023,28 @@ title=API+Testing+Channel
 					</li>
 			  </ul>-->
 			</li>
+            <li>
+                <a href="#stream_settings">Stream settings</a>
+                <ul class="nav">
+                    <li>
+                        <a href="#time_limit">Getting record time limit</a>
+                    </li>
+                    <li>
+                        <a href="#multi_quality">Multi quality streaming</a>
+                    </li>
+                    <li>
+                        <a href="#autorecord">Autorecord</a>
+                    </li>
+                </ul>
+            </li>
 			<li>
-				<a href="#video_settings">Video &amp; stream settings</a>
+				<a href="#video_settings">Video settings</a>
 				<ul class="nav">
 					<li>
 						<a href="#channel_videos">Listing the videos of channel</a>
 					</li>
 					<li>
 						<a href="#video_details">Video details</a>
-					</li>
-					<li>
-						<a href="#time_limit">Getting record time limit</a>
-					</li>
-					<li>
-						<a href="#multi_quality">Multi quality streaming</a>
-					</li>
-					<li>
-						<a href="#autorecord">Autorecord</a>
 					</li>
 					<li>
 						<a href="#video_expiration">Video expiration</a>
