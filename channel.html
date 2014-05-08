@@ -1627,6 +1627,189 @@ title=API+Testing+Channel
 
 
 
+<h2 id="design">Channel design</h2>
+
+    <h3 id="channel_background">Channel page background</h3>
+
+    <h4>Get</h4>
+    <p>Get current background color</p>
+
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+
+    <h5>Parameters</h5>
+    <p>This request has no parameters.</p>
+
+    <h5>Response</h5>
+    <p>A key-value structures under a "background" element.</p>
+
+    <table class="table">
+        <tr>
+            <th>key</th>
+
+            <th>type</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>color</td>
+
+            <td>string</td>
+
+            <td>Channel page background color in hex RGB format</td>
+        </tr>
+    </table>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The api user is not allowed to manage the given channel</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not found</td>
+
+            <td>Channel not found</td>
+        </tr>
+    </table>
+
+    <h4>Edit background color</h4>
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+
+    <h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>color</td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Channel page background color in hex RGB format</td>
+        </tr>
+    </table>
+
+    <h5>Response</h5>
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The api user is not allowed to manage the given channel</td>
+        </tr>
+
+        <tr>
+            <td>bad_request</td>
+
+            <td>400 Bad request</td>
+
+            <td>If validation fails</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not found</td>
+
+            <td>Channel not found</td>
+        </tr>
+    </table>
+
+    <h4>Remove settings</h4>
+    <table class="table">
+        <tr>
+            <td>DELETE</td>
+
+            <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+
+    <h5>Parameters</h5>
+    <p>This request has no parameters.</p>
+
+    <h5>Response</h5>
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The api user is not allowed to manage the given channel</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not found</td>
+
+            <td>Channel not found</td>
+        </tr>
+    </table>
 
 <h2 id="channel_managers">Channel managers</h2>
     <p>This feature enables a user (the master) to add managers to their channels with administrative rights. The activated managers receive benefits of managed channels, independently from their current plans. A managed channel can have at most 500 managers, but only 3 managers can be activated simultaneously by default.</p>
@@ -2994,6 +3177,14 @@ title=API+Testing+Channel
 					</li>
 					<li>
 						<a href="#hide_viewer_number">Hide viewer numbers</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#design">Channel design</a>
+				<ul class="nav">
+					<li>
+						<a href="#channel_background">Channel page background</a>
 					</li>
 				</ul>
 			</li>
