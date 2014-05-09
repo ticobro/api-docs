@@ -81,7 +81,7 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&
 </pre>
     <p><a href="authentication.html#examples">See more examples</a></p>
 
-    <h4 id="channel_operations">Channel creation</h4>    
+    <h4 id="channel_operations">Channel creation</h4>
     <table class="table">
 	    <tr>
 		    <td>POST</td>
@@ -287,9 +287,9 @@ title=API+Testing+Channel
             <td>string</td>
 
             <td>Long web URL of the channel
-                ({{<a>http://www.ustream.tv/channel/</a>
+                (<a>http://www.ustream.tv/channel/</a>
 
-                ...}})</td>
+                ...)</td>
         </tr>
 
         <tr>
@@ -298,9 +298,9 @@ title=API+Testing+Channel
             <td>string</td>
 
             <td>Shortened web URL of the channel
-                ({{<a>http://ustre.am/</a>
+                (<a>http://ustre.am/</a>
 
-               ...}}) - suitable for sharing on Twitter / Facebook</td>
+               ...) - suitable for sharing on Twitter / Facebook</td>
         </tr>
 
         <tr>
@@ -359,7 +359,7 @@ title=API+Testing+Channel
 "paging": {
   "previous": {
     "href": "https://api.ustream.tv/users/self/channels.json?pagesize=PAGESIZE&p=PREVIOUS_PAGE"
-  }
+  },
   "actual": {
     "href": "https://api.ustream.tv/users/self/channels.json?pagesize=PAGESIZE&p=PAGE"
   },
@@ -1088,7 +1088,7 @@ title=API+Testing+Channel
         </tr>
 
     </table>
-    
+
     <h5>Parameters</h5>
 
     <table class="table">
@@ -1627,6 +1627,189 @@ title=API+Testing+Channel
 
 
 
+<h2 id="design">Channel design</h2>
+
+    <h3 id="channel_background">Channel page background</h3>
+
+    <h4>Get</h4>
+    <p>Get current background color</p>
+
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+
+    <h5>Parameters</h5>
+    <p>This request has no parameters.</p>
+
+    <h5>Response</h5>
+    <p>A key-value structures under a "background" element.</p>
+
+    <table class="table">
+        <tr>
+            <th>key</th>
+
+            <th>type</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>color</td>
+
+            <td>string</td>
+
+            <td>Channel page background color in hex RGB format</td>
+        </tr>
+    </table>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The api user is not allowed to manage the given channel</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not found</td>
+
+            <td>Channel not found</td>
+        </tr>
+    </table>
+
+    <h4>Edit background color</h4>
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+
+    <h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>color</td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Channel page background color in hex RGB format</td>
+        </tr>
+    </table>
+
+    <h5>Response</h5>
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The api user is not allowed to manage the given channel</td>
+        </tr>
+
+        <tr>
+            <td>bad_request</td>
+
+            <td>400 Bad request</td>
+
+            <td>If validation fails</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not found</td>
+
+            <td>Channel not found</td>
+        </tr>
+    </table>
+
+    <h4>Remove settings</h4>
+    <table class="table">
+        <tr>
+            <td>DELETE</td>
+
+            <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+
+    <h5>Parameters</h5>
+    <p>This request has no parameters.</p>
+
+    <h5>Response</h5>
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The api user is not allowed to manage the given channel</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not found</td>
+
+            <td>Channel not found</td>
+        </tr>
+    </table>
 
 <h2 id="channel_managers">Channel managers</h2>
     <p>This feature enables a user (the master) to add managers to their channels with administrative rights. The activated managers receive benefits of managed channels, independently from their current plans. A managed channel can have at most 500 managers, but only 3 managers can be activated simultaneously by default.</p>
@@ -2012,7 +2195,7 @@ title=API+Testing+Channel
             <td>The user does not have active subaccount benefit</td>
         </tr>
     </table>
-    <h4 id="delete_manager">Deleting a new channel manager</h4>
+    <h4 id="delete_manager">Deleting a channel manager</h4>
 
     <table class="table">
         <tr>
@@ -2164,8 +2347,7 @@ title=API+Testing+Channel
     </table>
 
 
-
-<h2 id="video_settings">Video & stream settings</h2>
+<h2 id="stream_settings">Stream settings</h2>
 
     <h3 id="time_limit">Getting record time limit</h3>
     <p>Gets the maximum allowed length of recorded videos for the channel.</p>
@@ -2230,13 +2412,13 @@ title=API+Testing+Channel
     </table>
 
     <p><strong>TODO:</strong> currently only HTTP response code is returned
-    (error_value is not in the response)</p>
+        (error_value is not in the response)</p>
 
 
 
     <h3 id="multi_quality">Multi quality streaming</h3>
     <p>By turning this feature on your stream will be transcoded to several versions with different quality settings.</p>
-   
+
     <table class="table">
         <tr>
             <td>PUT</td>
@@ -2303,79 +2485,490 @@ title=API+Testing+Channel
 
 
 
-	<h3 id="autorecord">Autorecord</h3>
-	<p>Videos can be automatically created when broadcasting. The behaviour can be controlled by this resource.</p>
+    <h3 id="autorecord">Autorecord</h3>
+    <p>Videos can be automatically created when broadcasting. The behaviour can be controlled by this resource.</p>
 
-	<table class="table">
-		<tr>
-			<td>PUT</td>
+    <table class="table">
+        <tr>
+            <td>PUT</td>
 
-			<td>
-				<a>https://api.ustream.tv/channels/CHANNEL_ID/settings/autorecord.FORMAT</a>
-				(format can be json or xml)</td>
-		</tr>
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/autorecord.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
 
-	</table>
-	<h5>Parameters</h5>
+    </table>
+    <h5>Parameters</h5>
 
-	<table class="table">
-		<tr>
-			<th>parameter</th>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
 
-			<th>type</th>
+            <th>type</th>
 
-			<th>importance</th>
+            <th>importance</th>
 
-			<th>description</th>
-		</tr>
+            <th>description</th>
+        </tr>
 
-		<tr>
-			<td>value</td>
+        <tr>
+            <td>value</td>
 
-			<td>string</td>
+            <td>string</td>
 
-			<td>REQUIRED</td>
+            <td>REQUIRED</td>
 
-			<td>Possible values: disabled, private, public. If the value is disabled,
-				no auto-recorded video gets created for the channel when broadcasting.
-				If the value is private, then the new auto-record will be
-				private by default. In case of public the created auto-records will be
-				public by default.
-			</td>
-		</tr>
-	</table>
-	<h5>Response</h5>
+            <td>Possible values: disabled, private, public. If the value is disabled,
+                no auto-recorded video gets created for the channel when broadcasting.
+                If the value is private, then the new auto-record will be
+                private by default. In case of public the created auto-records will be
+                public by default.
+            </td>
+        </tr>
+    </table>
+    <h5>Response</h5>
 
-	<p>On success a response with HTTP status 200 OK is returned.</p>
-	<h5>Error codes</h5>
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+    <h5>Error codes</h5>
 
-	<table class="table">
-		<tr>
-			<th>error value</th>
+    <table class="table">
+        <tr>
+            <th>error value</th>
 
-			<th>HTTP response code</th>
+            <th>HTTP response code</th>
 
-			<th>Error conditions</th>
-		</tr>
+            <th>Error conditions</th>
+        </tr>
 
-		<tr>
-			<td>invalid_value</td>
+        <tr>
+            <td>invalid_value</td>
 
-			<td>400 Bad Request</td>
+            <td>400 Bad Request</td>
 
-			<td>The specified value is invalid or unsupported.</td>
-		</tr>
+            <td>The specified value is invalid or unsupported.</td>
+        </tr>
 
-		<tr>
-			<td>payment_required</td>
+        <tr>
+            <td>payment_required</td>
 
-			<td>402 Payment Required</td>
+            <td>402 Payment Required</td>
 
-			<td>The user does not have access to control autorecord settings</td>
-		</tr>
-	</table>
+            <td>The user does not have access to control autorecord settings</td>
+        </tr>
+    </table>
 
 
+    <h2 id="video_settings">Video settings</h2>
+    <h3 id="channel_videos">Listing the videos of channel</h3>
+    <p>Get a detailed list of the videos of channel</p>
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/videos.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+
+    <h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td>page</td>
+
+            <td>integer</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Requested page number (1 by default)</td>
+        </tr>
+        <tr>
+            <td>pagesize</td>
+
+            <td>integer</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Requested page size (50 by default, max 50)</td>
+        </tr>
+        <tr>
+            <td>filter</td>
+
+            <td>set</td>
+
+            <td>OPTIONAL</td>
+
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>parameter</th>
+
+                        <th>type</th>
+
+                        <th>importance</th>
+
+                        <th>description</th>
+                    </tr>
+                    <tr>
+                        <td>protect</td>
+
+                        <td>string</td>
+
+                        <td>OPTIONAL</td>
+
+                        <td>Filter videos by protection levels. Levels: public, friends, private (default: empty)</td>
+                    </tr>
+                    <tr>
+                        <td>vod</td>
+
+                        <td>boolean</td>
+
+                        <td>OPTIONAL</td>
+
+                        <td>Filter PPV VODs from result when true (default: false)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <h5>Response</h5>
+    <p>A set of a key-value structures under a "videos" element. Example:</p>
+
+    <pre>
+"videos": [
+    {
+        "id": "111",
+        "title": "Title of video",
+        "description": "Description of video",
+        "url": "http://www.ustream.tv/recorded/111",
+        "length": "12345.123456",
+        "created_at": 1399388736,
+        "file_size": "120000",
+        "views": 0,
+        "thumbnail": {
+            "default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+        },
+        "media_urls": {
+            "flv": "http://tcdn.ustream.tv/video/111"
+        },
+        "links": {
+            "channel": {
+                "href": "https://api.ustream.tv/channels/1.json"
+            }
+        }
+    },
+    ...
+]
+</pre>
+    <p>Explanation of some values:</p>
+    <table class="table">
+        <tr>
+            <th>key</th>
+
+            <th>type</th>
+
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>length</td>
+
+            <td>float</td>
+
+            <td>Video length in second</td>
+        </tr>
+
+            <tr>
+            <td>created_at</td>
+
+            <td>int</td>
+
+            <td>Video create date in UNIX timestamp</td>
+        </tr>
+
+        <tr>
+            <td>file_size</td>
+
+            <td>int</td>
+
+            <td>Video file size in byte</td>
+        </tr>
+    </table>
+
+    <p>The paging information can be found under the "paging" element. Example:</p>
+
+    <pre>
+"paging": {
+        "previous": "https://api.ustream.tv/channels/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE"
+        "next": "https://api.ustream.tv/channels/17728050/videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
+    }</pre>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given channel does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given channel does not exist.</td>
+        </tr>
+    </table>
+
+    <h3 id="video_details">Video details</h3>
+
+    <h4 id="video_details_get">Get video details</h4>
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td>
+                <a>https://api.ustream.tv//videos/VIDEO_ID.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+
+    <h5>Parameters</h5>
+    <p>This request has no parameters.</p>
+
+    <h5>Response</h5>
+    <p>A key-value structures under a "video" element. Example:</p>
+
+    <pre>
+"video": {
+    "id": "111",
+    "title": "Title of video",
+    "description": "Description of video",
+    "url": "http://www.ustream.tv/recorded/111",
+    "length": "12345.123456",
+    "created_at": 1399388736,
+    "file_size": "120000",
+    "views": 0,
+    "thumbnail": {
+        "default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+    },
+    "media_urls": {
+        "flv": "http://tcdn.ustream.tv/video/111"
+    },
+    "links": {
+        "channel": {
+            "href": "https://api.ustream.tv/channels/1.json"
+        }
+    }
+}
+</pre>
+    <p>Explanation of some values:</p>
+    <table class="table">
+        <tr>
+            <th>key</th>
+
+            <th>type</th>
+
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>length</td>
+
+            <td>float</td>
+
+            <td>Video length in second</td>
+        </tr>
+
+        <tr>
+            <td>created_at</td>
+
+            <td>int</td>
+
+            <td>Video create date in UNIX timestamp</td>
+        </tr>
+
+        <tr>
+            <td>file_size</td>
+
+            <td>int</td>
+
+            <td>Video file size in byte</td>
+        </tr>
+    </table>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given video does not exist.</td>
+        </tr>
+    </table>
+
+    <h4 id="video_details_put">Edit video details</h4>
+    <table class="table">
+        <tr>
+            <td>PUT</td>
+
+            <td>
+                <a>https://api.ustream.tv//videos/VIDEO_ID.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+
+    <h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>title</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Video title</td>
+        </tr>
+        <tr>
+            <td><strong>description</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Video description</td>
+        </tr>
+        <tr>
+            <td>protect</td>
+
+            <td>string</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Video protection level. Possible values: public, friends, private</td>
+        </tr>
+    </table>
+
+    <h5>Response</h5>
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>invalid_value</td>
+
+            <td>400 Bad Request</td>
+
+            <td>The specified value is invalid or unsupported.</td>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given video does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given video does not exist.</td>
+        </tr>
+    </table>
+
+    <h4 id="video_delete">Deleting a video</h4>
+    <p>Permanently delete a video from the current account.</p>
+    <table class="table">
+        <tr>
+            <td>DELETE</td>
+
+            <td><a>https://api.ustream.tv/videos/VIDOE_ID.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+
+    </table>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status 200 OK is returned.</p>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The given video does not belong to the user.</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not Found</td>
+
+            <td>The given video does not exist.</td>
+        </tr>
+    </table>
 
 	<h3 id="video_expiration">Video expiration</h3>
 	<p>A video gets deleted when expires. These videos can be saved by setting the time of the expiration.</p>
@@ -2588,6 +3181,14 @@ title=API+Testing+Channel
 				</ul>
 			</li>
 			<li>
+				<a href="#design">Channel design</a>
+				<ul class="nav">
+					<li>
+						<a href="#channel_background">Channel page background</a>
+					</li>
+				</ul>
+			</li>
+			<li>
 				<a href="#channel_managers">Channel managers</a>
 				<!--<ul class="nav">
 	  				<li>
@@ -2613,17 +3214,28 @@ title=API+Testing+Channel
 					</li>
 			  </ul>-->
 			</li>
+            <li>
+                <a href="#stream_settings">Stream settings</a>
+                <ul class="nav">
+                    <li>
+                        <a href="#time_limit">Getting record time limit</a>
+                    </li>
+                    <li>
+                        <a href="#multi_quality">Multi quality streaming</a>
+                    </li>
+                    <li>
+                        <a href="#autorecord">Autorecord</a>
+                    </li>
+                </ul>
+            </li>
 			<li>
-				<a href="#video_settings">Video &amp; stream settings</a>
+				<a href="#video_settings">Video settings</a>
 				<ul class="nav">
 					<li>
-						<a href="#time_limit">Getting record time limit</a>
+						<a href="#channel_videos">Listing the videos of channel</a>
 					</li>
 					<li>
-						<a href="#multi_quality">Multi quality streaming</a>
-					</li>
-					<li>
-						<a href="#autorecord">Autorecord</a>
+						<a href="#video_details">Video details</a>
 					</li>
 					<li>
 						<a href="#video_expiration">Video expiration</a>
