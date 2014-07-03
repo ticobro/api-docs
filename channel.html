@@ -3264,6 +3264,246 @@ title=API+Testing+Channel
 			<td>The specified video_id does not exist</td>
 		</tr>
 	</table>
+
+	<h2 id="channel_hooks">Channel hooks</h2>
+	<p>Hooks can be registered for different channel events. When a channel event is fired, a HTTP POST request is sent to the registered hook recipient URL.</p>
+	<p>POST body example:</p>
+	<pre>{
+    "status": "channel.status.live",
+    "channelId": "123"
+}</pre>
+
+	<h4 id="add_channel_hook">Hook registration</h4>
+	<table class="table">
+		<tr>
+			<td>PUT</td>
+			<td>
+				<a>https://api.ustream.tv/channels/CHANNEL_ID/hooks/EVENT.FORMAT</a>
+				(format can be json or xml)</td>
+		</tr>
+	</table>
+
+	<h5>Parameters</h5>
+	<table class="table">
+		<tr>
+			<th>parameter</th>
+
+			<th>type</th>
+
+			<th>importance</th>
+
+			<th>description</th>
+		</tr>
+
+		<tr>
+			<td>recipient</td>
+
+			<td>string</td>
+
+			<td>REQUIRED</td>
+
+			<td>The URL where the event notifications will be sent.</td>
+		</tr>
+	</table>
+
+	<h5>Response</h5>
+	<p>On success a response with HTTP status 204 No content is returned.</p>
+
+	<h5>Error codes</h5>
+	<table class="table">
+		<tr>
+			<th>error value</th>
+
+			<th>HTTP response code</th>
+
+			<th>Error conditions</th>
+		</tr>
+
+		<tr>
+			<td>not_found</td>
+
+			<td>404 Not found</td>
+
+			<td>The given channel does not exist</td>
+		</tr>
+
+		<tr>
+			<td>bad_request</td>
+
+			<td>400 Bad request</td>
+
+			<td>Some of the incoming parameters are invalid.</td>
+		</tr>
+	</table>
+
+	<h4 id="get_channel_hook">Getting a channel hook</h4>
+	<table class="table">
+		<tr>
+			<td>GET</td>
+			<td>
+				<a>https://api.ustream.tv/channels/CHANNEL_ID/hooks/EVENT.FORMAT</a>
+				(format can be json or xml)</td>
+		</tr>
+	</table>
+
+	<h5>Parameters</h5>
+	<p>This request has no parameters.</p>
+
+	<h5>Response</h5>
+	<p>On success a response with HTTP status 200 OK is returned.</p>
+
+	<table class="table">
+		<tr>
+			<th>key</th>
+
+			<th>type</th>
+
+			<th>description</th>
+		</tr>
+
+		<tr>
+			<td>recipient</td>
+
+			<td>string</td>
+
+			<td>the hook recipient URL</td>
+		</tr>
+		<tr>
+			<td>status</td>
+
+			<td>string</td>
+
+			<td>pending, active or suspended</td>
+		</tr>
+	</table>
+
+	<h5>Error codes</h5>
+	<table class="table">
+		<tr>
+			<th>error value</th>
+
+			<th>HTTP response code</th>
+
+			<th>Error conditions</th>
+		</tr>
+
+		<tr>
+			<td>not_found</td>
+
+			<td>404 Not found</td>
+
+			<td>Channel does not exist or no hook registered for the channel</td>
+		</tr>
+	</table>
+	<h4 id="delete_channel_hook">Deleting a channel hook</h4>
+	<table class="table">
+		<tr>
+			<td>DELETE</td>
+			<td>
+				<a>https://api.ustream.tv/channels/CHANNEL_ID/hooks/EVENT.FORMAT</a>
+				(format can be json or xml)</td>
+		</tr>
+	</table>
+
+	<h5>Parameters</h5>
+	<p>This request has no parameters.</p>
+
+	<h5>Response</h5>
+	<p>On success a response with HTTP status 200 OK is returned.</p>
+
+	<h5>Error codes</h5>
+	<table class="table">
+		<tr>
+			<th>error value</th>
+
+			<th>HTTP response code</th>
+
+			<th>Error conditions</th>
+		</tr>
+
+		<tr>
+			<td>not_found</td>
+
+			<td>404 Not found</td>
+
+			<td>Channel not found</td>
+		</tr>
+
+		<tr>
+			<td>bad_request</td>
+
+			<td>400 Bad request</td>
+
+			<td>Invalid event type.</td>
+		</tr>
+	</table>
+
+	<h3 id="channel_hook_supported_events">Supported events</h3>
+	<table class="table">
+		<tr>
+			<th>Event</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td>channel.status.live</td>
+			<td>A channel goes live</td>
+		</tr>
+		<tr>
+			<td>channel.status.offair</td>
+			<td>A channel goes offair</td>
+		</tr>
+	</table>
+
+	<h3 id="channel_hook_handshake_method">Handshake method</h3>
+	<p>
+		A newly registered hook is inactive by default. In order to make it active,
+		a basic handshake must be implemented at the recipient URL before the
+		hook registration.
+	</p>
+	<p>
+		After the hook was registered a POST request is sent to the recipient URL
+		with a X-Hook-Secret HTTP header.
+		Recipients must reply to this request with the same secret string in their
+		X-Hook-Secret response header to make sure that the registered recipient
+		URL is owned by the API user.
+	</p>
+	<pre>
+API client  Recipient                                                                   API
+     +          +                                                                        +
+     |          |                                                                        |
+     |          |                                                                        |
+     |          |       +----------------------------------------------------------+     |
+     |          |       |                                                          |     |
+     |          |       | POST /channels/123/hooks/channel.status.live.json        |     |
+     +------------------+                                                          +----->
+     |          |       | recipient=http%3A%2F%2Fyourdomain.com%2Fhook-endpoint    |     |
+     |          |       |                                                          |     |
+     |          |       +----------------------------------------------------------+     |
+     |          |                                                                        |
+     |          |       +----------------------------------------------------------+     |
+     |          |       |                                                          |     |
+     <------------------+ Response 204                                             +-----+
+     |          |       |                                                          |     |
+     |          |       +----------------------------------------------------------+     |
+     |          |                                                                        |
+     |          |       +----------------------------------------------------------+     |
+     |          |       |                                                          |     |
+     |          |       | POST http://yourdomain.com/hook-endpoint                 |     |
+     |          <-------+ X-Hook-Secret: 6f812d050420717dd9ef8c184368457f4f297b46  +-----+
+     |          |       |                                                          |     |
+     |          |       +----------------------------------------------------------+     |
+     |          |                                                                        |
+     |          |       +----------------------------------------------------------+     |
+     |          |       |                                                          |     |
+     |          |       | Response 200                                             |     |
+     |          +-------+ X-Hook-Secret: 6f812d050420717dd9ef8c184368457f4f297b46  +----->
+     |          |       |                                                          |     |
+     |          |       +----------------------------------------------------------+     |
+     |          |                                                                        |
+     |          |                                                                        |
+     +          +                                                                        +
+</pre>
+
 </div>
 <div class="col-md-3">
 	<div class="bs-docs-sidebar">
@@ -3374,6 +3614,17 @@ title=API+Testing+Channel
 					</li>
 					<li>
 						<a href="#video_expiration">Video expiration</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#channel_hooks">Channel hooks</a>
+				<ul class="nav">
+					<li>
+						<a href="#channel_hook_supported_events">Supported events</a>
+					</li>
+					<li>
+						<a href="#channel_hook_handshake_method">Handshake method</a>
 					</li>
 				</ul>
 			</li>
