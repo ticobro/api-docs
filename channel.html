@@ -298,6 +298,97 @@ title=API+Testing+Channel
     </ul>
 
 
+
+    <h3 id="update_channel">Edit channel details</h3>
+
+    <table class="table">
+    <tr>
+        <td>PUT</td>
+        <td><a>https://api.ustream.tv/channels/CHANNEL_ID.FORMAT</a>
+            (format can be json or xml)</td>
+    </tr>
+    </table>
+
+    <h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+
+            <th>type</th>
+
+            <th>importance</th>
+
+            <th>description</th>
+        </tr>
+
+        <tr>
+            <td><strong>title</strong></td>
+
+            <td>string</td>
+
+            <td>REQUIRED</td>
+
+            <td>Channel title</td>
+        </tr>
+        <tr>
+            <td><strong>description</strong></td>
+
+            <td>string</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Channel description</td>
+        </tr>
+        <tr>
+            <td><strong>tags</strong></td>
+
+            <td>string</td>
+
+            <td>OPTIONAL</td>
+
+            <td>Comma separated list of channel tags</td>
+        </tr>
+    </table>
+
+    <h5>Response</h5>
+    <p>On success a response with HTTP status 204 No Content is returned.</p>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+
+            <th>HTTP response code</th>
+
+            <th>Error conditions</th>
+        </tr>
+
+        <tr>
+            <td>lack_of_ownership</td>
+
+            <td>403 Forbidden</td>
+
+            <td>The api user is not allowed to manage the given channel</td>
+        </tr>
+
+        <tr>
+            <td>input_validation_error</td>
+
+            <td>400 Bad request</td>
+
+            <td>If validation fails</td>
+        </tr>
+
+        <tr>
+            <td>not_found</td>
+
+            <td>404 Not found</td>
+
+            <td>Channel not found</td>
+        </tr>
+    </table>
+
+
     <h3 id="delete_channel">Deleting a channel</h3>
 	<p>Permanently delete a channel from the current account.</p>
     <table class="table">
@@ -2151,7 +2242,7 @@ title=API+Testing+Channel
                 manager</td>
         </tr>
     </table>
-    <h4 id="modify_manager">Modifying a new channel manager</h4>
+    <h4 id="modify_manager">Modifying a channel manager</h4>
 
     <table class="table">
         <tr>
@@ -3275,6 +3366,9 @@ title=API+Testing+Channel
 				<ul class="nav">
 					<li>
 						<a href="#create_channel">Creating a channel</a>
+					</li>
+					<li>
+						<a href="#update_channel">Edit a channel</a>
 					</li>
 					<li>
 						<a href="#delete_channel">Deleting a channel</a>
