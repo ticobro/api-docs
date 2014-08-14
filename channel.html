@@ -113,57 +113,38 @@
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>url</td>
-
             <td>string</td>
-
             <td>Channel url name</td>
         </tr>
-
         <tr>
             <td>status</td>
-
             <td>string</td>
-
             <td>Possible values: "live" or "offair"</td>
         </tr>
-
         <tr>
             <td>last_broadcast_at</td>
-
             <td>int</td>
-
             <td>Last broadcast time in UNIX timestamp format</td>
         </tr>
-
         <tr>
             <td>stats.viewer_total</td>
-
             <td>int</td>
-
             <td>Total viewer number</td>
         </tr>
-
         <tr>
             <td>stats.viewer</td>
-
             <td>int</td>
-
             <td>Current viewer number when channel is live</td>
         </tr>
 
         <tr>
             <td>stream.hls</td>
-
             <td>string</td>
-
             <td><a href="http://en.wikipedia.org/wiki/HTTP_Live_Streaming" target="_blank">HTTP Live Streaming</a> url. This field does not exist when channel is offair (offline)</td>
         </tr>
     </table>
@@ -172,25 +153,17 @@
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not Found</td>
-
             <td>The given channel does not exist.</td>
         </tr>
-
         <tr>
             <td>unauthorized</td>
-
             <td>401 Unauthorized</td>
-
             <td>The channel is locked.</td>
         </tr>
     </table>
@@ -227,33 +200,22 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>title</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Create the channel with this title</td>
         </tr>
         <tr>
             <td>description</td>
-
             <td>string</td>
-
             <td>OPTIONAL</td>
-
             <td>Create the channel with this description</td>
         </tr>
-
     </table>
     <p>The body of the call should contain the channel title optionally it can
     contain channel description and tags. The Content-Type of the request
@@ -310,39 +272,26 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>title</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Channel title</td>
         </tr>
         <tr>
             <td><strong>description</strong></td>
-
             <td>string</td>
-
             <td>OPTIONAL</td>
-
             <td>Channel description</td>
         </tr>
         <tr>
             <td><strong>tags</strong></td>
-
             <td>string</td>
-
             <td>OPTIONAL</td>
-
             <td>Comma separated list of channel tags</td>
         </tr>
     </table>
@@ -354,33 +303,22 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The api user is not allowed to manage the given channel</td>
         </tr>
-
         <tr>
             <td>input_validation_error</td>
-
             <td>400 Bad request</td>
-
             <td>If validation fails</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not found</td>
-
             <td>Channel not found</td>
         </tr>
     </table>
@@ -391,7 +329,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>DELETE</td>
-
             <td><a>https://api.ustream.tv/channels/CHANNEL_ID.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -408,25 +345,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The given channel does not belong to the user.</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not Found</td>
-
             <td>The given channel does not exist.</td>
         </tr>
     </table>
@@ -447,33 +376,24 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>p</strong></td>
-
             <td>integer</td>
-
             <td>OPTIONAL</td>
-
             <td>Requested page number (1 by default)</td>
         </tr>
         <tr>
             <td><strong>pagesize</strong></td>
-
             <td>integer</td>
-
             <td>OPTIONAL</td>
-
             <td>Requested page size (50 by default)</td>
         </tr>
     </table>
+
     <h5>Response</h5>
 
     <p>A set of a key-value structures under a "channels" element. All of these
@@ -482,101 +402,72 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>id</td>
-
             <td>string</td>
-
             <td>Identifier of the channel</td>
         </tr>
-
         <tr>
             <td>title</td>
-
             <td>string</td>
-
             <td>Title of the channel</td>
         </tr>
-
         <tr>
             <td>url</td>
-
             <td>string</td>
-
             <td>Long web URL of the channel
                 (<a>http://www.ustream.tv/channel/</a>
 
                 ...)</td>
         </tr>
-
         <tr>
             <td>tiny_url</td>
-
             <td>string</td>
-
             <td>Shortened web URL of the channel
                 (<a>http://ustre.am/</a>
 
                ...) - suitable for sharing on Twitter / Facebook</td>
         </tr>
-
         <tr>
             <td>status</td>
-
             <td>string</td>
-
             <td>Possible values: "online" or "offline". "online" means that
                 the stream is viewable on the Ustream website.</td>
         </tr>
-
         <tr>
             <td>hls_url</td>
-
             <td>string</td>
-
             <td>Playback URL for iOS clients. This field is present only if
                 status=online. This URL can be passed directly to
                 MPMoviePlayerController. Note that this URL is not suitable for
                 sharing on social networks since it works only on iOS.</td>
         </tr>
-
         <tr>
             <td>broadcast_urls</td>
-
             <td>array of string</td>
-
             <td>Array of RTMP URLs (strings) where the client can broadcast.
                 Client should fall-back to the second/third one if it provided
                 and the previous element seems failing. Provided only in case
                 of client explicitly asks for with a "broadcaster" detail_level
                 query parameter.</td>
         </tr>
-
         <tr>
             <td>default</td>
-
             <td>boolean, optional</td>
-
             <td>True if this is the default channel for the user. False or
                 missing if it is not the default channel.</td>
         </tr>
-
         <tr>
             <td>live_thumbnail</td>
-
             <td>string</td>
-
             <td>Listed when the channel is online.</td>
         </tr>
     </table>
 
-    <p>The paging information can be found under the "paging" element. Example:</p>
+    <p>The paging information can be found inside the "paging" element. Example:</p>
 
     <pre><code class="json">
 "paging": {
@@ -599,7 +490,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>GET, PUT, DELETE</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/password.FORMAT</a>
                 (format can be json or xml)</td>
@@ -611,26 +501,19 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>HTTP method</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>GET</td>
-
             <td>Returns the password protection status</td>
         </tr>
-
         <tr>
             <td>PUT</td>
-
             <td>Sets the channel password and enables password protection as
                 well</td>
         </tr>
-
         <tr>
             <td>DELETE</td>
-
             <td>Removes the channel password, disables password protection
                 status</td>
         </tr>
@@ -643,24 +526,18 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>password</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>The new channel password</td>
         </tr>
     </table>
+
     <h5>Response</h5>
 
     <p>For DELETE and PUT an empty response is returned.<br>
@@ -669,44 +546,32 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>enabled</td>
-
             <td>boolean</td>
-
             <th>password protection status</th>
         </tr>
     </table>
+
     <h5>Error codes</h5>
 
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The given channel does not belong to the user.</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not Found</td>
-
             <td>The given channel does not exist.</td>
         </tr>
     </table>
@@ -719,7 +584,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash/basic.FORMAT</a>
                 (format can be json or xml)</td>
@@ -731,31 +595,20 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>url</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Third party url</td>
         </tr>
-
         <tr>
             <td><strong>secret</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Secret key</td>
         </tr>
     </table>
@@ -769,26 +622,18 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>400 Bad Request</td>
-
             <td>When one or more required parameters are missing or the user
                 has no access to hash lock</td>
         </tr>
-
         <tr>
             <td>invalid_type</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified type is invalid or unsupported</td>
         </tr>
     </table>
@@ -797,7 +642,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash/advanced.FORMAT</a>
                 (format can be json or xml)</td>
@@ -808,71 +652,44 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>url</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Third party url</td>
         </tr>
-
         <tr>
             <td><strong>secret</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Secret key</td>
         </tr>
-
         <tr>
             <td><strong>message</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Displayed message</td>
         </tr>
-
         <tr>
             <td><strong>button_caption</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Button caption</td>
         </tr>
-
         <tr>
             <td><strong>popup_width</strong></td>
-
             <td>int</td>
-
             <td>REQUIRED</td>
-
             <td>Popup width</td>
         </tr>
-
         <tr>
             <td><strong>popup_height</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Popup height</td>
         </tr>
     </table>
@@ -886,26 +703,18 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>400 Bad Request</td>
-
             <td>When one or more required parameters are missing or the user
                 has no access to hash lock</td>
         </tr>
-
         <tr>
             <td>invalid_type</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified type is invalid or unsupported</td>
         </tr>
     </table>
@@ -914,7 +723,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>DELETE</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash.FORMAT</a>
                 (format can be json or xml)</td>
@@ -938,7 +746,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>GET</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed.FORMAT</a>
                 (format can be json or xml)</td>
@@ -955,17 +762,13 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
 
         <tr>
             <td>locked</td>
-
             <td>string</td>
-
             <td>Returns TRUE if the embed lock is set to the channel, FALSE
                 otherwise</td>
         </tr>
@@ -975,17 +778,13 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
 
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment Required</td>
-
             <td>If the user does not have the embed_restriction benefit</td>
         </tr>
     </table>
@@ -994,7 +793,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1005,21 +803,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>locked</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Set embed lock on channel when parameter locked==TRUE,
                 remove embed lock when locked==FALSE</td>
         </tr>
@@ -1033,25 +824,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment Required</td>
-
             <td>If the user does not have the embed_restriction benefit</td>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>400 Bad Request</td>
-
             <td>If the request parameter is missing or invalid</td>
         </tr>
     </table>
@@ -1060,7 +843,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>GET</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1076,17 +858,12 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>allowed_urls</td>
-
             <td>array</td>
-
             <td>Return the url list from the allowed urls embed lock list no
                 matter where it was set. Return empty array if the lock is
                 FALSE.</td>
@@ -1097,26 +874,21 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment Required</td>
-
             <td>If the user does not have the embed_restriction benefit</td>
         </tr>
     </table>
+
     <h4 id="add_whitelist">Add url to embed lock url whitelist</h4>
 
     <table class="table">
         <tr>
             <td>POST</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1128,21 +900,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>url</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Add the url to the url whitelist</td>
         </tr>
     </table>
@@ -1157,34 +922,27 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment Required</td>
-
             <td>If the user does not have the embed_restriction benefit</td>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>400 Bad Request</td>
-
             <td>If the request parameter is missing or invalid</td>
         </tr>
     </table>
+
+
     <h4 id="empty_whitelist">Empty the embed lock url whitelist</h4>
 
     <table class="table">
         <tr>
             <td>DELETE</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1202,17 +960,12 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment Required</td>
-
             <td>If the user does not have the embed_restriction benefit</td>
         </tr>
     </table>
@@ -1228,7 +981,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/viewer.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1240,21 +992,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>sharing</strong></td>
-
             <td>boolean</td>
-
             <td>REQUIRED</td>
-
             <td>Enable or disable sharing</td>
         </tr>
     </table>
@@ -1265,25 +1010,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_sharing</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified sharing is invalid or unsupported.</td>
         </tr>
-
         <tr>
             <td>payment_required</td>
-
             <td>402 Payment Required</td>
-
             <td>The user does not have access to control sharing</td>
         </tr>
     </table>
@@ -1304,7 +1041,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/branding.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1317,21 +1053,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>type</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Branding type</td>
         </tr>
     </table>
@@ -1344,28 +1073,22 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>co</td>
-
             <td>Co-branding</td>
         </tr>
-
         <tr>
             <td>full</td>
-
             <td>Full-branding</td>
         </tr>
-
         <tr>
             <td>no</td>
-
             <td>No branding</td>
         </tr>
     </table>
+
     <h5>Response</h5>
 
     <p>On success a response with HTTP status 200 OK is returned.</p>
@@ -1374,25 +1097,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_type</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified type is invalid or unsupported.</td>
         </tr>
-
         <tr>
             <td>payment_required</td>
-
             <td>402 Payment Required</td>
-
             <td>The user does not have access to the specified branding
                 type</td>
         </tr>
@@ -1402,7 +1117,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>DELETE</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/branding.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1420,7 +1134,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/branding/logo/LOGO_ID/settings.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1433,41 +1146,26 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>position</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Logo position</td>
         </tr>
-
         <tr>
             <td><strong>margin</strong></td>
-
             <td>unsigned int</td>
-
             <td>REQUIRED</td>
-
             <td>Amount of margin</td>
         </tr>
-
         <tr>
             <td><strong>link</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Logo click url (valid url, or empty string)</td>
         </tr>
     </table>
@@ -1481,39 +1179,32 @@ title=API+Testing+Channel
         <tr>
             <th>position</th>
         </tr>
-
         <tr>
             <td>top-left</td>
         </tr>
-
         <tr>
             <td>top-middle</td>
         </tr>
-
         <tr>
             <td>top-right</td>
         </tr>
-
         <tr>
             <td>middle-left</td>
         </tr>
-
         <tr>
             <td>middle-right</td>
         </tr>
-
         <tr>
             <td>bottom-left</td>
         </tr>
-
         <tr>
             <td>bottom-middle</td>
         </tr>
-
         <tr>
             <td>bottom-right</td>
         </tr>
     </table>
+
     <h5>Response</h5>
 
     <p>On success a response with HTTP status 200 OK is returned.</p>
@@ -1522,41 +1213,27 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_position</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified position is invalid or unsupported.</td>
         </tr>
-
         <tr>
             <td>invalid_margin</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified margin is invalid.</td>
         </tr>
-
         <tr>
             <td>invalid_link</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified link is invalid.</td>
         </tr>
-
         <tr>
             <td>payment_required</td>
-
             <td>402 Payment Required</td>
-
             <td>The user does not have access to channel branding</td>
         </tr>
     </table>
@@ -1565,7 +1242,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/branding/logo/LOGO_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1618,33 +1294,22 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_file</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified file is invalid or unsupported.</td>
         </tr>
-
         <tr>
             <td>invalid_image</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified image is invalid.</td>
         </tr>
-
         <tr>
             <td>payment_required</td>
-
             <td>402 Payment Required</td>
-
             <td>The user does not have access to channel branding</td>
         </tr>
     </table>
@@ -1659,7 +1324,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>GET</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/page.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1676,17 +1340,12 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>locked</td>
-
             <td>string</td>
-
             <th>Returns TRUE if the page lock is set to the channel, FALSE
                 otherwise</th>
         </tr>
@@ -1696,17 +1355,12 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment Required</td>
-
             <td>If the user does not have the page_lock benefit</td>
         </tr>
     </table>
@@ -1715,7 +1369,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/page.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1726,21 +1379,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>locked</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Set page lock on channel when parameter locked==TRUE, remove
                 page lock when locked==FALSE</td>
         </tr>
@@ -1754,25 +1400,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment Required</td>
-
             <td>If the user does not have the page_lock benefit</td>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>400 Bad Request</td>
-
             <td>If the request parameter is missing or invalid</td>
         </tr>
     </table>
@@ -1787,7 +1425,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/hide-viewers.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1799,21 +1436,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>value</strong></td>
-
             <td>boolean</td>
-
             <td>REQUIRED</td>
-
             <td>Enable or disable viewer number hiding</td>
         </tr>
     </table>
@@ -1825,25 +1455,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_value</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified value is invalid or unsupported.</td>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The given channel does not belong to the user.</td>
         </tr>
     </table>
@@ -1860,11 +1482,9 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>GET</td>
-
             <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
-
     </table>
 
     <h5>Parameters</h5>
@@ -1876,17 +1496,12 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>color</td>
-
             <td>string</td>
-
             <td>Channel page background color in hex RGB format</td>
         </tr>
     </table>
@@ -1895,25 +1510,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The api user is not allowed to manage the given channel</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not found</td>
-
             <td>Channel not found</td>
         </tr>
     </table>
@@ -1922,7 +1529,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -1933,21 +1539,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>color</td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Channel page background color in hex RGB format</td>
         </tr>
     </table>
@@ -1959,33 +1558,22 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The api user is not allowed to manage the given channel</td>
         </tr>
-
         <tr>
             <td>bad_request</td>
-
             <td>400 Bad request</td>
-
             <td>If validation fails</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not found</td>
-
             <td>Channel not found</td>
         </tr>
     </table>
@@ -1994,7 +1582,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>DELETE</td>
-
             <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -2011,25 +1598,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The api user is not allowed to manage the given channel</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not found</td>
-
             <td>Channel not found</td>
         </tr>
     </table>
@@ -2041,7 +1620,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>GET</td>
-
             <td><a>https://api.ustream.tv/users/self/managers.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -2057,49 +1635,32 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>user_id</td>
-
             <td>string</td>
-
             <td>User identifier of the channel manager</td>
         </tr>
-
         <tr>
             <td>email</td>
-
             <td>string</td>
-
             <td>E-mail address of the channel manager</td>
         </tr>
-
         <tr>
             <td>alias</td>
-
             <td>string</td>
-
             <td>Alias name of the channel manager</td>
         </tr>
-
         <tr>
             <td>active</td>
-
             <td>boolean</td>
-
             <td>Active flag.</td>
         </tr>
-
         <tr>
             <td>channels</td>
-
             <td>array</td>
-
             <td>Array of managed channel identifiers</td>
         </tr>
     </table>
@@ -2108,19 +1669,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment required</td>
-
-            <td>The user does not have active subaccount benefit</td>
-        </tr>
+           <td>The user does not have active subaccount benefit</td>
+         </tr>
     </table>
     <h4 id="add_manager">Adding a new channel manager</h4>
 
@@ -2138,31 +1694,20 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>email</td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>The e-mail address of a registered Ustream user</td>
         </tr>
-
         <tr>
             <td>alias</td>
-
             <td>string</td>
-
             <td>OPTIONAL</td>
-
             <td>Alias name for the channel manager</td>
         </tr>
     </table>
@@ -2173,41 +1718,27 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>user_id</td>
-
             <td>string</td>
-
             <td>User identifier of the created channel manager</td>
         </tr>
-
         <tr>
             <td>email</td>
-
             <td>string</td>
-
             <td>E-mail address of the channel manager</td>
         </tr>
-
         <tr>
             <td>alias</td>
-
             <td>string</td>
-
             <td>Alias name of the channel manager</td>
         </tr>
-
         <tr>
             <td>active</td>
-
             <td>boolean</td>
-
             <td>Active flag (false by default)</td>
         </tr>
     </table>
@@ -2216,25 +1747,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment required</td>
-
             <td>The user does not have active subaccount benefit</td>
         </tr>
-
         <tr>
             <td>bad_request</td>
-
             <td>400 Bad request</td>
-
             <td>If validation fails, user not found or is already a channel
                 manager</td>
         </tr>
@@ -2244,7 +1767,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/users/self/managers/MANAGER_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -2256,31 +1778,20 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>alias</td>
-
             <td>string</td>
-
             <td>OPTIONAL</td>
-
             <td>Alias name for the channel manager</td>
         </tr>
-
         <tr>
             <td>active</td>
-
             <td>boolean</td>
-
             <td>REQUIRED</td>
-
             <td>Sets the manager active flag</td>
         </tr>
     </table>
@@ -2292,41 +1803,27 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment required</td>
-
             <td>The user does not have active subaccount benefit</td>
         </tr>
-
         <tr>
             <td>bad_request</td>
-
             <td>400 Bad request</td>
-
             <td>If validation fails</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not found</td>
-
             <td>Channel manager not found</td>
         </tr>
-
         <tr>
             <td>limit_reached</td>
-
             <td>403 Forbidden</td>
-
             <td>The maximum active channel manager count has been reached, no
             more active managers allowed</td>
         </tr>
@@ -2336,7 +1833,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>GET</td>
-
             <td>
                 <a>https://api.ustream.tv/users/self/managers/MANAGER_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -2353,49 +1849,32 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>user_id</td>
-
             <td>string</td>
-
             <td>User identifier of the channel manager</td>
         </tr>
-
         <tr>
             <td>email</td>
-
             <td>string</td>
-
             <td>E-mail address of the channel manager</td>
         </tr>
-
         <tr>
             <td>alias</td>
-
             <td>string</td>
-
             <td>Alias name of the channel manager</td>
         </tr>
-
         <tr>
             <td>active</td>
-
             <td>boolean</td>
-
             <td>Active flag.</td>
         </tr>
-
         <tr>
             <td>channels</td>
-
             <td>array</td>
-
             <td>Array of managed channel identifiers</td>
         </tr>
     </table>
@@ -2404,17 +1883,12 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment required</td>
-
             <td>The user does not have active subaccount benefit</td>
         </tr>
     </table>
@@ -2441,25 +1915,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment required</td>
-
             <td>The user does not have active subaccount benefit</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not found</td>
-
             <td>Channel manager not found</td>
         </tr>
     </table>
@@ -2486,33 +1952,22 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment required</td>
-
             <td>The user does not have active subaccount benefit</td>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The channel does not belong to the master user</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not found</td>
-
             <td>Channel manager not found</td>
         </tr>
     </table>
@@ -2538,101 +1993,32 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_request</td>
-
             <td>402 Payment required</td>
-
             <td>The user does not have active subaccount benefit</td>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The channel does not belong to the master user</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not found</td>
-
             <td>Channel manager not found</td>
         </tr>
     </table>
 
 
+
+
+
+
 <h2 id="stream_settings">Stream settings</h2>
-
-    <h3 id="time_limit">Getting record time limit</h3>
-    <p>Gets the maximum allowed length of recorded videos for the channel.</p>
-
-    <table class="table">
-        <tr>
-            <td>GET</td>
-
-            <td>
-                <a>https://api.ustream.tv/channels/CHANNEL_ID/limits/recording.FORMAT</a>
-                (format can be json or xml)</td>
-        </tr>
-    </table>
-    <h5>Parameters</h5>
-
-    <p>This request has no parameters.</p>
-    <h5>Response</h5>
-
-    <table class="table">
-        <tr>
-            <th>key</th>
-
-            <th>type</th>
-
-            <th>description</th>
-        </tr>
-
-        <tr>
-            <td>time</td>
-
-            <td>integer</td>
-
-            <td>record time limit in seconds</td>
-        </tr>
-    </table>
-    <h5>Error codes</h5>
-
-    <table class="table">
-        <tr>
-            <th>error value</th>
-
-            <th>HTTP response code</th>
-
-            <th>Error conditions</th>
-        </tr>
-
-        <tr>
-            <td>lack_of_ownership</td>
-
-            <td>403 Forbidden</td>
-
-            <td>The given channel does not belong to the user.</td>
-        </tr>
-
-        <tr>
-            <td>not_found</td>
-
-            <td>404 Not Found</td>
-
-            <td>The given channel does not exist.</td>
-        </tr>
-    </table>
 
 
     <h3 id="multi_quality">Multi quality streaming</h3>
@@ -2653,21 +2039,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>value</strong></td>
-
             <td>boolean</td>
-
             <td>REQUIRED</td>
-
             <td>Enable or disable multi quality in viewer</td>
         </tr>
     </table>
@@ -2679,28 +2058,30 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_value</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified value is invalid or unsupported.</td>
         </tr>
-
         <tr>
             <td>payment_required</td>
-
             <td>402 Payment Required</td>
-
             <td>The user does not have access to control multi quality</td>
         </tr>
     </table>
+
+
+
+
+
+
+
+    <h2 id="recording">Recording</h2>
+
+    <h3 id="start_stop_recording">Start/stop recording</h3>
 
 
 
@@ -2722,21 +2103,14 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>value</td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Possible values: disabled, private, public. If the value is disabled,
                 no auto-recorded video gets created for the channel when broadcasting.
                 If the value is private, then the new auto-record will be
@@ -2753,31 +2127,79 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_value</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified value is invalid or unsupported.</td>
         </tr>
-
         <tr>
             <td>payment_required</td>
-
             <td>402 Payment Required</td>
-
             <td>The user does not have access to control autorecord settings</td>
         </tr>
     </table>
 
+    <h3 id="time_limit">Getting record time limit</h3>
+    <p>Gets the maximum allowed length of recorded videos for the channel.</p>
 
-    <h2 id="video_settings">Video settings</h2>
+    <table class="table">
+        <tr>
+            <td>GET</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/limits/recording.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+    <h5>Parameters</h5>
+
+    <p>This request has no parameters.</p>
+    <h5>Response</h5>
+
+    <table class="table">
+        <tr>
+            <th>key</th>
+            <th>type</th>
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>time</td>
+            <td>integer</td>
+            <td>record time limit in seconds</td>
+        </tr>
+    </table>
+    <h5>Error codes</h5>
+
+    <table class="table">
+        <tr>
+            <th>error value</th>
+            <th>HTTP response code</th>
+            <th>Error conditions</th>
+        </tr>
+        <tr>
+            <td>lack_of_ownership</td>
+            <td>403 Forbidden</td>
+            <td>The given channel does not belong to the user.</td>
+        </tr>
+        <tr>
+            <td>not_found</td>
+            <td>404 Not Found</td>
+            <td>The given channel does not exist.</td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
+
+    <h2 id="video">Video</h2>
     <h3 id="channel_videos">Listing the videos of channel</h3>
     <p>Get a detailed list of the videos of channel</p>
     <table class="table">
@@ -2794,66 +2216,44 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td>page</td>
-
             <td>integer</td>
-
             <td>OPTIONAL</td>
-
             <td>Requested page number (1 by default)</td>
         </tr>
         <tr>
             <td>pagesize</td>
-
             <td>integer</td>
-
             <td>OPTIONAL</td>
-
             <td>Requested page size (50 by default, max 50)</td>
         </tr>
         <tr>
             <td>filter</td>
-
             <td>set</td>
-
             <td>OPTIONAL</td>
-
             <td>
                 <table class="table">
                     <tr>
                         <th>parameter</th>
-
                         <th>type</th>
-
                         <th>importance</th>
-
                         <th>description</th>
                     </tr>
                     <tr>
                         <td>protect</td>
-
                         <td>string</td>
-
                         <td>OPTIONAL</td>
-
                         <td>Filter videos by protection levels. Levels: public, friends, private (default: empty)</td>
                     </tr>
                     <tr>
                         <td>vod</td>
-
                         <td>boolean</td>
-
                         <td>OPTIONAL</td>
-
                         <td>Filter PPV VODs from result when true (default: false)</td>
                     </tr>
                 </table>
@@ -2893,32 +2293,22 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
         <tr>
             <td>length</td>
-
             <td>float</td>
-
             <td>Video length in second</td>
         </tr>
-
             <tr>
             <td>created_at</td>
-
             <td>int</td>
-
             <td>Video create date in UNIX timestamp</td>
         </tr>
-
         <tr>
             <td>file_size</td>
-
             <td>int</td>
-
             <td>Video file size in byte</td>
         </tr>
     </table>
@@ -2934,25 +2324,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The given channel does not belong to the user.</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not Found</td>
-
             <td>The given channel does not exist.</td>
         </tr>
     </table>
@@ -2963,7 +2345,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>GET</td>
-
             <td>
                 <a>https://api.ustream.tv/videos/VIDEO_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -3002,32 +2383,22 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>key</th>
-
             <th>type</th>
-
             <th>description</th>
         </tr>
         <tr>
             <td>length</td>
-
             <td>float</td>
-
             <td>Video length in second</td>
         </tr>
-
         <tr>
             <td>created_at</td>
-
             <td>int</td>
-
             <td>Video create date in UNIX timestamp</td>
         </tr>
-
         <tr>
             <td>file_size</td>
-
             <td>int</td>
-
             <td>Video file size in byte</td>
         </tr>
     </table>
@@ -3036,17 +2407,12 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not Found</td>
-
             <td>The given video does not exist.</td>
         </tr>
     </table>
@@ -3055,7 +2421,6 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/videos/VIDEO_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -3066,39 +2431,26 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>parameter</th>
-
             <th>type</th>
-
             <th>importance</th>
-
             <th>description</th>
         </tr>
-
         <tr>
             <td><strong>title</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Video title</td>
         </tr>
         <tr>
             <td><strong>description</strong></td>
-
             <td>string</td>
-
             <td>REQUIRED</td>
-
             <td>Video description</td>
         </tr>
         <tr>
             <td>protect</td>
-
             <td>string</td>
-
             <td>OPTIONAL</td>
-
             <td>Video protection level. Possible values: public, friends, private</td>
         </tr>
     </table>
@@ -3110,33 +2462,22 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>invalid_value</td>
-
             <td>400 Bad Request</td>
-
             <td>The specified value is invalid or unsupported.</td>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The given video does not belong to the user.</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not Found</td>
-
             <td>The given video does not exist.</td>
         </tr>
     </table>
@@ -3163,25 +2504,17 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <th>error value</th>
-
             <th>HTTP response code</th>
-
             <th>Error conditions</th>
         </tr>
-
         <tr>
             <td>lack_of_ownership</td>
-
             <td>403 Forbidden</td>
-
             <td>The given video does not belong to the user.</td>
         </tr>
-
         <tr>
             <td>not_found</td>
-
             <td>404 Not Found</td>
-
             <td>The given video does not exist.</td>
         </tr>
     </table>
@@ -3193,7 +2526,6 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<td>GET</td>
-
 			<td>
 				<a>https://api.ustream.tv/videos/VIDEO_ID/expiration.FORMAT</a>
 				(format can be json or xml)</td>
@@ -3208,24 +2540,17 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>key</th>
-
 			<th>type</th>
-
 			<th>description</th>
 		</tr>
-
 		<tr>
 			<td>rule</td>
-
 			<td>string</td>
-
 			<td>Valid values: never, at_given_time</td>
 		</tr>
 		<tr>
 			<td>expires_at</td>
-
 			<td>integer</td>
-
 			<td>If rule field is at_given_time, expires_at contains the UNIX timestamp of the expiration.
 				If the rule is never, expires_at field is not provided.</td>
 		</tr>
@@ -3235,33 +2560,24 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>error value</th>
-
 			<th>HTTP response code</th>
-
 			<th>Error conditions</th>
 		</tr>
-
 		<tr>
 			<td>lack_of_ownership</td>
-
 			<td>403 Forbidden</td>
-
 			<td>The api user is not allowed to manage the given channel</td>
 		</tr>
 
 		<tr>
 			<td>forbidden</td>
-
 			<td>403 Forbidden</td>
-
 			<td>Managing the expiration is disabled at system level or user has no permission to manage the expiration of videos.</td>
 		</tr>
 
 		<tr>
 			<td>not_found</td>
-
 			<td>404 Not found</td>
-
 			<td>The specified video_id does not exist</td>
 		</tr>
 	</table>
@@ -3270,7 +2586,6 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<td>PUT</td>
-
 			<td>
 				<a>https://api.ustream.tv/videos/VIDEO_ID/expiration.FORMAT</a>
 				(format can be json or xml)</td>
@@ -3281,21 +2596,14 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>parameter</th>
-
 			<th>type</th>
-
 			<th>importance</th>
-
 			<th>description</th>
 		</tr>
-
 		<tr>
 			<td>rule</td>
-
 			<td>string</td>
-
 			<td>REQUIRED</td>
-
 			<td>Supported value: never.</td>
 		</tr>
 	</table>
@@ -3307,44 +2615,35 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>error value</th>
-
 			<th>HTTP response code</th>
-
 			<th>Error conditions</th>
 		</tr>
-
 		<tr>
 			<td>bad_request</td>
-
 			<td>400 Bad request</td>
-
-			<td>Invalid request body: either rule is not provided or rule value is not valid.</td>
+    		<td>Invalid request body: either rule is not provided or rule value is not valid.</td>
 		</tr>
-
 		<tr>
 			<td>lack_of_ownership</td>
-
 			<td>403 Forbidden</td>
-
 			<td>The api user is not allowed to manage the given channel</td>
 		</tr>
-
 		<tr>
 			<td>forbidden</td>
-
 			<td>403 Forbidden</td>
-
 			<td>Setting the expiration is disabled at system level or user has no permissions to modify the expiration of videos.</td>
 		</tr>
-
 		<tr>
 			<td>not_found</td>
-
 			<td>404 Not found</td>
-
 			<td>The specified video_id does not exist</td>
 		</tr>
 	</table>
+
+
+
+
+
 
 	<h2 id="channel_hooks">Channel hooks</h2>
 	<p>Hooks can be registered for different channel events. When a channel event is fired, a HTTP POST request is sent to the registered hook recipient URL.
@@ -3369,21 +2668,14 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>parameter</th>
-
 			<th>type</th>
-
 			<th>importance</th>
-
 			<th>description</th>
 		</tr>
-
 		<tr>
 			<td>recipient</td>
-
 			<td>string</td>
-
 			<td>REQUIRED</td>
-
 			<td>The URL where the event notifications will be sent.</td>
 		</tr>
 	</table>
@@ -3395,25 +2687,17 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>error value</th>
-
 			<th>HTTP response code</th>
-
 			<th>Error conditions</th>
 		</tr>
-
 		<tr>
 			<td>not_found</td>
-
 			<td>404 Not found</td>
-
 			<td>The given channel does not exist</td>
 		</tr>
-
 		<tr>
 			<td>bad_request</td>
-
 			<td>400 Bad request</td>
-
 			<td>Some of the incoming parameters are invalid.</td>
 		</tr>
 	</table>
@@ -3437,24 +2721,17 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>key</th>
-
 			<th>type</th>
-
 			<th>description</th>
 		</tr>
-
 		<tr>
 			<td>recipient</td>
-
 			<td>string</td>
-
 			<td>the hook recipient URL</td>
 		</tr>
-		<tr>
+	    <tr>
 			<td>status</td>
-
 			<td>string</td>
-
 			<td>pending, active or suspended</td>
 		</tr>
 	</table>
@@ -3463,17 +2740,12 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>error value</th>
-
 			<th>HTTP response code</th>
-
 			<th>Error conditions</th>
 		</tr>
-
 		<tr>
 			<td>not_found</td>
-
-			<td>404 Not found</td>
-
+    		<td>404 Not found</td>
 			<td>Channel does not exist or no hook registered for the channel</td>
 		</tr>
 	</table>
@@ -3497,25 +2769,17 @@ title=API+Testing+Channel
 	<table class="table">
 		<tr>
 			<th>error value</th>
-
 			<th>HTTP response code</th>
-
 			<th>Error conditions</th>
 		</tr>
-
 		<tr>
 			<td>not_found</td>
-
 			<td>404 Not found</td>
-
 			<td>Channel not found</td>
 		</tr>
-
 		<tr>
 			<td>bad_request</td>
-
 			<td>400 Bad request</td>
-
 			<td>Invalid event type.</td>
 		</tr>
 	</table>
@@ -3678,18 +2942,26 @@ API client  Recipient                                                           
                 <a href="#stream_settings">Stream settings</a>
                 <ul class="nav">
                     <li>
-                        <a href="#time_limit">Getting record time limit</a>
-                    </li>
-                    <li>
                         <a href="#multi_quality">Multi quality streaming</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#recording">Recording</a>
+                <ul class="nav">
+                    <li>
+                        <a href="#start_stop_recording">Start/stop recording on a channel</a>
                     </li>
                     <li>
                         <a href="#autorecord">Autorecord</a>
                     </li>
+                   <li>
+                        <a href="#time_limit">Getting record time limit</a>
+                    </li>
                 </ul>
             </li>
 			<li>
-				<a href="#video_settings">Video settings</a>
+				<a href="#video">Video</a>
 				<ul class="nav">
 					<li>
 						<a href="#channel_videos">Listing the videos of channel</a>
