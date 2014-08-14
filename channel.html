@@ -227,6 +227,7 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&
 Host: api.ustream.tv
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
+
 title=API+Testing+Channel
 </code></pre>
 
@@ -2032,7 +2033,6 @@ title=API+Testing+Channel
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/multi-quality.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
-
     </table>
     <h5>Parameters</h5>
 
@@ -2082,7 +2082,46 @@ title=API+Testing+Channel
     <h2 id="recording">Recording</h2>
 
     <h3 id="start_stop_recording">Start/stop recording</h3>
+    <p>During broadcast clients can control recorder on an owned channel. There's no direct feedback on the results of the operation.</p>
 
+    <table class="table">
+        <tr>
+            <td>POST</td>
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/recorder.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+
+    <h5>Parameters</h5>
+
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+            <th>type</th>
+            <th>importance</th>
+            <th>description</th>
+        </tr>
+        <tr>
+            <td><strong>command</strong></td>
+            <td>string</td>
+            <td>REQUIRED</td>
+            <td>The command should be "start" or "stop"</td>
+        </tr>
+    </table>
+    <h5>Response</h5>
+
+    <p>On success a response with HTTP status "202 Accepted" is returned.</p>
+
+    <p>Example usage:</p>
+
+<pre><code class="http">POST /channels/42/recorder.json HTTP/1.1
+Host: api.ustream.tv
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+command=start
+</code></pre>
 
 
     <h3 id="autorecord">Autorecord</h3>
@@ -2091,12 +2130,10 @@ title=API+Testing+Channel
     <table class="table">
         <tr>
             <td>PUT</td>
-
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/autorecord.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
-
     </table>
     <h5>Parameters</h5>
 
