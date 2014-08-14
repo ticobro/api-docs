@@ -2878,44 +2878,72 @@ command=stop
 		with a X-Hook-Secret HTTP header.
 		Recipients must reply to this request with the same secret string in their
 		X-Hook-Secret response header to make sure that the registered recipient
-		URL is owned by the API user.
+		URL is owned by the API user. This handshake request will also contain
+        an "event" and "contentId" in the body (JSON encoded) property with the 
+        corresponding values of your freshly registered hook. Using these values
+        you can re-use the same hook to handle multiple secrets based on these
+        identifiers.
 	</p>
-	<pre>
-API client  Recipient                                                                   API
-     +          +                                                                        +
-     |          |                                                                        |
-     |          |                                                                        |
-     |          |       +----------------------------------------------------------+     |
-     |          |       |                                                          |     |
-     |          |       | POST /channels/123/hooks/channel.status.live.json        |     |
-     +------------------+                                                          +----->
-     |          |       | recipient=http%3A%2F%2Fyourdomain.com%2Fhook-endpoint    |     |
-     |          |       |                                                          |     |
-     |          |       +----------------------------------------------------------+     |
-     |          |                                                                        |
-     |          |       +----------------------------------------------------------+     |
-     |          |       |                                                          |     |
-     <------------------+ Response 204                                             +-----+
-     |          |       |                                                          |     |
-     |          |       +----------------------------------------------------------+     |
-     |          |                                                                        |
-     |          |       +----------------------------------------------------------+     |
-     |          |       |                                                          |     |
-     |          |       | POST http://yourdomain.com/hook-endpoint                 |     |
-     |          <-------+ X-Hook-Secret: 6f812d050420717dd9ef8c184368457f4f297b46  +-----+
-     |          |       |                                                          |     |
-     |          |       +----------------------------------------------------------+     |
-     |          |                                                                        |
-     |          |       +----------------------------------------------------------+     |
-     |          |       |                                                          |     |
-     |          |       | Response 200                                             |     |
-     |          +-------+ X-Hook-Secret: 6f812d050420717dd9ef8c184368457f4f297b46  +----->
-     |          |       |                                                          |     |
-     |          |       +----------------------------------------------------------+     |
-     |          |                                                                        |
-     |          |                                                                        |
-     +          +                                                                        +
-</pre>
+
+    <h4>Handshake example</h4>
+
+    <p>Your app needs to be notified about channel 123 whenever it goes live, so the
+        app initiates a new hook.</p>
+
+    <pre><code class="HTTP">POST /channels/123/hooks/channel.status.live.json HTTP/1.1
+Host: api.ustream.tv
+Authorization: Bearer 782f6544405a22636f3d5d3b63c2573673bf3950
+Content-Type: application/x-www-form-urlencoded
+
+recipient=http://your-app.url/hook-receiver</code></pre>
+
+    <p>If everything went smoothly, your app will get simply:</p>
+
+    <pre><code class="http">HTTP/1.1 204 No Content</code></pre>
+
+    <p>Asynchronously, the handshake mechanism will start promptly, our hook
+        server will call your hook to exchange a secret.</p>
+
+    <pre><code class="http">POST /hook-receiver HTTP/1.1
+Host: your-app.url
+Content-Type: application/json
+Content-Length: 46
+X-Hook-Secret: open-sesame!
+
+{
+    "event": "channel.status.live", 
+    "contentId": 123
+}</code></pre>
+
+    <p>Your hook implementation should store that secret and echo the <strong>X-Hook-Secret</strong> header 
+        in the response.</p>
+
+    <pre><code class="http">HTTP/1.1 200 OK
+Content-Length: 0
+X-Hook-Secret: open-sesame!</code></pre>
+
+
+    <h4>Receiving webhook events</h4>
+
+    <p>On an event triggered interested by you, our hook server will call your receiver:</p>
+
+<pre><code class="http">POST /hook-receiver HTTP/1.1
+Host: your-app.url
+Content-Type: application/json
+Content-Length: 76
+X-Hook-Signature: 61f34d324ac51dde1288825dab2111
+
+{
+    "event": "channel.status.live", 
+    "contentId": 123,
+    "when": 1234567890
+}</code></pre>
+
+    <p>The property "when" will contain the exact time of the event occurred. Its provided
+        as a unix timestamp.</p>
+
+    <p>Your receiver should verify the signature provided in the request <strong>X-Hook-Signature</strong> header,
+        using <strong>HMAC-SHA1</strong> algorith with the the previously exchanged secret and the full request body as-is.</p>
 
 </div>
 <div class="col-md-3">
