@@ -2112,6 +2112,7 @@ title=API+Testing+Channel
     <h5>Response</h5>
 
     <p>On success a response with HTTP status "202 Accepted" is returned.</p>
+    <p>On the stop command the response body will contain information about the resulting video (id and API resource uri)</re>
 
     <p>Example usage:</p>
 
@@ -2120,9 +2121,39 @@ Host: api.ustream.tv
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 
-command=start
+command=stop
 </code></pre>
 
+    <p>Example reponse (for stop command):</p>
+
+    <pre><code class="json">{
+    "video": {
+        "id": 11111,
+        "url": "https://api.ustream.tv/videos/11111.json"
+    }
+}</code></pre>
+
+    <h3 id="start_stop_recording">Getting recording status</h3>
+
+    <p>During broadcast you can ask for that information using the GET HTTP method on the same resource.</p>
+
+    <table class="table">
+        <tr>
+            <td class="verb">GET</td>
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/recorder.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+
+    <p>Example reponse:</p>
+
+    <pre><code class="json">{
+    "video": {
+        "id": 11111,
+        "url": "https://api.ustream.tv/videos/11111.json"
+    }
+}</code></pre>
 
     <h3 id="autorecord">Autorecord</h3>
     <p>Videos can be automatically created when broadcasting. The behaviour can be controlled by this resource.</p>
