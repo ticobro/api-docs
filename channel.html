@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="css/bootstrap-theme.css" title="" type="text/css" media="screen">
 	<link rel="stylesheet" href="css/bootstrap-docs.css" title="" type="text/css" media="screen">
 	<link rel="stylesheet" href="css/apidocs.css" title="" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/hljs/railscasts.css" type="text/css" media="screen">
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
 <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
@@ -79,8 +80,7 @@
     <h5>Response</h5>
     <p>A key-value structures under a "channel" element. Example:</p>
 
-    <pre>
-"channel": {
+    <pre><code class="json">"channel": {
     "id": "1111",
     "title": "Channel title",
     "description": "Description of channel",
@@ -108,7 +108,7 @@
         "picture": "https://ustvstaticcdn1-a.akamaihd.net/images/defaults/user_48x48:1.png"
     }
 }
-</pre>
+</code></pre>
     <p>Explanation of some values:</p>
     <table class="table">
         <tr>
@@ -208,11 +208,11 @@
 
     <p>Example initialization of a web-server token-acquiring flow:</p>
                 <pre>
-https://www.ustream.tv/oauth2/authorize?response_type=code&amp;client_id=A...Z&amp;redirect_uri=http://site/callback
+https://www.ustream.tv/oauth2/authorize?response_type=code&amp;client_id=A...Z&amp;redirect_uri=http://...
 </pre>
     <p>Example initialization of an implicit token-acquiring flow:</p>
                 <pre>
-https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&amp;redirect_uri=http://site/callback
+https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&amp;redirect_uri=http://...
 </pre>
     <p><a href="authentication.html#examples">See more examples</a></p>
 
@@ -261,27 +261,24 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&
 
     <p>Example:</p>
 
-                <pre>
-POST users/self/channels.json HTTP/1.1
+                <pre><code class="http">POST users/self/channels.json HTTP/1.1
 Host: api.ustream.tv
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 title=API+Testing+Channel
-</pre>
+</code></pre>
 
     <p>The token in the above call is only an example.</p>
     <h5>Positive response</h5>
-    <pre>
-{
-    "channel":
-            {
-            "id":"13091307",
-            "title":"Whatever Test 1234",
-            "url":"whatever-test-1234",
-            "tiny_url":"http://ustre.am/SVE7"
-            }
+    <pre><code class="json">{
+    "channel": {
+        "id":"13091307",
+        "title":"Whatever Test 1234",
+        "url":"whatever-test-1234",
+        "tiny_url":"http://ustre.am/SVE7"
+    }
 }
-</pre>
+</code></pre>
 <h5>Possible negative responses</h5>
 
     <ul>
@@ -581,7 +578,7 @@ title=API+Testing+Channel
 
     <p>The paging information can be found under the "paging" element. Example:</p>
 
-    <pre>
+    <pre><code class="json">
 "paging": {
   "previous": {
     "href": "https://api.ustream.tv/users/self/channels.json?pagesize=PAGESIZE&p=PREVIOUS_PAGE"
@@ -592,7 +589,7 @@ title=API+Testing+Channel
   "next": {
     "href": "https://api.ustream.tv/users/self/channels.json?pagesize=PAGESIZE&p=NEXT_PAGE"
   }
-}</pre>
+}</code></pre>
 
     <h2 id="security">Security</h2>
 
@@ -2637,10 +2634,6 @@ title=API+Testing+Channel
         </tr>
     </table>
 
-    <p><strong>TODO:</strong> currently only HTTP response code is returned
-        (error_value is not in the response)</p>
-
-
 
     <h3 id="multi_quality">Multi quality streaming</h3>
     <p>By turning this feature on your stream will be transcoded to several versions with different quality settings.</p>
@@ -2871,8 +2864,7 @@ title=API+Testing+Channel
     <h5>Response</h5>
     <p>A set of a key-value structures under a "videos" element. Example:</p>
 
-    <pre>
-"videos": [
+    <pre><code class="json">"videos": [
     {
         "id": "111",
         "title": "Title of video",
@@ -2896,7 +2888,7 @@ title=API+Testing+Channel
     },
     ...
 ]
-</pre>
+</code></pre>
     <p>Explanation of some values:</p>
     <table class="table">
         <tr>
@@ -2933,11 +2925,10 @@ title=API+Testing+Channel
 
     <p>The paging information can be found under the "paging" element. Example:</p>
 
-    <pre>
-"paging": {
-        "previous": "https://api.ustream.tv/channels/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE"
-        "next": "https://api.ustream.tv/channels/17728050/videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
-    }</pre>
+    <pre><code class="json">"paging": {
+    "previous": ".../CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE"
+    "next": ".../channels/17728050/videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
+}</code></pre>
 
     <h5>Error codes</h5>
     <table class="table">
@@ -2985,8 +2976,7 @@ title=API+Testing+Channel
     <h5>Response</h5>
     <p>A key-value structures under a "video" element. Example:</p>
 
-    <pre>
-"video": {
+    <pre><code class="json">"video": {
     "id": "111",
     "title": "Title of video",
     "description": "Description of video",
@@ -3007,7 +2997,7 @@ title=API+Testing+Channel
         }
     }
 }
-</pre>
+</code></pre>
     <p>Explanation of some values:</p>
     <table class="table">
         <tr>
@@ -3360,10 +3350,10 @@ title=API+Testing+Channel
 	<p>Hooks can be registered for different channel events. When a channel event is fired, a HTTP POST request is sent to the registered hook recipient URL.
         You can use to these endpoints with <a href="authentication.html#client_credentials">Client Credentials</a>.</p>
 	<p>POST body example:</p>
-	<pre>{
+	<pre><code class="json">{
     "status": "channel.status.live",
     "channelId": "123"
-}</pre>
+}</code></pre>
 
 	<h4 id="add_channel_hook">Hook registration</h4>
 	<table class="table">
@@ -3735,5 +3725,7 @@ API client  Recipient                                                           
 </footer>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/hljs/highlight.pack.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

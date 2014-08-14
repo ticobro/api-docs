@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/bootstrap-theme.css" title="" type="text/css" media="screen">
 	<link rel="stylesheet" href="css/bootstrap-docs.css" title="" type="text/css" media="screen">
 	<link rel="stylesheet" href="css/apidocs.css" title="" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/hljs/railscasts.css" type="text/css" media="screen">
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
 <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
@@ -496,9 +497,8 @@
     The authentication is done with HTTP Basic authorization method. Example
     HTTP Header:</p>
 
-                <pre>
-Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
-</pre>
+                <pre><code class="http">Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
+</code></pre>
 
     <p><strong>Response:</strong></p>
 
@@ -636,9 +636,8 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
     The authentication is done with HTTP Basic authorization method. Example
     HTTP Header:</p>
 
-                <pre>
-Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
-</pre>
+                <pre><code class="http">Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
+</code></pre>
 
     <p><strong>Response:</strong></p>
 
@@ -765,9 +764,9 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
     HTTP Header:
     </p>
 
-    <pre>Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01</pre>
+    <pre><code class="http">Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01</code></pre>
 
-    <p><strong>Response:</strong></p>
+    <p><strog>Response:</strong></p>
 
     <table class="table">
         <tr>
@@ -824,9 +823,9 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
     <p>If there is an error, the Token Endpoint returns a JSON object with the
     following format:</p>
 
-                <pre>
-{"error": "ERROR_VALUE"}
-</pre>
+                <pre><code class="json">{
+    "error": "ERROR_VALUE"
+}</code></pre>
 
     <p>It also sends a HTTP status code indicating the error. Possible error
     responses:</p>
@@ -891,10 +890,14 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 
     <p>1. The Client opens a browser with the Authorization Endpoint:</p>
 
-                <pre>
-https://www.ustream.tv/oauth2/authorize?response_type=code&amp;client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD
-&amp;redirect_uri=http://example.com/get_access_token&amp;device_name=My%20Device
-&amp;scope=offline+broadcaster&amp;display=touch&amp;state=XYZ
+                <pre>https://www.ustream.tv/oauth2/authorize
+?response_type=code
+&amp;client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD
+&amp;redirect_uri=http://example.com/get_access_token
+&amp;device_name=My%20Device
+&amp;scope=offline+broadcaster
+&amp;display=touch
+&amp;state=XYZ
 </pre>
 
     <p>2. The User enters his/her credentials and presses the Allow button. The
@@ -907,41 +910,49 @@ http://example.com/get_access_token?code=19d8dbb3ebac55f110c3b526e38bcfdfbf46d65
     <p>3. The page handler at <a>http://example.com/get_access_token</a>
     retrieves the Access Token using the Token Endpoint:</p>
 
-                <pre>
-POST /oauth2/token HTTP/1.1
+                <pre><code class="http">POST /oauth2/token HTTP/1.1
 Host: www.ustream.tv
 Authorization: Basic xxxxxxxxxxyyyyyyyyyywwwwwwwwwwzzzzzzzzzz
 Content-Type: application/x-www-form-urlencoded
 grant_type=authorization_code&amp;client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD
 &amp;code=19d8dbb3ebac55f110c3b526e38bcfdfbf46d659&amp;redirect_uri=http://example.com/get_access_token
-</pre>
+</code></pre>
 
     <p>4. The response of Token Endpoint contains the Access Token:</p>
 
-                <pre>
-HTTP/1.1 200 OK
+                <pre><code class="http">HTTP/1.1 200 OK
 Cache-Control: no-store
 Content-Type:application/json; charset=UTF-8
 {"access_token":"ab345cdef123ef1267890abcdef04567890abcd1", "token_type":"bearer", "expires_in":86400}
-</pre>
+</code></pre>
 <h4>Implicit Flow, requesting for MAC tokens on a mobile-optimized
     authorization page</h4>
 
     <p>1. The Client opens a browser with the Authorization Endpoint:</p>
 
                 <pre>
-https://www.ustream.tv/oauth2/authorize?response_type=token&amp;token_type=mac
-&amp;client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD&amp;redirect_uri=http://example.com/token
-&amp;device_name=My%20Device&amp;scope=offline+broadcaster&amp;display=touch&amp;state=XYZ
+https://www.ustream.tv/oauth2/authorize
+?response_type=token
+&amp;token_type=mac
+&amp;client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD
+&amp;redirect_uri=http://example.com/token
+&amp;device_name=My%20Device
+&amp;scope=offline+broadcaster
+&amp;display=touch
+&amp;state=XYZ
 </pre>
 
     <p>2/a. The User enters his/her credentials and presses the Allow button.
     The browser is redirected to the following URL:</p>
 
                 <pre>
-http://example.com/token?access_token=1a446888dfaa921e189479409d638d680dfdbf77
-&amp;token_type=mac&amp;mac_key=dfc337d39b0941650b67051a622885cb0eb67a51
-&amp;mac_algorithm=hmac-sha-1&amp;created_at=1310000546&amp;state=XYZ
+http://example.com/token
+?access_token=1a446888dfaa921e189479409d638d680dfdbf77
+&amp;token_type=mac
+&amp;mac_key=dfc337d39b0941650b67051a622885cb0eb67a51
+&amp;mac_algorithm=hmac-sha-1
+&amp;created_at=1310000546
+&amp;state=XYZ
 </pre>
 
     <p>2/b. The user cancels the authorization page or presses <em>Deny</em>
@@ -955,7 +966,13 @@ http://example.com/token?error=access_denied&amp;state=XYZ
     <h5>Get an access token</h5>
 
                 <pre>
-https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=057ce944b015ec9fdf546dfbbe1b7af4b19e8158&amp;redirect_uri=https://www.ustream.tv/oauth2/redirect&amp;device_name=MyDevice&amp;display=touch&amp;state=XYZ
+https://www.ustream.tv/oauth2/authorize
+?response_type=token
+&amp;client_id=057ce944b015ec9fdf546dfbbe1b7af4b19e8158
+&amp;redirect_uri=https://www.ustream.tv/oauth2/redirect
+&amp;device_name=MyDevice
+&amp;display=touch
+&amp;state=XYZ
 </pre>
 
     <p>After logging in, the browser is redirected to a special URL (defined by
@@ -964,12 +981,10 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=057ce9
     requests: "Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950"</p>
     <h5>Creating a channel (POST)</h5>
 
-                <pre>
-$curl -i -H "Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950" -d "title=Whatever+Test+1234" https://api.ustream.tv/users/self/channels.json
-</pre>
+                <pre><code>$curl -i -X POST -H "Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950" -d "title=Whatever+Test+1234" https://api.ustream.tv/users/self/channels.json
+</code></pre>
 
-                <pre>
-HTTP/1.1 201 CREATED
+                <pre><code class="http">HTTP/1.1 201 CREATED
 Server: nginx/1.2.6
 Date: Tue, 15 Jan 2013 13:08:06 GMT
 Content-Type: application/json; charset=UTF-8
@@ -983,7 +998,7 @@ X-Varnish: 703443498
 Age: 0
 Via: 1.1 varnish
 {"channel":{"id":"13091307","title":"Whatever Test 1234","url":"whatever-test-1234","tiny_url":"http://ustre.am/SVE7"}}
-</pre>
+</code></pre>
 <h5>Acquiring the streamkey for an external broadcasting application</h5>
 
     <p>If you wish to use an non-Ustream provided broadcaster application or
@@ -999,18 +1014,16 @@ Via: 1.1 varnish
     <a>https://api.ustream.tv/channels/CHANNEL_ID/authorizations/broadcasting.json</a></p>Example
     call
 
-                <pre>
-GET /channels/123456/authorizations/broadcasting.json
+                <pre><code class="http">GET /channels/123456/authorizations/broadcasting.json
 Host: api.ustream.tv
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
-</pre>
+</code></pre>
 
-                <pre>
-HTTP/1.1 200 OK
+                <pre><code class="http">HTTP/1.1 200 OK
 Cache-Control: no-store
 {"streaming_key": "kqDlIyGb0H47g8SRSyKjyxAqPmiwTbw3"}
-</pre>
+</code></pre>
 <h5>Acquiring the channelkey for an external broadcasting application</h5>
 
     <p>If you wish to use Flash media live encoder , you will need the
@@ -1026,20 +1039,18 @@ Cache-Control: no-store
 
     <p>Example call</p>
 
-                <pre>
-GET /channels/123456/authorizations/broadcasting/channel_key.json
+                <pre><code class="http">GET /channels/123456/authorizations/broadcasting/channel_key.json
 Host: api.ustream.tv
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
-</pre>
+</code></pre>
 
     <p>Example response</p>
 
-                <pre>
-HTTP/1.1 200 OK
+                <pre><code class="http">HTTP/1.1 200 OK
 Cache-Control: no-store
 {"channel_key": "kqDlIyGb0H47g8SRSyKjyxAqPmiwTbw3"}
-</pre>
+</code></pre>
 
 </div>
 </div>
@@ -1078,5 +1089,7 @@ Cache-Control: no-store
 </footer>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/hljs/highlight.pack.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
