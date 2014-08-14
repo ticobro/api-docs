@@ -141,3 +141,9 @@ footer {
 	font-size: 12px;
 	margin-bottom: 40px;
 }
+
+td.verb {
+	width: 1%;
+	font-weight: bold;
+}
+

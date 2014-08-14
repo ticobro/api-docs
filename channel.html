@@ -66,7 +66,7 @@
     <h3 id="channel_details_get">Get channel details</h3>
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
 
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID.FORMAT</a>
@@ -192,7 +192,7 @@ https://www.ustream.tv/oauth2/authorize?response_type=token&amp;client_id=A...Z&
     <h4 id="channel_operations">Channel creation</h4>
     <table class="table">
 	    <tr>
-		    <td>POST</td>
+		    <td class="verb">POST</td>
 		    <td><a href="https://api.ustream.tv/users/self/channels.json">https://api.ustream.tv/users/self/channels.json</a></td>
 	    </tr>
     </table>
@@ -263,7 +263,7 @@ title=API+Testing+Channel
     <p>Edit a channel's title, description and tags.</p>
     <table class="table">
     <tr>
-        <td>PUT</td>
+        <td class="verb">PUT</td>
         <td><a>https://api.ustream.tv/channels/CHANNEL_ID.FORMAT</a>
             (format can be json or xml)</td>
     </tr>
@@ -329,7 +329,7 @@ title=API+Testing+Channel
 	<p>Permanently delete a channel from the current account.</p>
     <table class="table">
         <tr>
-            <td>DELETE</td>
+            <td class="verb">DELETE</td>
             <td><a>https://api.ustream.tv/channels/CHANNEL_ID.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -367,7 +367,7 @@ title=API+Testing+Channel
 	<p>Get a detailed list of the user's channels, including live status, thumbnail, and mobile and broadcast urls</p>
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
             <td><a>https://api.ustream.tv/users/self/channels.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -490,7 +490,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>GET, PUT, DELETE</td>
+            <td class="verb">GET, PUT, DELETE</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/password.FORMAT</a>
                 (format can be json or xml)</td>
@@ -584,7 +584,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash/basic.FORMAT</a>
                 (format can be json or xml)</td>
@@ -642,7 +642,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash/advanced.FORMAT</a>
                 (format can be json or xml)</td>
@@ -723,7 +723,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>DELETE</td>
+            <td class="verb">DELETE</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/hash.FORMAT</a>
                 (format can be json or xml)</td>
@@ -793,7 +793,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed.FORMAT</a>
                 (format can be json or xml)</td>
@@ -843,7 +843,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
                 (format can be json or xml)</td>
@@ -889,7 +889,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>POST</td>
+            <td class="verb">POST</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
                 (format can be json or xml)</td>
@@ -943,7 +943,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>DELETE</td>
+            <td class="verb">DELETE</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/embed/allowed-urls.FORMAT</a>
                 (format can be json or xml)</td>
@@ -981,7 +981,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/viewer.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1041,7 +1041,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/branding.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1117,7 +1117,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>DELETE</td>
+            <td class="verb">DELETE</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/branding.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1134,7 +1134,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/branding/logo/LOGO_ID/settings.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1242,7 +1242,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/branding/logo/LOGO_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1324,7 +1324,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/page.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1369,7 +1369,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/locks/page.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1425,7 +1425,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/hide-viewers.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1482,7 +1482,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
             <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -1529,7 +1529,7 @@ title=API+Testing+Channel
     <h4>Edit background color</h4>
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -1582,7 +1582,7 @@ title=API+Testing+Channel
     <h4>Remove settings</h4>
     <table class="table">
         <tr>
-            <td>DELETE</td>
+            <td class="verb">DELETE</td>
             <td><a>https://api.ustream.tv/channels/CHANNEL_ID/design/background.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -1620,7 +1620,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
             <td><a>https://api.ustream.tv/users/self/managers.FORMAT</a>
                 (format can be json or xml)</td>
         </tr>
@@ -1683,7 +1683,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>POST</td>
+            <td class="verb">POST</td>
 
             <td><a>https://api.ustream.tv/users/self/managers.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1767,7 +1767,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/users/self/managers/MANAGER_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1833,7 +1833,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
             <td>
                 <a>https://api.ustream.tv/users/self/managers/MANAGER_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -1897,7 +1897,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>DELETE</td>
+            <td class="verb">DELETE</td>
 
             <td>
                 <a>https://api.ustream.tv/users/self/managers/MANAGER_ID.FORMAT</a>
@@ -1934,7 +1934,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
 
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/managers/MANAGER_ID.FORMAT</a>
@@ -1976,7 +1976,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>DELETE</td>
+            <td class="verb">DELETE</td>
 
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/managers/MANAGER_ID.FORMAT</a>
@@ -2027,7 +2027,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
 
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/multi-quality.FORMAT</a>
@@ -2086,7 +2086,7 @@ title=API+Testing+Channel
 
     <table class="table">
         <tr>
-            <td>POST</td>
+            <td class="verb">POST</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/recorder.FORMAT</a>
                 (format can be json or xml)</td>
@@ -2129,7 +2129,7 @@ command=start
 
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/settings/autorecord.FORMAT</a>
                 (format can be json or xml)</td>
@@ -2184,8 +2184,7 @@ command=start
 
     <table class="table">
         <tr>
-            <td>GET</td>
-
+            <td class="verb">GET</td>
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/limits/recording.FORMAT</a>
                 (format can be json or xml)</td>
@@ -2241,7 +2240,7 @@ command=start
     <p>Get a detailed list of the videos of channel</p>
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
 
             <td>
                 <a>https://api.ustream.tv/channels/CHANNEL_ID/videos.FORMAT</a>
@@ -2381,7 +2380,7 @@ command=start
     <h4 id="video_details_get">Get video details</h4>
     <table class="table">
         <tr>
-            <td>GET</td>
+            <td class="verb">GET</td>
             <td>
                 <a>https://api.ustream.tv/videos/VIDEO_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -2457,7 +2456,7 @@ command=start
     <h4 id="video_details_put">Edit video details</h4>
     <table class="table">
         <tr>
-            <td>PUT</td>
+            <td class="verb">PUT</td>
             <td>
                 <a>https://api.ustream.tv/videos/VIDEO_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -2523,7 +2522,7 @@ command=start
     <p>Permanently delete a video from the current account.</p>
     <table class="table">
         <tr>
-            <td>DELETE</td>
+            <td class="verb">DELETE</td>
 
             <td><a>https://api.ustream.tv/videos/VIDOE_ID.FORMAT</a>
                 (format can be json or xml)</td>
@@ -2562,7 +2561,7 @@ command=start
 	<h4 id="get_video_expiration">Getting video expiration</h4>
 	<table class="table">
 		<tr>
-			<td>GET</td>
+			<td class="verb">GET</td>
 			<td>
 				<a>https://api.ustream.tv/videos/VIDEO_ID/expiration.FORMAT</a>
 				(format can be json or xml)</td>
@@ -2622,7 +2621,7 @@ command=start
 	<h4 id="edit_video_expiration">Setting video expiration</h4>
 	<table class="table">
 		<tr>
-			<td>PUT</td>
+			<td class="verb">PUT</td>
 			<td>
 				<a>https://api.ustream.tv/videos/VIDEO_ID/expiration.FORMAT</a>
 				(format can be json or xml)</td>
@@ -2694,7 +2693,7 @@ command=start
 	<h4 id="add_channel_hook">Hook registration</h4>
 	<table class="table">
 		<tr>
-			<td>PUT</td>
+			<td class="verb">PUT</td>
 			<td>
 				<a>https://api.ustream.tv/channels/CHANNEL_ID/hooks/EVENT.FORMAT</a>
 				(format can be json or xml)</td>
@@ -2742,7 +2741,7 @@ command=start
 	<h4 id="get_channel_hook">Getting a channel hook</h4>
 	<table class="table">
 		<tr>
-			<td>GET</td>
+			<td class="verb">GET</td>
 			<td>
 				<a>https://api.ustream.tv/channels/CHANNEL_ID/hooks/EVENT.FORMAT</a>
 				(format can be json or xml)</td>
@@ -2789,7 +2788,7 @@ command=start
 	<h4 id="delete_channel_hook">Deleting a channel hook</h4>
 	<table class="table">
 		<tr>
-			<td>DELETE</td>
+			<td class="verb">DELETE</td>
 			<td>
 				<a>https://api.ustream.tv/channels/CHANNEL_ID/hooks/EVENT.FORMAT</a>
 				(format can be json or xml)</td>
