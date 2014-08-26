@@ -2718,7 +2718,7 @@ command=stop
 	<p>POST body example:</p>
 	<pre><code class="json">{
     "status": "channel.status.live",
-    "channelId": "123"
+    "channelId": 123
 }</code></pre>
 
 	<h4 id="add_channel_hook">Hook registration</h4>
@@ -2879,7 +2879,7 @@ command=stop
 		Recipients must reply to this request with the same secret string in their
 		X-Hook-Secret response header to make sure that the registered recipient
 		URL is owned by the API user. This handshake request will also contain
-        an "event" and "contentId" in the body (JSON encoded) property with the 
+        an "event" and "channelId" in the body (JSON encoded) property with the
         corresponding values of your freshly registered hook. Using these values
         you can re-use the same hook to handle multiple secrets based on these
         identifiers.
@@ -2912,7 +2912,7 @@ X-Hook-Secret: open-sesame!
 
 {
     "event": "channel.status.live", 
-    "contentId": 123
+    "channelId": 123
 }</code></pre>
 
     <p>Your hook implementation should store that secret and echo the <strong>X-Hook-Secret</strong> header 
@@ -2935,7 +2935,7 @@ X-Hook-Signature: 61f34d324ac51dde1288825dab2111
 
 {
     "event": "channel.status.live", 
-    "contentId": 123,
+    "channelId": 123,
     "when": 1234567890
 }</code></pre>
 
@@ -2943,7 +2943,7 @@ X-Hook-Signature: 61f34d324ac51dde1288825dab2111
         as a unix timestamp.</p>
 
     <p>Your receiver should verify the signature provided in the request <strong>X-Hook-Signature</strong> header,
-        using <strong>HMAC-SHA1</strong> algorith with the the previously exchanged secret and the full request body as-is.</p>
+        using <strong>HMAC-SHA1</strong> algorithm with the the previously exchanged secret and the full request body as-is.</p>
 
 </div>
 <div class="col-md-3">
