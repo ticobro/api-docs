@@ -2715,11 +2715,6 @@ command=stop
 	<h2 id="channel_hooks">Channel hooks</h2>
 	<p>Hooks can be registered for different channel events. When a channel event is fired, a HTTP POST request is sent to the registered hook recipient URL.
         You can use to these endpoints with <a href="authentication.html#client_credentials">Client Credentials</a>.</p>
-	<p>POST body example:</p>
-	<pre><code class="json">{
-    "status": "channel.status.live",
-    "channelId": 123
-}</code></pre>
 
 	<h4 id="add_channel_hook">Hook registration</h4>
 	<table class="table">
