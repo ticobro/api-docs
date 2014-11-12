@@ -95,9 +95,6 @@
     "thumbnail": {
         "live": "https://ustvstaticcdn1-a.akamaihd.net/images/defaults/channel_192x108:1.png"
     },
-    "stream": {
-        "hls": "http://iphone-streaming.ustream.tv/uhls/1111/streams/live/iphone/playlist.m3u8"
-    },
     "owner": {
         "id": "1234",
         "username": "api-user",
@@ -136,12 +133,6 @@
             <td>stats.viewer</td>
             <td>int</td>
             <td>Current viewer number when channel is live</td>
-        </tr>
-
-        <tr>
-            <td>stream.hls</td>
-            <td>string</td>
-            <td><a href="http://en.wikipedia.org/wiki/HTTP_Live_Streaming" target="_blank">HTTP Live Streaming</a> url. This field does not exist when channel is offair (offline)</td>
         </tr>
     </table>
 
@@ -433,14 +424,6 @@ title=API+Testing+Channel
             <td>string</td>
             <td>Possible values: "online" or "offline". "online" means that
                 the stream is viewable on the Ustream website.</td>
-        </tr>
-        <tr>
-            <td>hls_url</td>
-            <td>string</td>
-            <td>Playback URL for iOS clients. This field is present only if
-                status=online. This URL can be passed directly to
-                MPMoviePlayerController. Note that this URL is not suitable for
-                sharing on social networks since it works only on iOS.</td>
         </tr>
         <tr>
             <td>broadcast_urls</td>
