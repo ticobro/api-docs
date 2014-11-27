@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Embed API - Ustream Enterprise Broadcasting API Documentation</title>
+	<link rel="shortcut icon" href="http://static-cdn1.ustream.tv/images/favicon.ico" />
+	<meta charset="utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../css/bootstrap.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="../css/bootstrap-theme.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="../css/bootstrap-docs.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="../css/apidocs.css" title="" type="text/css" media="screen">
+	<link rel="stylesheet" href="../css/hljs/railscasts.css" type="text/css" media="screen">
+
+	<style type="text/css">
+		#Container {
+			position: relative;
+			width: 640px;
+			margin: 20px auto;
+			height: 390px;
+		}
+
+		#Container.fullscreen {
+			width: 100%;
+			height: 100%;
+		}
+
+		#FullScreenButton {
+			cursor: pointer;
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+			padding: 5px;
+			background: #38f;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+
+<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+	<div class="container">
+		<div class="navbar-header">
+			<a href="../index.html" class="navbar-brand">Ustream</a>
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="../index.html">Overview</a>
+				</li>
+				<li>
+					<a href="../authentication.html">Authentication</a>
+				</li>
+				<li>
+					<a href="../channel.html">Channel API</a>
+				</li>
+				<li>
+					<a href="../socialstream.html">Social Stream</a>
+				</li>
+				<li class="dropdown active">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Embed API <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="index.html">Basic example</a></li>
+						<li><a href="dynamic-frame-insert.html">Dynamic insertion</a></li>
+						<li><a href="multiple-instances.html">Multiple instances</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<div class="bs-docs-header" id="content">
+	<div class="container">
+		<h1>Embed API – Fullscreen example</h1>
+	</div>
+</div>
+
+<div class="container" id="content-body">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 id="embed_api-overview">Overview</h3>
+			<p>
+				<b>Important to note that this example is not part of the Ustream Embed API, and requires additional development on the third party side.</b>
+				<br/>
+				Third party player controls should implement the fullscreen functionality on the client side with the <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode">HTML5 Fullscreen API</a>.
+			</p>
+			<h4>Necessary steps</h4>
+			<ul>
+				<li>switch your embed container to fullscreen mode with HTML5 FullScreen API</li>
+				<li>handle the iframe size accordingly</li>
+				<li>Ustream embed will adopt to the resized iframe size responsively</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="Container">
+				<iframe id="UstreamIframe" width="100%" height="100%" src="http://www.ustream.tv/embed/1524?controls=false" frameborder="0" allowfullscreen></iframe>
+
+				<div id="FullScreenButton"> custom fullscreen switch button </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4>Javascript</h4>
+			<pre>
+<code>var fullScreenBtn = document.getElementById('fullScreenBtn');
+var container = document.getElementById('Container');
+
+document.addEventListener("fullscreenchange",changeHandler);
+document.addEventListener("webkitfullscreenchange",changeHandler);
+document.addEventListener("mozfullscreenchange",changeHandler);
+
+// trigger fullscreen change on our custom button click
+fullScreenBtn.addEventListener('click',onfullScreenBtnClick);
+
+// check if the current state is fullscreen or not
+function isFullScreen () {
+  return document.fullScreen ||
+    document.webkitIsFullScreen ||
+    document.mozfullScreen;
+}
+
+// change everything on other change events too
+function changeHandler () {
+  container.className = isFullScreen() ? 'fullscreen' : '';
+}
+
+// fullscreen button event handler
+function onfullScreenBtnClick () {
+  // if we are in fullscreen, then exit
+  if (isFullScreen()) {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.mozExitFullscreen) {
+      document.mozExitFullscreen();
+    }
+    // if we are in non-fullscreen mode, open it
+  } else {
+    if (container.requestFullscreen) {
+      container.requestFullscreen();
+    } else if (container.webkitRequestFullscreen) {
+      container.webkitRequestFullscreen();
+    } else if (container.mozRequestFullscreen) {
+      container.mozRequestFullscreen();
+    }
+  }
+}
+</code></pre>
+		</div>
+		<div class="col-md-6">
+			<h4>HTML</h4>
+			<pre>
+<code class="xml">&lt;div id=&quot;Container&quot;&gt;
+  &lt;iframe id=&quot;UstreamIframe&quot;
+    width=&quot;100%&quot; height=&quot;100%&quot;
+    src=&quot;http://www.ustream.tv/embed/1524?controls=false&quot;
+    frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+  &lt;div id=&quot;fullScreenBtn&quot;&gt; custom fullscreen button &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+			<h4>CSS</h4>
+			<pre>
+<code class="css">#Viewer {
+  position: relative;
+  width: 640px;
+  height: 390px;
+}
+
+#Viewer.fullscreen {
+  width: 100%;
+  height: 100%;
+}
+
+#FullScreen {
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px;
+  background: #38f;
+  color: #fff;
+}
+</code></pre>
+		</div>
+	</div>
+</div>
+<footer>
+	<p class="footer-tagline">USTREAM You're on!</p>
+	<p class="footer-copy">© 2014 Ustream, Inc. All rights reserved.</p>
+</footer>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script src="../js/ustream-embedapi.min.js"></script>
+<script type="text/javascript" src="../js/hljs/highlight.pack.js"></script>
+<script type="text/javascript">
+	hljs.initHighlightingOnLoad();
+
+	(function () {
+		var fullScreenButton = document.getElementById('FullScreenButton');
+		var container = document.getElementById('Container');
+
+		// handle fullscreen event changes because of ESC / exit browser buttons
+		document.addEventListener("fullscreenchange", changeHandler, false);
+		document.addEventListener("webkitfullscreenchange", changeHandler, false);
+		document.addEventListener("mozfullscreenchange", changeHandler, false);
+
+		// trigger fullscreen change on our custom button click
+		fullScreenButton.addEventListener('click', onFullScreenButtonClick);
+
+		// check if the current state is fullscreen or not
+		function isFullScreen () {
+			return document.fullScreen ||
+			document.webkitIsFullScreen ||
+			document.mozfullScreen;
+		}
+
+		// change everything on other change events too
+		function changeHandler () {
+			container.className = isFullScreen() ? 'fullscreen' : '';
+		}
+
+		// fullscreen button event handler
+		function onFullScreenButtonClick () {
+			// if we are in fullscreen, then exit
+			if (isFullScreen()) {
+
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+				} else if (document.webkitExitFullscreen) {
+					document.webkitExitFullscreen();
+				} else if (document.mozExitFullscreen) {
+					document.mozExitFullscreen();
+				}
+
+				// if we are in non-fullscreen mode, open it
+			} else {
+
+				if (container.requestFullscreen) {
+					container.requestFullscreen();
+				} else if (container.webkitRequestFullscreen) {
+					container.webkitRequestFullscreen();
+				} else if (container.mozRequestFullscreen) {
+					container.mozRequestFullscreen();
+				}
+
+			}
+		}
+	}());
+</script>
+
+</body>
+</html>
