@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+-<!DOCTYPE html>
 <html>
 <head>
 	<title>Embed API - Ustream Enterprise Broadcasting API Documentation</title>
@@ -118,7 +118,7 @@ document.addEventListener("webkitfullscreenchange",changeHandler);
 document.addEventListener("mozfullscreenchange",changeHandler);
 
 // trigger fullscreen change on our custom button click
-fullScreenBtn.addEventListener('click',onfullScreenBtnClick);
+fullScreenBtn.addEventListener('click',onFullScreenBtnClick);
 
 // check if the current state is fullscreen or not
 function isFullScreen () {
@@ -133,15 +133,17 @@ function changeHandler () {
 }
 
 // fullscreen button event handler
-function onfullScreenBtnClick () {
+function onFullScreenBtnClick () {
   // if we are in fullscreen, then exit
   if (isFullScreen()) {
     if (document.exitFullscreen) {
       document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
-    } else if (document.mozExitFullscreen) {
-      document.mozExitFullscreen();
+    } else if (document.mozExitFullScreen) {
+      document.mozExitFullScreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
     }
     // if we are in non-fullscreen mode, open it
   } else {
@@ -149,8 +151,10 @@ function onfullScreenBtnClick () {
       container.requestFullscreen();
     } else if (container.webkitRequestFullscreen) {
       container.webkitRequestFullscreen();
-    } else if (container.mozRequestFullscreen) {
-      container.mozRequestFullscreen();
+    } else if (container.mozRequestFullScreen) {
+      container.mozRequestFullScreen();
+    } else if (container.msRequestFullscreen) {
+      container.msRequestFullscreen();
     }
   }
 }
@@ -239,8 +243,10 @@ function onfullScreenBtnClick () {
 					document.exitFullscreen();
 				} else if (document.webkitExitFullscreen) {
 					document.webkitExitFullscreen();
-				} else if (document.mozExitFullscreen) {
-					document.mozExitFullscreen();
+				} else if (document.mozExitFullScreen) {
+					document.mozExitFullScreen();
+				} else if (document.msExitFullscreen) {
+					document.msExitFullscreen();
 				}
 
 				// if we are in non-fullscreen mode, open it
@@ -250,8 +256,10 @@ function onfullScreenBtnClick () {
 					container.requestFullscreen();
 				} else if (container.webkitRequestFullscreen) {
 					container.webkitRequestFullscreen();
-				} else if (container.mozRequestFullscreen) {
-					container.mozRequestFullscreen();
+				} else if (container.mozRequestFullScreen) {
+					container.mozRequestFullScreen();
+				} else if (container.msRequestFullscreen) {
+					container.msRequestFullscreen();
 				}
 
 			}
