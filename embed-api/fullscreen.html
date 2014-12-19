@@ -228,6 +228,8 @@ function onFullScreenBtnClick () {
 
 		// check if the current state is fullscreen or not
 		function isFullScreen () {
+			console.log(document.msFullscreenElement);
+
 			return document.fullScreen ||
 			document.webkitIsFullScreen ||
 			document.mozfullScreen ||
