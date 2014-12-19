@@ -227,7 +227,8 @@ function onFullScreenBtnClick () {
 		function isFullScreen () {
 			return document.fullScreen ||
 			document.webkitIsFullScreen ||
-			document.mozfullScreen;
+			document.mozfullScreen ||
+			document.msFullscreenElement;
 		}
 
 		// change everything on other change events too
