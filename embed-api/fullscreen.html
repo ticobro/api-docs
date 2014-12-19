@@ -219,13 +219,13 @@ function onFullScreenBtnClick () {
 		document.addEventListener("fullscreenchange", changeHandler, false);
 		document.addEventListener("webkitfullscreenchange", changeHandler, false);
 		document.addEventListener("mozfullscreenchange", changeHandler, false);
+		document.addEventListener("msfullscreenchange", changeHandler, false);
 
 		// trigger fullscreen change on our custom button click
 		fullScreenButton.addEventListener('click', onFullScreenButtonClick);
 
 		// check if the current state is fullscreen or not
 		function isFullScreen () {
-			console.log(document.msFullscreenElement);
 			return document.fullScreen ||
 			document.webkitIsFullScreen ||
 			document.mozfullScreen ||
