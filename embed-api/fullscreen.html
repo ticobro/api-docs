@@ -117,7 +117,7 @@ var container = document.getElementById('Container');
 document.addEventListener("fullscreenchange",changeHandler);
 document.addEventListener("webkitfullscreenchange",changeHandler);
 document.addEventListener("mozfullscreenchange",changeHandler);
-document.addEventListener("msfullscreenchange", changeHandler, false);
+document.addEventListener("MSFullscreenChange", changeHandler, false);
 
 // trigger fullscreen change on our custom button click
 fullScreenBtn.addEventListener('click',onFullScreenBtnClick);
@@ -228,8 +228,6 @@ function onFullScreenBtnClick () {
 
 		// check if the current state is fullscreen or not
 		function isFullScreen () {
-			console.log(document.msFullscreenElement);
-
 			return document.fullScreen ||
 			document.webkitIsFullScreen ||
 			document.mozfullScreen ||
@@ -238,7 +236,6 @@ function onFullScreenBtnClick () {
 
 		// change everything on other change events too
 		function changeHandler () {
-			console.log("change");
 			container.className = isFullScreen() ? 'fullscreen' : '';
 		}
 
