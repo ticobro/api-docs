@@ -2714,6 +2714,103 @@ command=stop
 
 
 
+
+    <h2 id="event">Event</h2>
+    <h3 id="channel_events">Listing the upcoming events of a channel</h3>
+    <p>Get a detailed list of the events of a channel</p>
+    <table class="table">
+        <tr>
+            <td class="verb">GET</td>
+
+            <td>
+                <a>https://api.ustream.tv/channels/CHANNEL_ID/upcoming-events.FORMAT</a>
+                (format can be json or xml)</td>
+        </tr>
+    </table>
+
+    <h5>Parameters</h5>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+            <th>type</th>
+            <th>importance</th>
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>page</td>
+            <td>integer</td>
+            <td>OPTIONAL</td>
+            <td>Requested page number (1 by default)</td>
+        </tr>
+        <tr>
+            <td>pagesize</td>
+            <td>integer</td>
+            <td>OPTIONAL</td>
+            <td>Requested page size (50 by default, max 50)</td>
+        </tr>
+    </table>
+
+    <h5>Response</h5>
+    <p>A set of a key-value structures under an "events" element. Example:</p>
+
+    <pre><code class="json">"events": [
+    {
+        "id": "111",
+        "title": "Title of the event",
+        "description": "Description of the event",
+        "start": 1399388736,
+        "duration": 900,
+    },
+    ...
+]</code></pre>
+    <p>Explanation of some values:</p>
+    <table class="table">
+        <tr>
+            <th>key</th>
+            <th>type</th>
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>start</td>
+            <td>int</td>
+            <td>Event start date in UNIX timestamp</td>
+        </tr>
+        <tr>
+            <td>duration</td>
+            <td>int</td>
+            <td>Expected duration of the event in seconds</td>
+        </tr>
+    </table>
+
+    <p>The paging information can be found under the "paging" element. Example:</p>
+
+    <pre><code class="json">"paging": {
+    "previous": ".../CHANNEL_ID/upcoming-events.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
+    "next": ".../channels/CHANNEL_ID/upcoming-events.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
+}</code></pre>
+
+    <h5>Error codes</h5>
+    <table class="table">
+        <tr>
+            <th>error value</th>
+            <th>HTTP response code</th>
+            <th>Error conditions</th>
+        </tr>
+        <tr>
+            <td>invalid_token</td>
+            <td>401 Authorization required</td>
+            <td>The event list is protected, only the owner with a valid token can access it.</td>
+        </tr>
+        <tr>
+            <td>not_found</td>
+            <td>404 Not Found</td>
+            <td>The given channel does not exist.</td>
+        </tr>
+    </table>
+
+
+
+
 	<h2 id="channel_hooks">Channel hooks</h2>
 	<p>Hooks can be registered for different channel events. When a channel event is fired, a HTTP POST request is sent to the registered hook recipient URL.
         You can use to these endpoints with <a href="authentication.html#client_credentials">Client Credentials</a>.</p>
@@ -3066,6 +3163,14 @@ X-Hook-Signature: 61f34d324ac51dde1288825dab2111
 					</li>
 				</ul>
 			</li>
+            <li>
+                <a href="#event">Event</a>
+                <ul class="nav">
+                    <li>
+                        <a href="#channel_events">Listing the upcoming events of a channel</a>
+                    </li>
+                </ul>
+            </li>
 			<li>
 				<a href="#channel_hooks">Channel hooks</a>
 				<ul class="nav">
