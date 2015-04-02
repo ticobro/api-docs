@@ -2290,6 +2290,18 @@ command=stop
             <td>Requested page size (50 by default, max 50)</td>
         </tr>
         <tr>
+            <td>q</td>
+            <td>string</td>
+            <td>OPTIONAL</td>
+            <td>Search for text in video related data</td>
+        </tr>
+        <tr>
+            <td>sort</td>
+            <td>string</td>
+            <td>OPTIONAL</td>
+            <td>Result order. Possible values: recent,popular (default: recent)</td>
+        </tr>
+        <tr>
             <td>filter</td>
             <td>set</td>
             <td>OPTIONAL</td>
@@ -2896,11 +2908,11 @@ Content-Length: 46
 X-Hook-Secret: open-sesame!
 
 {
-    "event": "channel.status.live", 
+    "event": "channel.status.live",
     "channelId": 123
 }</code></pre>
 
-    <p>Your hook implementation should store that secret and echo the <strong>X-Hook-Secret</strong> header 
+    <p>Your hook implementation should store that secret and echo the <strong>X-Hook-Secret</strong> header
         in the response.</p>
 
     <pre><code class="http">HTTP/1.1 200 OK
@@ -2919,7 +2931,7 @@ Content-Length: 76
 X-Hook-Signature: 61f34d324ac51dde1288825dab2111
 
 {
-    "event": "channel.status.live", 
+    "event": "channel.status.live",
     "channelId": 123,
     "when": 1234567890
 }</code></pre>
