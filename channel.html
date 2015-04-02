@@ -2385,8 +2385,8 @@ command=stop
     <p>The paging information can be found under the "paging" element. Example:</p>
 
     <pre><code class="json">"paging": {
-    "previous": ".../CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE"
-    "next": ".../channels/17728050/videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
+    "previous": ".../CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
+    "next": ".../channels/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
 }</code></pre>
 
     <h5>Error codes</h5>
@@ -2397,9 +2397,9 @@ command=stop
             <th>Error conditions</th>
         </tr>
         <tr>
-            <td>lack_of_ownership</td>
-            <td>403 Forbidden</td>
-            <td>The given channel does not belong to the user.</td>
+            <td>invalid_token</td>
+            <td>401 Authorization required</td>
+            <td>The video list is protected, only the owner with a valid token can access it.</td>
         </tr>
         <tr>
             <td>not_found</td>
