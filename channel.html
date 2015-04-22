@@ -70,7 +70,7 @@
 	<h2 id="basic_actions">Basic actions</h2>
 
 
-    <h3 id="channel_details_get">Get channel details</h3>
+    <h3 id="channel_details_get">Getting channel's details</h3>
     <table class="table">
         <tr>
             <td class="verb">GET</td>
@@ -82,8 +82,24 @@
     </table>
 
     <h5>Parameters</h5>
-    <p>This request has no parameters.</p>
-
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+            <th>type</th>
+            <th>importance</th>
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>detail_level</td>
+            <td>string</td>
+            <td>OPTIONAL</td>
+            <td>Verbosity level. Possible value: "minimal". In case of minimal verbosity level
+                the result set is limited to id, title, picture, owner and locks data.
+                If the channel is protected (see <a href="channel.html#security">security</a>
+                section), only minimal data can be get without valid access token.
+            </td>
+        </tr>
+    </table>
     <h5>Response</h5>
     <p>A key-value structures under a "channel" element. Example:</p>
 
@@ -110,6 +126,30 @@
         "id": "1234",
         "username": "api-user",
         "picture": "https://ustvstaticcdn1-a.akamaihd.net/images/defaults/user_48x48:1.png"
+    },
+    "locks": []
+}
+</code></pre>
+
+    <p>Minimal response example:</p>
+
+    <pre><code class="json">"channel": {
+    "id": "1111",
+    "title": "Channel title",
+    "owner": {
+        "id": "1234",
+        "username": "api-user",
+        "picture": "https://ustvstaticcdn1-a.akamaihd.net/images/defaults/user_48x48:1.png"
+    },
+    "picture": {
+        "90x90": "https://ustvstaticcdn1-a.akamaihd.net/images/defaults/channel_90x90:1.png",
+        "66x66": ...
+    },
+    "locks": {
+        "hash": {
+            "type": "advanced",
+            "auth_method": "custom"
+        }
     }
 }
 </code></pre>
@@ -145,6 +185,33 @@
             <td>int</td>
             <td>Current viewer number when channel is live</td>
         </tr>
+        <tr>
+            <td>locks</td>
+            <td>array</td>
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>key</th>
+                        <th>type</th>
+                        <th>description</th>
+                    </tr>
+                    <tr>
+                        <td>hash</td>
+                        <td>array</td>
+                        <td>3rd party viewer authentication is enabled for the channel. The "type"
+                            attribute can be either "basic" or "advanced". In case of advanced authentication,
+                            the "auth_method" attribute can contain "twostepauth" or "samlsso" for Ustream-supported
+                            authentication schemes or "custom" for other authentication methods.
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>array</td>
+                        <td>Empty array if channel is password protected</td>
+                    </tr>
+                </table>
+             </td>
+        </tr>
     </table>
 
     <h5>Error codes</h5>
@@ -171,7 +238,7 @@
         <h4 id="prerequisites">Prerequisites</h4>
 
     <p>The caller must have an access token capable initializing channel
-    creation. To obtain a token , the client must request one from the
+    creation. To obtain a token, the client must request one from the
     authorization server.</p>
 	<p>Clients can acquire tokens without expiration by asking for
                 "offline" scope. By using this scope the token will never
@@ -2421,7 +2488,24 @@ command=stop
     </table>
 
     <h5>Parameters</h5>
-    <p>This request has no parameters.</p>
+    <table class="table">
+        <tr>
+            <th>parameter</th>
+            <th>type</th>
+            <th>importance</th>
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>detail_level</td>
+            <td>string</td>
+            <td>OPTIONAL</td>
+            <td>Verbosity level. Possible value: "minimal". In case of minimal verbosity level
+                the result set is limited to id, and links data.
+                If the channel is protected (see <a href="channel.html#security">security</a>
+                section), only minimal data can be get without valid access token.
+            </td>
+        </tr>
+    </table>
 
     <h5>Response</h5>
     <p>A key-value structures under a "video" element. Example:</p>
@@ -2443,11 +2527,26 @@ command=stop
     },
     "links": {
         "channel": {
-            "href": "https://api.ustream.tv/channels/1.json"
+            "href": "https://api.ustream.tv/channels/1.json",
+            "id": "1"
         }
     }
 }
 </code></pre>
+
+    <p>Minimal response example:</p>
+
+    <pre><code class="json">"video": {
+    "id": "111",
+    "links": {
+        "channel": {
+            "href": "https://api.ustream.tv/channels/1.json",
+            "id": "1"
+        }
+    }
+}
+</code></pre>
+
     <p>Explanation of some values:</p>
     <table class="table">
         <tr>
